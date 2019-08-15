@@ -8,7 +8,7 @@
 .. include:: ./exercises_intro.rst
 
 
-Задание 25.1
+Задание 1.1
 ~~~~~~~~~~~~
 
 Создать класс Topology, который представляет топологию сети.
@@ -54,12 +54,12 @@
 
 
 
-Задание 25.1a
+Задание 1.1a
 ~~~~~~~~~~~~~
 
-Скопировать класс Topology из задания 25.1 и изменить его.
+Скопировать класс Topology из задания 1.1 и изменить его.
 
-Если в задании 25.1 удаление дублей выполнялось в методе __init__,
+Если в задании 1.1 удаление дублей выполнялось в методе __init__,
 надо перенести функциональность удаления дублей в метод _normalize.
 
 При этом метод __init__ должен выглядеть таким образом:
@@ -71,10 +71,10 @@
             self.topology = self._normalize(topology_dict)
 
 
-Задание 25.1b
+Задание 1.1b
 ~~~~~~~~~~~~~
 
-Изменить класс Topology из задания 25.1a или 25.1.
+Изменить класс Topology из задания 1.1a или 1.1.
 
 Добавить метод delete_link, который удаляет указанное соединение.
 Метод должен удалять и зеркальное соединение, если оно есть.
@@ -130,10 +130,10 @@
     In [13]: t.delete_link(('R5', 'Eth0/0'), ('R3', 'Eth0/2'))
     Такого соединения нет
 
-Задание 25.1c
+Задание 1.1c
 ~~~~~~~~~~~~~
 
-Изменить класс Topology из задания 25.1b.
+Изменить класс Topology из задания 1.1b.
 
 Добавить метод delete_node, который удаляет все соединения с указаным устройством.
 Если такого устройства нет, выводится сообщение "Такого устройства нет".
@@ -172,10 +172,10 @@
     In [5]: t.delete_node('SW1')
     Такого устройства нет
 
-Задание 25.1d
+Задание 1.1d
 ~~~~~~~~~~~~~
 
-Изменить класс Topology из задания 25.1c
+Изменить класс Topology из задания 1.1c
 
 Добавить метод add_link, который добавляет указанное соединение, если его еще нет в топологии.
 Если соединение существует, вывести сообщение "Такое соединение существует".
@@ -216,7 +216,7 @@
     Cоединение с одним из портов существует
 
 
-Задание 25.2
+Задание 1.2
 ~~~~~~~~~~~~
 
 Создать класс CiscoTelnet, который подключается по Telnet к оборудованию Cisco.
@@ -234,7 +234,7 @@
 
 .. code-block:: python
 
-    In [2]: from task_25_2 import CiscoTelnet
+    In [2]: from task_1_2 import CiscoTelnet
 
     In [3]: r1_params = {
        ...:     'ip': '192.168.100.1',
@@ -248,10 +248,10 @@
     In [5]: r1.send_show_command('sh ip int br')
     Out[5]: 'sh ip int br\r\nInterface                  IP-Address      OK? Method Status                Protocol\r\nEthernet0/0                192.168.100.1   YES NVRAM  up                    up      \r\nEthernet0/1                192.168.200.1   YES NVRAM  up                    up      \r\nEthernet0/2                190.16.200.1    YES NVRAM  up                    up      \r\nEthernet0/3                192.168.130.1   YES NVRAM  up                    up      \r\nEthernet0/3.100            10.100.0.1      YES NVRAM  up                    up      \r\nEthernet0/3.200            10.200.0.1      YES NVRAM  up                    up      \r\nEthernet0/3.300            10.30.0.1       YES NVRAM  up                    up      \r\nLoopback0                  10.1.1.1        YES NVRAM  up                    up      \r\nLoopback55                 5.5.5.5         YES manual up                    up      \r\nR1#'
 
-Задание 25.2a
+Задание 1.2a
 ~~~~~~~~~~~~~
 
-Скопировать класс CiscoTelnet из задания 25.2 и изменить метод send_show_command добавив два параметра:
+Скопировать класс CiscoTelnet из задания 1.2 и изменить метод send_show_command добавив два параметра:
 
 * parse - контролирует то, будет возвращаться обычный вывод команды или список словарей, 
   полученные после обработки с помощью TextFSM. 
@@ -269,7 +269,7 @@
        ...:     'password': 'cisco',
        ...:     'secret': 'cisco'}
 
-    In [2]: from task_25_2a import CiscoTelnet
+    In [2]: from task_1_2a import CiscoTelnet
 
     In [3]: r1 = CiscoTelnet(**r1_params)
 
@@ -319,10 +319,10 @@
       'status': 'up',
       'protocol': 'up'}]
 
-Задание 25.2b
+Задание 1.2b
 ~~~~~~~~~~~~~
 
-Скопировать класс CiscoTelnet из задания 25.2a и добавить метод send_config_commands.
+Скопировать класс CiscoTelnet из задания 1.2a и добавить метод send_config_commands.
 
 
 Метод send_config_commands должен уметь отправлять одну команду конфигурационного режима или список команд.
@@ -332,7 +332,7 @@
 
 .. code-block:: python
 
-    In [1]: from task_25_2b import CiscoTelnet
+    In [1]: from task_1_2b import CiscoTelnet
 
     In [2]: r1_params = {
        ...:     'ip': '192.168.100.1',
@@ -351,10 +351,10 @@
     Out[6]: 'conf t\r\nEnter configuration commands, one per line.  End with CNTL/Z.\r\nR1(config)#interface loop55\r\nR1(config-if)#ip address 5.5.5.5 255.255.255.255\r\nR1(config-if)#end\r\nR1#'
 
 
-Задание 25.2c
+Задание 1.2c
 ~~~~~~~~~~~~~
 
-Скопировать класс CiscoTelnet из задания 25.2b и изменить метод send_config_commands добавив проверку команд на ошибки.
+Скопировать класс CiscoTelnet из задания 1.2b и изменить метод send_config_commands добавив проверку команд на ошибки.
 
 У метода send_config_commands должен быть дополнительный параметр strict:
 
@@ -367,7 +367,7 @@
 
 .. code-block:: python
 
-    In [1]: from task_25_2c import CiscoTelnet
+    In [1]: from task_1_2c import CiscoTelnet
 
     In [2]: r1_params = {
        ...:     'ip': '192.168.100.1',

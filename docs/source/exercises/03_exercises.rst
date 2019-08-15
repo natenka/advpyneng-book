@@ -8,18 +8,18 @@
 .. include:: ./exercises_intro.rst
 
 
-Задание 27.1
+Задание 3.1
 ~~~~~~~~~~~~
 
 Создать класс CiscoSSH, который наследует класс BaseSSH из файла base_connect_class.py.
 
 Создать метод __init__ в классе CiscoSSH таким образом, чтобы после подключения по SSH выполнялся переход в режим enable.
 
-Для этого в методе __init__ должен сначала вызываться метод __init__ класса ConnectSSH, а затем выполняться переход в режим enable.
+Для этого в методе __init__ должен сначала вызываться метод __init__ класса BaseSSH, а затем выполняться переход в режим enable.
 
 .. code-block:: python
 
-    In [2]: from task_27_1 import CiscoSSH
+    In [2]: from task_3_1 import CiscoSSH
 
     In [3]: r1 = CiscoSSH(**device_params)
 
@@ -27,10 +27,10 @@
     Out[4]: 'Interface                  IP-Address      OK? Method Status                Protocol\nEthernet0/0                192.168.100.1   YES NVRAM  up                    up      \nEthernet0/1                192.168.200.1   YES NVRAM  up                    up      \nEthernet0/2                190.16.200.1    YES NVRAM  up                    up      \nEthernet0/3                192.168.230.1   YES NVRAM  up                    up      \nEthernet0/3.100            10.100.0.1      YES NVRAM  up                    up      \nEthernet0/3.200            10.200.0.1      YES NVRAM  up                    up      \nEthernet0/3.300            10.30.0.1       YES NVRAM  up                    up      '
 
 
-Задание 27.1a
+Задание 3.1a
 ~~~~~~~~~~~~~
 
-Дополнить класс CiscoSSH из задания 27.1.
+Дополнить класс CiscoSSH из задания 3.1.
 
 Перед подключением по SSH необходимо проверить если ли в словаре
 с параметрами подключения такие параметры: username, password, secret.
@@ -38,7 +38,7 @@
 
 .. code-block:: python
 
-    In [1]: from task_27_1a import CiscoSSH
+    In [1]: from task_3_1a import CiscoSSH
 
     In [2]: device_params = {
        ...:         'device_type': 'cisco_ios',
@@ -53,7 +53,7 @@
     In [4]: r1.send_show_command('sh ip int br')
     Out[4]: 'Interface                  IP-Address      OK? Method Status                Protocol\nEthernet0/0                192.168.100.1   YES NVRAM  up                    up      \nEthernet0/1                192.168.200.1   YES NVRAM  up                    up      \nEthernet0/2                190.16.200.1    YES NVRAM  up                    up      \nEthernet0/3                192.168.230.1   YES NVRAM  up                    up      \nEthernet0/3.100            10.100.0.1      YES NVRAM  up                    up      \nEthernet0/3.200            10.200.0.1      YES NVRAM  up                    up      \nEthernet0/3.300            10.30.0.1       YES NVRAM  up                    up      '
 
-Задание 27.2
+Задание 3.2
 ~~~~~~~~~~~~
 
 Создать класс MyNetmiko, который наследует класс CiscoIosBase из netmiko.
@@ -66,17 +66,17 @@
 
 .. code-block:: python
 
-    In [2]: from task_27_2 import MyNetmiko
+    In [2]: from task_3_2 import MyNetmiko
 
     In [3]: r1 = MyNetmiko(**device_params)
 
     In [4]: r1.send_command('sh ip int br')
     Out[4]: 'Interface                  IP-Address      OK? Method Status                Protocol\nEthernet0/0                192.168.100.1   YES NVRAM  up                    up      \nEthernet0/1                192.168.200.1   YES NVRAM  up                    up      \nEthernet0/2                190.16.200.1    YES NVRAM  up                    up      \nEthernet0/3                192.168.230.1   YES NVRAM  up                    up      \nEthernet0/3.100            10.100.0.1      YES NVRAM  up                    up      \nEthernet0/3.200            10.200.0.1      YES NVRAM  up                    up      \nEthernet0/3.300            10.30.0.1       YES NVRAM  up                    up      '
 
-Задание 27.2a
+Задание 3.2a
 ~~~~~~~~~~~~~
 
-Дополнить класс MyNetmiko из задания 27.2.
+Дополнить класс MyNetmiko из задания 3.2.
 
 Добавить метод _check_error_in_command, который выполняет проверку на такие ошибки:
 
@@ -90,7 +90,7 @@
 
 .. code-block:: python
 
-    In [2]: from task_27_2a import MyNetmiko
+    In [2]: from task_3_2a import MyNetmiko
 
     In [3]: r1 = MyNetmiko(**device_params)
 
@@ -105,10 +105,10 @@
     ...
     ErrorInCommand: При выполнении команды "sh ip br" на устройстве 192.168.100.1 возникла ошибка "Invalid input detected at '^' marker."
 
-Задание 27.2b
+Задание 3.2b
 ~~~~~~~~~~~~~
 
-Дополнить класс MyNetmiko из задания 27.2a.
+Дополнить класс MyNetmiko из задания 3.2a.
 
 Переписать метод send_config_set netmiko, добавив в него проверку на ошибки с помощью метода _check_error_in_command.
 
@@ -117,7 +117,7 @@
 
 .. code-block:: python
 
-    In [2]: from task_27_2b import MyNetmiko
+    In [2]: from task_3_2b import MyNetmiko
 
     In [3]: r1 = MyNetmiko(**device_params)
 
@@ -129,17 +129,17 @@
     ...
     ErrorInCommand: При выполнении команды "lo" на устройстве 192.168.100.1 возникла ошибка "Incomplete command."
 
-Задание 27.2c
+Задание 3.2c
 ~~~~~~~~~~~~~
 
 
-Проверить, что метод send_command класса MyNetmiko из задания 27.2b, принимает дополнительные аргументы (как в netmiko), кроме команды.
+Проверить, что метод send_command класса MyNetmiko из задания 3.2b, принимает дополнительные аргументы (как в netmiko), кроме команды.
 
 Если возникает ошибка, переделать метод таким образом, чтобы он принимал любые аргументы, которые поддерживает netmiko.
 
 .. code-block:: python
 
-    In [2]: from task_27_2c import MyNetmiko
+    In [2]: from task_3_2c import MyNetmiko
 
     In [3]: r1 = MyNetmiko(**device_params)
 
@@ -149,10 +149,10 @@
     In [5]: r1.send_command('sh ip int br', strip_command=True)
     Out[5]: 'Interface                  IP-Address      OK? Method Status                Protocol\nEthernet0/0                192.168.100.1   YES NVRAM  up                    up      \nEthernet0/1                192.168.200.1   YES NVRAM  up                    up      \nEthernet0/2                190.16.200.1    YES NVRAM  up                    up      \nEthernet0/3                192.168.230.1   YES NVRAM  up                    up      \nEthernet0/3.100            10.100.0.1      YES NVRAM  up                    up      \nEthernet0/3.200            10.200.0.1      YES NVRAM  up                    up      \nEthernet0/3.300            10.30.0.1       YES NVRAM  up                    up      '
 
-Задание 27.2d
+Задание 3.2d
 ~~~~~~~~~~~~~
 
-Дополнить класс MyNetmiko из задания 27.2c или задания 27.2b.
+Дополнить класс MyNetmiko из задания 3.2c или задания 3.2b.
 
 Добавить параметр ignore_errors в метод send_config_set.
 Если передано истинное значение, не надо выполнять проверку на ошибки и метод должен работать точно так же как метод send_config_set в netmiko.
@@ -163,7 +163,7 @@
 
 .. code-block:: python
 
-    In [2]: from task_27_2d import MyNetmiko
+    In [2]: from task_3_2d import MyNetmiko
 
     In [3]: r1 = MyNetmiko(**device_params)
 
