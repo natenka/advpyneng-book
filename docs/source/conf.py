@@ -17,7 +17,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'Больше Python для сетевых инженеров'
+project = 'Продвинутый Python для сетевых инженеров'
 copyright = '2019, Natasha Samoylenko'
 author = 'Natasha Samoylenko'
 
