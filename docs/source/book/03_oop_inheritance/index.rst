@@ -10,4 +10,4 @@
    :maxdepth: 1
 
    inheritance
-   ../../exercises/27_exercises.rst
+   ../../exercises/03_exercises.rst

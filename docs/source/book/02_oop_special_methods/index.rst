@@ -29,4 +29,4 @@
    str_repr
    add_method
    protocols
-   ../../exercises/26_exercises.rst
+   ../../exercises/02_exercises.rst
