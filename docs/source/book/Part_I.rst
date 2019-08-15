@@ -7,3 +7,5 @@ I. Объектно-ориентированное программирован�
    01_oop_basics/index.rst
    02_oop_special_methods/index.rst
    03_oop_inheritance/index.rst
+   04_oop_method_decorators/index.rst
+   05_data_classes/index.rst
