@@ -11,5 +11,4 @@
 
    inheritance
    abc
-   abc_standard_library
    ../../exercises/03_exercises.rst
