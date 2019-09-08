@@ -17,14 +17,5 @@ Callable                                   ``__call__``
 Collection          Sized,                 ``__contains__``,
                     Iterable,              ``__iter__``,
                     Container              ``__len__``
-
-Sequence            Reversible,            ``__getitem__``,        ``__contains__``, ``__iter__``, ``__reversed__``,
-                    Collection             ``__len__``             ``index``, and ``count``
-
-MutableSequence     Sequence               ``__getitem__``,        Inherited :class:`Sequence` methods and
-                                           ``__setitem__``,        ``append``, ``reverse``, ``extend``, ``pop``,
-                                           ``__delitem__``,        ``remove``, and ``__iadd__``
-                                           ``__len__``,
-                                           ``insert``
 =================== ====================== ======================= ====================================================
 
