@@ -5,8 +5,6 @@
 можно использовать для наследования или проверки типа объекта.
 Большая часть классов находится в ``collections.abc`` и часть из них показана в таблице ниже.
 
-.. note::
-
 Полный перечень классов ``collections.abc`` доступен в `документации <https://docs.python.org/3/library/collections.abc.html>`__
 
 .. tabularcolumns:: |l|L|L|L|
