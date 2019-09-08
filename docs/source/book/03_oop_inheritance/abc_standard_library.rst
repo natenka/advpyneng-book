@@ -4,7 +4,7 @@
 .. tabularcolumns:: |l|L|L|L|
 
 .. list-table:: ABC
-   :widths: 25 25 25
+   :widths: 2 5 5
    :header-rows: 1
 
    * - ABC
@@ -19,61 +19,61 @@
    * - ``Iterable``
      - ``__iter__``
      - 
-   * - ``Iterator`     
+   * - ``Iterator``    
      - ``__next__``       
      - ``__iter__``
-   * - ``Reversible`   
+   * - ``Reversible``  
      - ``__reversed__``
      - 
-   * - ``Generator`    
+   * - ``Generator``   
      - ``send``, ``throw``
      - ``close``, ``__iter__``, ``__next__``
-   * - ``Sized`        
+   * - ``Sized``       
      - ``__len__``
      - 
-   * - ``Callable`     
+   * - ``Callable``    
      - ``__call__``
      - 
-   * - ``Collection`   
+   * - ``Collection``  
      - ``__contains__``, ``__iter__``, ``__len__``
      - 
-   * - ``Sequence`     
+   * - ``Sequence``    
      - ``__getitem__``, ``__len__``        
      - ``__contains__``, ``__iter__``, ``__reversed__``, ``index``, ``count``
    * - ``MutableSequence`
      - ``__getitem__``, ``__setitem__``, ``__delitem__``, ``__len__``, ``insert``
-     - Inherited :class:`Sequence` methods and ``append``, ``reverse``, ``extend``, ``pop``, ``remove``, ``__iadd__``
-   * - ``ByteString`   
+     - Inherited :class:`Sequence``methods and ``append``, ``reverse``, ``extend``, ``pop``, ``remove``, ``__iadd__``
+   * - ``ByteString``  
      - ``__getitem__``, ``__len__``
-     - Inherited :class:`Sequence` methods
-   * - ``Set`          
+     - Inherited :class:`Sequence``methods
+   * - ``Set``         
      - ``__contains__``, ``__iter__``, ``__len__``
      - ``__le__``, ``__lt__``, ``__eq__``, ``__ne__``, ``__gt__``, ``__ge__``, ``__and__``, ``__or__``, ``__sub__``, ``__xor__``, ``isdisjoint``
-   * - ``MutableSet`   
+   * - ``MutableSet``  
      - ``__contains__``, ``__iter__``,``__len__``, ``add``, ``discard``
-     - Inherited :class:`Set` methods and ``clear``, ``pop``, ``remove``, ``__ior__``, ``__iand__``, ``__ixor__``, and ``__isub__``
-   * - ``Mapping`      
+     - Inherited :class:`Set``methods and ``clear``, ``pop``, ``remove``, ``__ior__``, ``__iand__``, ``__ixor__``, and ``__isub__``
+   * - ``Mapping``     
      - ``__getitem__``, ``__iter__``, ``__len__``
      - ``__contains__``, ``keys``, ``items``, ``values``, ``get``, ``__eq__``, ``__ne__``
    * - ``MutableMapping`
      - ``__getitem__``, ``__setitem__``, ``__delitem__``, ``__iter__``, ``__len__``
-     - Inherited :class:`Mapping` methods and ``pop``, ``popitem``, ``clear``, ``update``, ``setdefault``
+     - Inherited :class:`Mapping``methods and ``pop``, ``popitem``, ``clear``, ``update``, ``setdefault``
    * - ``MappingView`
      - 
      - ``__len__``
-   * - ``ItemsView`                            
+   * - ``ItemsView``                           
      - 
      - ``__contains__``,  ``__iter__``
-   * - ``KeysView`                             
+   * - ``KeysView``                            
      - 
      - ``__contains__``,  ``__iter__``
-   * - ``ValuesView`                           
+   * - ``ValuesView``                          
      - 
      - ``__contains__``,  ``__iter__``
-   * - ``Awaitable`    
+   * - ``Awaitable``   
      - ``__await__``
      - 
-   * - ``Coroutine`    
+   * - ``Coroutine``   
      - ``send``, ``throw``
      - ``close``
    * - ``AsyncIterable`
