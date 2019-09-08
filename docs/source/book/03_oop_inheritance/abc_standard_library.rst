@@ -3,28 +3,28 @@
 
 .. tabularcolumns:: |l|L|L|L|
 
-================== =================== ========================================
-ABC                Abstract Methods    Mixin Methods
-================== =================== ========================================
-Container          __contains__  
-Hashable           __hash__  
-Iterable           __iter__  
-Iterator           __next__            __iter__  
-Reversible         __reversed__  
-Generator          send, throw         close, __iter__, __next__  
-Sized              __len__  
-Callable           __call__  
-Collection         __contains__,
-                   __iter__,
-                   __len__  
+========================== ====================== ======================= ====================================================
+ABC                        Inherits from          Abstract Methods        Mixin Methods
+========================== ====================== ======================= ====================================================
+:class:`Container`                                ``__contains__``
+:class:`Hashable`                                 ``__hash__``
+:class:`Iterable`                                 ``__iter__``
+:class:`Iterator`          :class:`Iterable`      ``__next__``            ``__iter__``
+:class:`Reversible`        :class:`Iterable`      ``__reversed__``
+:class:`Generator`         :class:`Iterator`      ``send``, ``throw``     ``close``, ``__iter__``, ``__next__``
+:class:`Sized`                                    ``__len__``
+:class:`Callable`                                 ``__call__``
+:class:`Collection`        :class:`Sized`,        ``__contains__``,
+                           :class:`Iterable`,     ``__iter__``,
+                           :class:`Container`     ``__len__``
 
-Sequence           __getitem__,        __contains__, __iter__, __reversed__,
-                   __len__             index, and   count  
+:class:`Sequence`          :class:`Reversible`,   ``__getitem__``,        ``__contains__``, ``__iter__``, ``__reversed__``,
+                           :class:`Collection`    ``__len__``             ``index``, and ``count``
 
-MutableSequence    __getitem__,        Inherited Sequence methods and
-                   __setitem__,        append, reverse, extend,  pop,
-                   __delitem__,        remove,  __iadd__  
-                   __len__,
-                   insert  
-================== =================== =======================================
+:class:`MutableSequence`   :class:`Sequence`      ``__getitem__``,        Inherited :class:`Sequence` methods and
+                                                  ``__setitem__``,        ``append``, ``reverse``, ``extend``, ``pop``,
+                                                  ``__delitem__``,        ``remove``, and ``__iadd__``
+                                                  ``__len__``,
+                                                  ``insert``
+========================== ====================== ======================= ====================================================
 
