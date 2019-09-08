@@ -6,9 +6,10 @@
 .. list-table:: ABC
    :widths: 5, 5, 15
    :header-rows: 1
+   :class: longtable
 
    * - ABC
-     - Abstract Methods
+     - Абстрактные методы
      - Mixin Methods
    * - Container
      -  __contains__
@@ -42,7 +43,7 @@
      - __contains__, __iter__, __reversed__, index, count
    * - MutableSequence
      - __getitem__, __setitem__,
-       __delitem__, __len__, insert
+      | __delitem__, __len__, insert
      - Inherited Sequence methods and append, reverse, extend, pop, remove, __iadd__
    * - ByteString  
      - __getitem__, __len__
