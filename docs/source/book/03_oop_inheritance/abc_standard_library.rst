@@ -4,7 +4,7 @@
 .. tabularcolumns:: |l|L|L|L|
 
 .. list-table:: ABC
-   :widths: 2 1 1
+   :widths: 10 10 10
    :header-rows: 1
 
    * - ABC
