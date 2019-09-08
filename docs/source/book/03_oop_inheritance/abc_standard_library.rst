@@ -3,65 +3,65 @@
 
 .. tabularcolumns:: |l|L|L|L|
 
-================== ============== ======================= ====================================================
-ABC                Inherits from  Abstract Methods        Mixin Methods
-================== ============== ======================= ====================================================
-Container                           __contains__  
-Hashable                            __hash__  
-Iterable                            __iter__  
-Iterator           Iterable         __next__                __iter__  
-Reversible         Iterable         __reversed__  
-Generator          Iterator         send  ,   throw         close  ,   __iter__  ,   __next__  
-Sized                               __len__  
-Callable                            __call__  
-Collection         Sized ,          __contains__  ,
-                   Iterable ,       __iter__  ,
-                   Container        __len__  
+================== ======================= ====================================================
+ABC                Abstract Methods        Mixin Methods
+================== ======================= ====================================================
+Container            __contains__  
+Hashable             __hash__  
+Iterable             __iter__  
+Iterator             __next__                __iter__  
+Reversible           __reversed__  
+Generator            send  ,   throw         close  ,   __iter__  ,   __next__  
+Sized                __len__  
+Callable             __call__  
+Collection           __contains__  ,
+                     __iter__  ,
+                     __len__  
 
-Sequence           Reversible ,     __getitem__  ,          __contains__  ,   __iter__  ,   __reversed__  ,
-                   Collection       __len__                 index  , and   count  
+Sequence             __getitem__  ,          __contains__  ,   __iter__  ,   __reversed__  ,
+                     __len__                 index  , and   count  
 
-MutableSequence    Sequence         __getitem__  ,        Inherited Sequence  methods and
-                                    __setitem__  ,          append  ,   reverse  ,   extend  ,   pop  ,
-                                    __delitem__  ,          remove  , and   __iadd__  
-                                    __len__  ,
-                                    insert  
+MutableSequence      __getitem__  ,        Inherited Sequence  methods and
+                     __setitem__  ,          append  ,   reverse  ,   extend  ,   pop  ,
+                     __delitem__  ,          remove  , and   __iadd__  
+                     __len__  ,
+                     insert  
 
-ByteString         Sequence         __getitem__  ,        Inherited Sequence  methods
-                                    __len__  
+ByteString           __getitem__  ,        Inherited Sequence  methods
+                     __len__  
 
-Set                Collection       __contains__  ,         __le__  ,   __lt__  ,   __eq__  ,   __ne__  ,
-                                    __iter__  ,             __gt__  ,   __ge__  ,   __and__  ,   __or__  ,
-                                    __len__                 __sub__  ,   __xor__  , and   isdisjoint  
+Set                  __contains__  ,         __le__  ,   __lt__  ,   __eq__  ,   __ne__  ,
+                     __iter__  ,             __gt__  ,   __ge__  ,   __and__  ,   __or__  ,
+                     __len__                 __sub__  ,   __xor__  , and   isdisjoint  
 
-MutableSet         Set              __contains__  ,       Inherited Set  methods and
-                                    __iter__  ,             clear  ,   pop  ,   remove  ,   __ior__  ,
-                                    __len__  ,              __iand__  ,   __ixor__  , and   __isub__  
-                                    add  ,
-                                    discard  
+MutableSet           __contains__  ,       Inherited Set  methods and
+                     __iter__  ,             clear  ,   pop  ,   remove  ,   __ior__  ,
+                     __len__  ,              __iand__  ,   __ixor__  , and   __isub__  
+                     add  ,
+                     discard  
 
-Mapping            Collection       __getitem__  ,          __contains__  ,   keys  ,   items  ,   values  ,
-                                    __iter__  ,             get  ,   __eq__  , and   __ne__  
-                                    __len__  
+Mapping              __getitem__  ,          __contains__  ,   keys  ,   items  ,   values  ,
+                     __iter__  ,             get  ,   __eq__  , and   __ne__  
+                     __len__  
 
-MutableMapping     Mapping          __getitem__  ,        Inherited Mapping  methods and
-                                    __setitem__  ,          pop  ,   popitem  ,   clear  ,   update  ,
-                                    __delitem__  ,        and   setdefault  
-                                    __iter__  ,
-                                    __len__  
+MutableMapping       __getitem__  ,        Inherited Mapping  methods and
+                     __setitem__  ,          pop  ,   popitem  ,   clear  ,   update  ,
+                     __delitem__  ,        and   setdefault  
+                     __iter__  ,
+                     __len__  
 
 
-MappingView        Sized                                    __len__  
-ItemsView          MappingView ,                            __contains__  ,
-                   Set                                      __iter__  
-KeysView           MappingView ,                            __contains__  ,
-                   Set                                      __iter__  
-ValuesView         MappingView ,                            __contains__  ,   __iter__  
-                   Collection 
-Awaitable                           __await__  
-Coroutine          Awaitable        send  ,   throw         close  
-AsyncIterable                       __aiter__  
-AsyncIterator      AsyncIterable    __anext__               __aiter__  
-AsyncGenerator     AsyncIterator    asend  ,   athrow       aclose  ,   __aiter__  ,   __anext__  
-================== ============== ======================= ====================================================
+MappingView                                  __len__  
+ItemsView                                    __contains__  ,
+                                             __iter__  
+KeysView                                     __contains__  ,
+                                             __iter__  
+ValuesView                                   __contains__  ,   __iter__  
+                   
+Awaitable            __await__  
+Coroutine            send  ,   throw         close  
+AsyncIterable        __aiter__  
+AsyncIterator        __anext__               __aiter__  
+AsyncGenerator       asend  ,   athrow       aclose  ,   __aiter__  ,   __anext__  
+================== ======================= ====================================================
 
