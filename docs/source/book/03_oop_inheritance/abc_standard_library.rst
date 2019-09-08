@@ -41,7 +41,8 @@
      - __getitem__, __len__        
      - __contains__, __iter__, __reversed__, index, count
    * - MutableSequence
-     - __getitem__, __setitem__, __delitem__, __len__, insert
+     - __getitem__, __setitem__,
+       __delitem__, __len__, insert
      - Inherited Sequence methods and append, reverse, extend, pop, remove, __iadd__
    * - ByteString  
      - __getitem__, __len__
