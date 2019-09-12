@@ -3,7 +3,6 @@ import time
 
 
 class BaseSSH:
-    __slots__ = ('ip', 'username', 'password', '_MAX_READ', '_ssh')
     def __init__(self, ip, username, password):
         self.ip = ip
         self.username = username
@@ -47,3 +46,4 @@ class BaseSSH:
             time.sleep(0.5)
         result = self._ssh.recv(self._MAX_READ).decode('ascii')
         return result
+
