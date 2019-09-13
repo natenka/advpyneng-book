@@ -40,3 +40,13 @@ Mixin не должен использовать атрибуты класса I
 
         def __lt__(self, other):
             return self._ip < other._ip
+
+
+
+Mixin task2
+-----------
+
+Создать Mixin InheritanceMixin с двумя методами:
+
+* subclasses отображает дочерние классы 
+* superclasses - отображает родительские классы

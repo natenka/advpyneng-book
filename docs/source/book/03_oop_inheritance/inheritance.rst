@@ -165,11 +165,12 @@ paging, так что можно попробовать выполнить дл�
 .. code:: python
 
     class CiscoSSH(BaseSSH):
-        def __init__(self, ip, username, password, enable_password,
+        def __init__(self, ip, username, password, enable_password=None,
                      disable_paging=True):
             super().__init__(ip, username, password)
-            self._ssh.send('enable\n')
-            self._ssh.send(enable_password + '\n')
+            if enable_password
+                self._ssh.send('enable\n')
+                self._ssh.send(enable_password + '\n')
             if disable_paging:
                 self._ssh.send('terminal length 0\n')
             time.sleep(1)
