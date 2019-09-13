@@ -14,4 +14,5 @@
    multiple_inheritance
    abc
    mixin
+   terms
    ../../exercises/03_exercises.rst
