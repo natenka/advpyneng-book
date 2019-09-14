@@ -2,17 +2,17 @@
 
    \newpage
 
-3. Наследование
+4. Наследование
 ============================
 
 
 .. toctree::
    :maxdepth: 1
 
+   terms
    inheritance
    exceptions
    multiple_inheritance
    abc
    mixin
-   terms
    ../../exercises/03_exercises.rst

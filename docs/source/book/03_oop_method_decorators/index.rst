@@ -2,7 +2,7 @@
 
    \newpage
 
-4. Classmethod, staticmethod, property
+3. Classmethod, staticmethod, property
 ======================================
 
 

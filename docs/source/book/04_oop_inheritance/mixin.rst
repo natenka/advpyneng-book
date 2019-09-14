@@ -8,6 +8,11 @@ Mixin используются для добавления одних и тех 
 В Python примеси делаются с помощью классов. Так как в Python нет отдельного типа 
 для примесей, классам-примесям принято давать имена заканчивающиеся на Mixin.
 
+.. note::
+
+    `What is a mixin, and why are they useful? <https://stackoverflow.com/questions/533631/what-is-a-mixin-and-why-are-they-useful>`__
+    `Перевод "Что такое mixin и почему они полезны?" <http://qaru.site/questions/12628/what-is-a-mixin-and-why-are-they-useful>`__
+
 С одной стороны, то же самое можно сделать с помощью наследования обычных классов,
 но не всегда те методы, которые нужны в разных дочерних классах,
 имеют смысл в родительском.
@@ -99,4 +104,5 @@ Mixin используются для добавления одних и тех 
             result += super().send_config_commands(commands)
             result += self.exit_config_mode()
             return result
+
 
