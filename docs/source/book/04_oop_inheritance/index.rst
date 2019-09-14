@@ -15,4 +15,4 @@
    multiple_inheritance
    abc
    mixin
-   ../../exercises/03_exercises.rst
+   ../../exercises/04_exercises.rst

@@ -9,4 +9,4 @@
 .. toctree::
    :maxdepth: 1
 
-   ../../exercises/04_exercises.rst
+   ../../exercises/03_exercises.rst
