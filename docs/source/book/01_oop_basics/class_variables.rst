@@ -6,74 +6,73 @@
 
 .. code:: python
 
-    In [27]: class A:
-        ...:     var_a = 5
-        ...:
-        ...:     def method(self):
-        ...:         pass
-        ...:
+    In [1]: class CiscoSSH:
+       ...:     device_type = 'cisco_ios'
+       ...:
+       ...:     def send_command(self, command):
+       ...:         pass
+       ...:
 
 Теперь не только у класса, но и у каждого экземпляра класса будет
-переменная ``var_a``:
+переменная ``device_type``:
 
 .. code:: python
 
-    In [40]: A.var_a
-    Out[40]: 5
+    In [2]: CiscoSSH.device_type
+    Out[2]: 'cisco_ios'
 
-    In [30]: a1 = A()
+    In [3]: r1 = CiscoSSH()
 
-    In [31]: a1.var_a
-    Out[31]: 5
+    In [4]: r1.device_type
+    Out[4]: 'cisco_ios'
 
-    In [32]: a2 = A()
+    In [5]: r2 = CiscoSSH()
 
-    In [33]: a2.var_a
-    Out[33]: 5
+    In [6]: r2.device_type
+    Out[6]: 'cisco_ios'
 
 Важный момент при использовании переменных класса, то что внутри метода
-к ним все равно надо обращаться через имя класса (или self, но через имя
-класса лучше, так как тогда понятно, что это переменная класса). Для
+к ним все равно надо обращаться через имя класса. Для
 начала, вариант обращения без имени класса:
 
 .. code:: python
 
-    In [37]: class A:
-        ...:     var_a = 5
-        ...:
-        ...:     def method(self):
-        ...:         print(var_a)
-        ...:
+    In [7]: class CiscoSSH:
+       ...:     device_type = 'cisco_ios'
+       ...:
+       ...:     def send_command(self, command):
+       ...:         print(device_type)
+       ...:
 
-    In [38]: a1 = A()
+    In [8]: r1 = CiscoSSH()
 
-    In [39]: a1.method()
+    In [9]: r1.send_command()
     ---------------------------------------------------------------------------
     NameError                                 Traceback (most recent call last)
-    <ipython-input-39-921b8753dbee> in <module>()
-    ----> 1 a1.method()
+    <ipython-input-9-921b8733dbee> in <module>()
+    ----> 1 r1.send_command()
 
-    <ipython-input-37-ef925c4e39d3> in method(self)
+    <ipython-input-7-ef923c4e39d3> in send_command(self, command)
           3
-          4     def method(self):
-    ----> 5         print(var_a)
+          4     def send_command(self, command):
+    ----> 5         print(device_type)
           6
 
-    NameError: name 'var_a' is not defined
+    NameError: name 'device_type' is not defined
 
 И правильный вариант:
 
 .. code:: python
 
-    In [47]: class A:
-        ...:     var_a = 5
+    In [10]: class CiscoSSH:
+        ...:     device_type = 'cisco_ios'
         ...:
-        ...:     def method(self):
-        ...:         print(A.var_a)
+        ...:     def send_command(self, command):
+        ...:         print(CiscoSSH.device_type)
         ...:
 
-    In [48]: a1 = A()
+    In [11]: r1 = CiscoSSH()
 
-    In [49]: a1.method()
-    5
+    In [12]: r1.send_command()
+    'cisco_ios'
 
