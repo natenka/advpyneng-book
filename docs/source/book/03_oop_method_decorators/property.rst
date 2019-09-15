@@ -92,8 +92,52 @@ Property как правило, используется как декорато
     <ipython-input-17-e153170a5893> in <module>
     ----> 1 ip1.mask = 30
 
-    AttributeError: can't set attribute
+    AttributeError: can't set attribute'
 
 Также property позволяет добавлять метод setter, который будет отвечать 
 за изменение значения переменной и, так как это тоже метод, позволяет
 включить логику с проверкой или динамическим вычислением значения.
+
+.. code:: python
+
+    In [19]: class IPAddress:
+        ...:     def __init__(self, address, mask):
+        ...:         self._address = address
+        ...:         self._mask = int(mask)
+        ...:
+        ...:     @property
+        ...:     def mask(self):
+        ...:         return self._mask
+        ...:
+        ...:     @mask.setter
+        ...:     def mask(self, mask):
+        ...:         if not isinstance(mask, int):
+        ...:             raise TypeError("Маска должна быть числом")
+        ...:         if not mask in range(8, 32):
+        ...:             raise ValueError("Маска должна быть в диапазоне от 8 до 32")
+        ...:         self._mask = mask
+        ...:
+
+    In [20]: ip1 = IPAddress('10.1.1.1', 24)
+
+    In [21]: ip1.mask
+    Out[21]: 24
+
+    In [23]: ip1.mask = 30
+
+    In [24]: ip1.mask = 320
+    ---------------------------------------------------------------------------
+    ValueError                                Traceback (most recent call last)
+    <ipython-input-24-8573933afac9> in <module>
+    ----> 1 ip1.mask = 320
+
+    <ipython-input-19-d0e571cd5e2b> in mask(self, mask)
+         13             raise TypeError("Маска должна быть числом")
+         14         if not mask in range(8, 32):
+    ---> 15             raise ValueError("Маска должна быть в диапазоне от 8 до 32")
+         16         self._mask = mask
+         17
+
+    ValueError: Маска должна быть в диапазоне от 8 до 32
+
+

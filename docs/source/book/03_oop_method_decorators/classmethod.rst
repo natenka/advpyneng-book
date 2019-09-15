@@ -10,3 +10,20 @@
 Существует другой вариант решения проблемы - создать альтернативный 
 конструктор с помощью декоратора classmethod.
 
+Пример альтернативного конструктора в стандартной библиотеке:
+
+.. code:: python
+
+    In [25]: r1 = {
+        ...: 'hostname': 'R1',
+        ...: 'OS': 'IOS',
+        ...: 'Vendor': 'Cisco'
+        ...: }
+
+    In [28]: dict.fromkeys(['hostname', 'os', 'vendor'])
+    Out[28]: {'hostname': None, 'os': None, 'vendor': None}
+
+    In [29]: dict.fromkeys(['hostname', 'os', 'vendor'], '')
+    Out[29]: {'hostname': '', 'os': '', 'vendor': ''}
+
+
