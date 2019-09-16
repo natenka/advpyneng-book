@@ -9,4 +9,6 @@
 .. toctree::
    :maxdepth: 1
 
+   namedtuple
+   dataclasses
    ../../exercises/05_exercises.rst
