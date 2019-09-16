@@ -141,3 +141,125 @@ Property как правило, используется как декорато
     ValueError: Маска должна быть в диапазоне от 8 до 32
 
 
+Пример использования property для динамического получения значения:
+
+.. code:: python
+
+    from base_ssh import BaseSSH
+    import time
+
+
+    class CiscoSSH(BaseSSH):
+        def __init__(self, ip, username, password, enable_password,
+                     disable_paging=True):
+            super().__init__(ip, username, password)
+            self._ssh.send('enable\n')
+            self._ssh.send(enable_password + '\n')
+            if disable_paging:
+                self._ssh.send('terminal length 0\n')
+            time.sleep(1)
+            self._ssh.recv(self._MAX_READ)
+            self._cfg = None
+
+        @property
+        def cfg(self):
+            if not self._cfg:
+                self._cfg = self.send_show_command('sh run')
+            return self._cfg
+
+
+При обращении к переменной cfg первый раз, на оборудовании выполняется команда sh run
+и записывается в переменную self._cfg, второй раз значение просто берется из переменной:
+
+.. code:: python
+
+    In [6]: r1 = CiscoSSH('192.168.100.1', 'cisco', 'cisco', 'cisco')
+
+    In [7]: r1.cfg # тут возникает пауза
+    Out[7]: 'sh run\r\nBuilding configuration...\r\n\r\nCurrent configuration : 2286 bytes\r\n!\r\nversion 15.2\r\n...'
+
+    In [8]: r1.cfg
+    Out[8]: 'sh run\r\nBuilding configuration...\r\n\r\nCurrent configuration : 2286 bytes\r\n!\r\nversion 15.2\r\n...'
+
+В этом примере property используется для создания переменной, которая отвечает за
+чтение/изменение основного IP-адреса:
+
+.. code:: python
+
+    import re
+    import time
+    from base_ssh import BaseSSH
+
+
+    class CiscoSSH(BaseSSH):
+        def __init__(self, ip, username, password, enable_password,
+                     disable_paging=True):
+            super().__init__(ip, username, password)
+            self._ssh.send('enable\n')
+            self._ssh.send(enable_password + '\n')
+            if disable_paging:
+                self._ssh.send('terminal length 0\n')
+            time.sleep(1)
+            self._ssh.recv(self._MAX_READ)
+            self._mgmt_ip = None
+
+        def config_mode(self):
+            self._ssh.send('conf t\n')
+            time.sleep(0.5)
+            result = self._ssh.recv(self._MAX_READ).decode('ascii')
+            return result
+
+        def exit_config_mode(self):
+            self._ssh.send('end\n')
+            time.sleep(0.5)
+            result = self._ssh.recv(self._MAX_READ).decode('ascii')
+            return result
+
+        def send_config_commands(self, commands):
+            result = self.config_mode()
+            result += super().send_config_commands(commands)
+            result += self.exit_config_mode()
+            return result
+
+        @property
+        def mgmt_ip(self):
+            if not self._mgmt_ip:
+                loopback0 = self.send_show_command('sh run interface lo0')
+                self._mgmt_ip = re.search('ip address (\S+) ', loopback0).group(1)
+            return self._mgmt_ip
+
+        @mgmt_ip.setter
+        def mgmt_ip(self, new_ip):
+            if self.mgmt_ip != new_ip:
+                self.send_config_commands([f'interface lo0',
+                                           f'ip address {new_ip} 255.255.255.255'])
+                self._mgmt_ip = new_ip
+
+Теперь при чтении переменной mgmt_ip считывается конфиг или читается переменная _mgmt_ip,
+а при записи адрес перенастраивается на оборудовании:
+
+.. code:: python
+
+    In [19]: r1 = CiscoSSH('192.168.100.1', 'cisco', 'cisco', 'cisco')
+
+    In [22]: r1.mgmt_ip
+    Out[22]: '4.4.4.4'
+
+    In [23]: r1.mgmt_ip = '10.4.4.4'
+
+    In [24]: r1.mgmt_ip
+    Out[24]: '10.4.4.4'
+
+    In [27]: print(r1.send_show_command('sh run interface lo0'))
+    sh run interface lo0
+    Building configuration...
+
+    Current configuration : 64 bytes
+    !
+    interface Loopback0
+     ip address 10.4.4.4 255.255.255.255
+    end
+
+    R1#
+
+
