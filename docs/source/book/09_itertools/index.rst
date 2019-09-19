@@ -2,8 +2,8 @@
 
    \newpage
 
-9. Модуль itertools
-===================
+9. Модули itertools, more-itertools
+===================================
 
 
 .. toctree::
