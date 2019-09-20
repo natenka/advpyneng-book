@@ -61,3 +61,4 @@
 
     In [9]: r1.send_show_command('sh clock')
     Out[9]: '*16:38:01.883 UTC Sun Jan 28 2018'
+

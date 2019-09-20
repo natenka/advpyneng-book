@@ -134,4 +134,24 @@ collections.namedtuple
 typing.NamedTuple
 ~~~~~~~~~~~~~~~~~
 
+Еще один вариант создания класса с помощью именнованного кортежа - наследование
+класса typing.NamedTuple.
+Базовые особенности namedtuple сохраняются, плюс есть возможность добавлять свои методы.
+
+.. code:: python
+
+    classs IPAddress(typing.NamedTuple):
+        pass
+
+    In [33]: IPAddress = namedtuple('IPAddress', ['address', 'mask'], defaults=[24])
+
+    In [34]: ip1 = IPAddress('10.1.1.1', 28)
+
+    In [35]: ip1
+    Out[35]: IPAddress(address='10.1.1.1', mask=28)
+
+    In [36]: ip2 = IPAddress('10.2.2.2')
+
+    In [37]: ip2
+    Out[37]: IPAddress(address='10.2.2.2', mask=24)
 
