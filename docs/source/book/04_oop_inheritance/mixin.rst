@@ -17,21 +17,6 @@ Mixin используются для добавления одних и тех 
 но не всегда те методы, которые нужны в разных дочерних классах,
 имеют смысл в родительском.
 
-.. code:: python
-
-    class Shape:
-        def perimeter(self):
-            return self.width * 2 + self.length * 2
-
-
-    class Circle(Shape):
-        pass
-
-    class Rectangle(Shape):
-        pass
-
-    class Square(Shape):
-        pass
 
 .. code:: python
 

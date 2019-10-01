@@ -140,18 +140,29 @@ typing.NamedTuple
 
 .. code:: python
 
-    classs IPAddress(typing.NamedTuple):
-        pass
+    In [9]: from typing import NamedTuple
 
-    In [33]: IPAddress = namedtuple('IPAddress', ['address', 'mask'], defaults=[24])
+    In [10]: class IPAddress(typing.NamedTuple):
+        ...:     ip: str
+        ...:     mask: int = 24
+        ...:
 
-    In [34]: ip1 = IPAddress('10.1.1.1', 28)
+    In [11]: ip1 = IPAddress('10.1.1.1', 28)
 
-    In [35]: ip1
-    Out[35]: IPAddress(address='10.1.1.1', mask=28)
+    In [12]: ip1
+    Out[12]: IPAddress(ip='10.1.1.1', mask=28)
 
-    In [36]: ip2 = IPAddress('10.2.2.2')
+    In [13]: class IPAddress(typing.NamedTuple):
+        ...:     ip: str
+        ...:     mask: int = 24
+        ...:
+        ...:     def convert_to_bin(self):
+        ...:         pass
+        ...:
 
-    In [37]: ip2
-    Out[37]: IPAddress(address='10.2.2.2', mask=24)
+    In [14]: ip1 = IPAddress('10.1.1.1', 28)
+
+    In [15]: ip1.convert_to_bin
+    Out[15]: <bound method IPAddress.convert_to_bin of IPAddress(ip='10.1.1.1', mask=28)>
+
 
