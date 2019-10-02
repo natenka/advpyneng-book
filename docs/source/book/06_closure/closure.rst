@@ -90,6 +90,11 @@
 Изменение свободных переменных
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+Для получения значения свободной переменной достаточно обратиться к ней, однако, при изменении
+значений есть нюансы. Если переменная ссылается на изменяемый объект, например, список, 
+изменение содержимого делается стандартным образом без каких-либо проблем. Однако
+если необходимо, к примеру, добавить 1 к числу, мы получим ошибку:
+
 .. code:: python
 
     In [31]: def func1():
@@ -128,6 +133,43 @@
     <cell at 0xb12174c4: str object at 0xb732d720> line
     <cell at 0xb1217af4: list object at 0xb11e5dac> [1, 2, 3, 4]
 
+Если необходимо присвоить свободной переменной другое значение, необходимо
+явно объявить ее как nonlocal:
+
+.. code:: python
+
+    In [40]: def func1():
+        ...:     a = 1
+        ...:     b = 'line'
+        ...:     c = [1, 2, 3]
+        ...:
+        ...:     def func2():
+        ...:         nonlocal a
+        ...:         c.append(4)
+        ...:         a += 1
+        ...:         return a, b, c
+        ...:
+        ...:     return func2
+        ...:
+
+    In [41]: call_func = func1()
+
+    In [42]: call_func()
+    Out[42]: (2, 'line', [1, 2, 3, 4])
+
+    In [43]: for item in call_func.__closure__:
+        ...:     print(item, item.cell_contents)
+        ...:
+    <cell at 0xb11fc6bc: int object at 0x836bef0> 2
+    <cell at 0xb11fcdac: str object at 0xb732d720> line
+    <cell at 0xb11fc56c: list object at 0xb117fe2c> [1, 2, 3, 4]
+
+
+Использование nonlocal нужно только если необходимо менять свободную переменную
+сохраняя измененное значение между вызовами внутренней функции. Для обычного
+переприсваивания значения ничего делать не нужно.
+
+Пример использования nonlocal с повторным вызовом внутренней функции:
 
 .. code:: python
 
@@ -139,43 +181,25 @@
             return r
         return step
 
-    #n = countdown(10)
-    #n()
-    #n()
+    In [49]: do_step = countdown(10)
 
+    In [50]: do_step()
+    Out[50]: 10
 
+    In [51]: do_step()
+    Out[51]: 9
 
-.. code:: python
+    In [52]: do_step()
+    Out[52]: 8
 
-    def func_as_object(a,b):
-        def inner():
-            def add():
-                return a+b
-            def sub():
-                return a-b
-            def mul():
-                return a*b
-            inner.add = add
-            inner.sub = sub
-            inner.mul = mul
-        return inner
+    In [53]: do_step()
+    Out[53]: 7
 
+Примеры использования замыкания
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    In [9]: r = func_as_object(5,2)
-
-    In [10]: r
-    Out[10]: <function __main__.func_as_object.<locals>.inner>
-
-    In [11]: r()
-
-    In [12]: r.add()
-    Out[12]: 7
-
-    In [13]: r.mul()
-    Out[13]: 10
-
-
-
+Так как замыкания позволяют сохранять состояние (значения свободных переменных),
+их можно использовать для создания функции, которая отчасти похожа на класс:
 
 .. code:: python
 
@@ -205,6 +229,8 @@
 
 
 
+Пример с подключением SSH:
+
 .. code:: python
 
     from netmiko import ConnectHandler
@@ -217,70 +243,25 @@
         'secret': 'cisco'
     }
 
-    def netmiko_ssh(params_dict):
-        ssh = ConnectHandler(**params_dict)
-        ssh.enable()
-        def send_show_command(command):
-            return ssh.send_command(command)
-        return send_show_command
-
-###version 2
-
-.. code:: python
-
-    def netmiko_ssh(params_dict):
-        ssh = ConnectHandler(**params_dict)
-        ssh.enable()
-        def send_show_command(command):
-            if hasattr(send_show_command, 'close') and send_show_command.close:
-                ssh.disconnect()
-                print('Session closed')
-                return
-            return ssh.send_command(command)
-        return send_show_command
-
-
-#####
-
-.. code:: python
-    import logging
-
-    def ssh_with_logging(log_level):
-
-        logging.basicConfig(
-            level=getattr(logging, log_level.upper(), logging.INFO), datefmt='%H:%M:%S',
-            format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-
-        def netmiko_ssh(params_dict):
+    def netmiko_ssh(**params_dict):
             ssh = ConnectHandler(**params_dict)
             ssh.enable()
-
             def send_show_command(command):
-                if hasattr(send_show_command, 'close') and send_show_command.close:
+                if command == 'close':
                     ssh.disconnect()
-                    logging.debug('Session closed')
+                    print('Session closed')
                     return
-                command_output = ssh.send_command(command)
-                logging.debug(command_output)
-                return command_output
+                return ssh.send_command(command)
+            netmiko_ssh.send_show_command = send_show_command
             return send_show_command
-        return netmiko_ssh
 
 
-    verbose_ssh = ssh_with_logging('debug')
-    r1 = verbose_ssh(device_params)
-    r1('sh clock')
+    In [25]: r1 = netmiko_ssh(**device_params)
 
+    In [26]: r1('sh clock')
+    Out[26]: '*15:14:13.240 UTC Wed Oct 2 2019'
 
-
-    In [31]: verbose_ssh = ssh_with_logging('debug')
-
-    In [32]: r1 = verbose_ssh(device_params)
-
-    In [33]: r1
-    Out[33]: <function __main__.verbose_ssh.<locals>.netmiko_ssh.<locals>.send_show_command>
-
-    In [34]: r1('sh clock')
-    Out[34]: '*16:20:33.794 UTC Sat Feb 24 2018'
+    In [27]: r1('close')
+    Session closed
 
 
