@@ -113,6 +113,9 @@
     def capitalize(string):
         return string.capitalize()
 
+
+
+
 .. code:: python
 .. code:: python
 .. code:: python
