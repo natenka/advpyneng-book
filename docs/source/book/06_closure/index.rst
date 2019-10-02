@@ -9,4 +9,6 @@
 .. toctree::
    :maxdepth: 1
 
+   first_class_functions
+   closure
    ../../exercises/06_exercises.rst
