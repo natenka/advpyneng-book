@@ -44,21 +44,21 @@
 .. code:: python
 
     def verbose(func):
-        def inner(*args, **kwargs):
+        def wrapper(*args, **kwargs):
             print(f'Вызываю функцию {func.__name__}')
             return func(*args, **kwargs)
-        return inner
+        return wrapper
 
 Функция verbose принимает как аргумент функцию, а затем возвращает
-внутреннюю функцю inner внутри которой выводится сообщение, а затем
+внутреннюю функцю wrapper внутри которой выводится сообщение, а затем
 вызывается исходная функция. Для того чтобы функция verbose работала
-надо заменить функцию upper внутренней функцией inner таким образом:
+надо заменить функцию upper внутренней функцией wrapper таким образом:
 
 .. code:: python
 
     In [10]: upper = verbose(upper)
 
-Теперь при вызове функции upper, вызывается внутренняя функция inner
+Теперь при вызове функции upper, вызывается внутренняя функция wrapper
 и перед вызовом самой upper выводится сообщение:
 
 .. code:: python
@@ -73,10 +73,10 @@
 .. code:: python
 
     def verbose(func):
-        def inner(*args, **kwargs):
+        def wrapper(*args, **kwargs):
             print(f'Вызываю функцию {func.__name__}')
             return func(*args, **kwargs)
-        return inner
+        return wrapper
 
     def upper(string):
         return string.upper()
@@ -96,10 +96,10 @@
 .. code:: python
 
     def verbose(func):
-        def inner(*args, **kwargs):
+        def wrapper(*args, **kwargs):
             print(f'Вызываю функцию {func.__name__}')
             return func(*args, **kwargs)
-        return inner
+        return wrapper
 
     @verbose
     def upper(string):
@@ -120,7 +120,7 @@
 .. code:: python
 
     In [2]: lower
-    Out[2]: <function __main__.verbose.<locals>.inner(*args, **kwargs)>
+    Out[2]: <function __main__.verbose.<locals>.wrapper(*args, **kwargs)>
 
     In [4]: lower?
     Signature: lower(*args, **kwargs)
@@ -128,7 +128,7 @@
     File:      ~/repos/experiments/netdev_try/<ipython-input-1-32089045b87b>
     Type:      function
 
-Чтобы исправить это небоходимо воспользоваться декоратором wraps
+Чтобы исправить это необходимо воспользоваться декоратором wraps
 из модуля functools:
 
 .. code:: python
@@ -137,10 +137,10 @@
 
     In [6]: def verbose(func):
        ...:     @wraps(func)
-       ...:     def inner(*args, **kwargs):
+       ...:     def wrapper(*args, **kwargs):
        ...:         print(f'Вызываю функцию {func.__name__}')
        ...:         return func(*args, **kwargs)
-       ...:     return inner
+       ...:     return wrapper
        ...:
        ...: @verbose
        ...: def upper(string):
@@ -174,26 +174,26 @@
 
     def stars(func):
         @wraps(func)
-        def inner(*args, **kwargs):
+        def wrapper(*args, **kwargs):
             print('*'*30)
             return func(*args, **kwargs)
-        return inner
+        return wrapper
 
 
     def lines(func):
         @wraps(func)
-        def inner(*args, **kwargs):
+        def wrapper(*args, **kwargs):
             print('-'*30)
             return func(*args, **kwargs)
-        return inner
+        return wrapper
 
 
     def equals(func):
         @wraps(func)
-        def inner(*args, **kwargs):
+        def wrapper(*args, **kwargs):
             print('='*30)
             return func(*args, **kwargs)
-        return inner
+        return wrapper
 
 
     @stars
@@ -209,7 +209,7 @@
     ==============================
     Out[23]: 9
 
-    In [29]: def func(a, b):
+    In [24]: def func(a, b):
         ...:     return a + b
         ...: func = stars(lines(equals(func)))
 
@@ -219,28 +219,28 @@
     ==============================
     Out[30]: 9
 
-    In [24]: @equals
+    In [31]: @equals
         ...: @lines
         ...: @stars
         ...: def func(a, b):
         ...:     return a + b
         ...:
 
-    In [25]: func(4,5)
+    In [32]: func(4,5)
     ==============================
     ------------------------------
     ******************************
-    Out[25]: 9
+    Out[32]: 9
 
-    In [29]: def func(a, b):
+    In [33]: def func(a, b):
         ...:     return a + b
         ...: func = equals(lines(stars(func)))
 
-    In [30]: func(4,5)
+    In [34]: func(4,5)
     ==============================
     ------------------------------
     ******************************
-    Out[30]: 9
+    Out[34]: 9
 
 Для некоторых декораторов порядок важен и тогда он будет
 указан в документации. Например, декоратор abstractmethod 
