@@ -12,5 +12,6 @@
    basics
    examples
    with_args
+   with_args_examples
    class_decorator
    ../../exercises/07_exercises.rst
