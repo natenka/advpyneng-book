@@ -12,4 +12,9 @@
 .. toctree::
    :maxdepth: 1
 
+   syntax
+   generator
+   generator_example
+   genexpr
+   further_reading
    ../../exercises/08_exercises.rst
