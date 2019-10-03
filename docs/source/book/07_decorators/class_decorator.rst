@@ -24,11 +24,3 @@
         def __init__(self, ip, username, password):
             pass
 
-
-
-.. code:: python
-.. code:: python
-.. code:: python
-.. code:: python
-.. code:: python
-

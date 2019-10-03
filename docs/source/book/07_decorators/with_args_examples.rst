@@ -128,7 +128,7 @@
         send_commands(dev_list, config=commands)
         send_commands(dev_list, show=show_command)
 
-В стандартной библиотеке есть интересный декоратор singledispatch:
+В стандартной библиотеке есть интересный `декоратор singledispatch <https://github.com/python/cpython/blob/3.7/Lib/functools.py#L763>`__:
 
 .. code:: python
 
