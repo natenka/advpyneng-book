@@ -263,3 +263,7 @@ Property как правило, используется как декорато
     R1#
 
 
+.. toctree::
+   :maxdepth: 1
+
+   property_variations
