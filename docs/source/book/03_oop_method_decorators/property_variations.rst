@@ -6,117 +6,144 @@
 
 .. code:: python
 
-    class IPAddress:
-        def __init__(self, ip, mask):
-            self._ip = ip
-            self._mask = mask
+    class Book:
+        def __init__(self, title, price, quantity):
+            self.title = title
+            self.price = price
+            self.quantity = quantity
 
         # метод, который декорирован property становится getter'ом
         @property
-        def mask(self):
+        def total(self):
             print('getter')
-            return self._mask
+            return self.price * self.quantity
 
 Стандартный вариант применения property с setter
 
 .. code:: python
 
-    class IPAddress:
-        def __init__(self, ip, mask):
-            self._ip = ip
-            self._mask = mask
+    class Book:
+        def __init__(self, title, price, quantity):
+            self.title = title
+            self.price = price
+            self.quantity = quantity
 
+        # total остается атрибутом только для чтения
+        @property
+        def total(self):
+            return round(self.price * self.quantity, 2)
+
+        # а price доступен для чтения и записи
         @property # этот метод превращается в getter
-        def mask(self):
-            print('getter')
-            return self._mask
+        def price(self):
+            print('price getter')
+            return self._price
 
-        @mask.setter
-        def mask(self, value):
-            print('setter')
-            if not isinstance(value, int):
+        # при записи делается проверка значения
+        @price.setter
+        def price(self, value):
+            print('price setter')
+            if not isinstance(value, (int, float)):
                 raise TypeError('Значение должно быть числом')
-            if not 8 <= value <= 32:
-                raise ValueError('Значение должно быть в диапазоне 8 - 32')
-            self._mask = value
+            if not value >= 0:
+                raise ValueError('Значение должно быть положительным')
+            self._price = float(value)
+
 
 Декораторы с явным setter
 
 .. code:: python
 
-    class IPAddress:
-        def __init__(self, ip, mask):
-            self._ip = ip
-            self._mask = mask
+    class Book:
+        def __init__(self, title, price, quantity):
+            self.title = title
+            self.price = price
+            self.quantity = quantity
 
-        # создаем пустую property
-        mask = property()
+        # создаем пустую property для total
+        total = property()
+
+        @total.getter
+        def total(self):
+            return round(self.price * self.quantity, 2)
+
+        # создаем пустую property для price
+        price = property()
 
         # позже указываем getter
-        @mask.getter
-        def mask(self):
-            print('getter')
-            return self._mask
+        @price.getter
+        def price(self):
+            print('price getter')
+            return self._price
 
-        @mask.setter
-        def mask(self, value):
-            print('setter')
-            if not isinstance(value, int):
+        @price.setter
+        def price(self, value):
+            print('price setter')
+            if not isinstance(value, (int, float)):
                 raise TypeError('Значение должно быть числом')
-            if not 8 <= value <= 32:
-                raise ValueError('Значение должно быть в диапазоне 8 - 32')
-            self._mask = value
+            if not value >= 0:
+                raise ValueError('Значение должно быть положительным')
+            self._price = float(value)
 
 
 property без декораторов
 
 .. code:: python
 
-    class IPAddress:
-        def __init__(self, ip, mask):
-            self._ip = ip
-            self._mask = mask
+    class Book:
+        def __init__(self, title, price, quantity):
+            self.title = title
+            self.price = price
+            self.quantity = quantity
 
-        def get_mask(self):
-            print('getter')
-            return self._mask
+        def _get_total(self):
+            return round(self.price * self.quantity, 2)
 
-        def set_mask(self, value):
-            print('setter')
-            if not isinstance(value, int):
+        def _get_price(self):
+            print('price getter')
+            return self._price
+
+        def _set_price(self, value):
+            print('price setter')
+            if not isinstance(value, (int, float)):
                 raise TypeError('Значение должно быть числом')
-            if not 8 <= value <= 32:
-                raise ValueError('Значение должно быть в диапазоне 8 - 32')
-            self._mask = value
+            if not value >= 0:
+                raise ValueError('Значение должно быть положительным')
+            self._price = float(value)
 
-        mask = property(get_mask, set_mask)
+        total = property(_get_total)
+        price = property(_get_price, _set_price)
+
 
 Второй вариант property без декораторов 
 
 .. code:: python
 
-    class IPAddress:
-        def __init__(self, ip, mask):
-            self._ip = ip
-            self._mask = mask
+    class Book:
+        def __init__(self, title, price, quantity):
+            self.title = title
+            self.price = price
+            self.quantity = quantity
 
-        def get_mask(self):
-            print('getter')
-            return self._mask
+        def _get_total(self):
+            return round(self.price * self.quantity, 2)
 
-        def set_mask(self, value):
-            print('setter')
-            if not isinstance(value, int):
+        def _get_price(self):
+            print('price getter')
+            return self._price
+
+        def _set_price(self, value):
+            print('price setter')
+            if not isinstance(value, (int, float)):
                 raise TypeError('Значение должно быть числом')
-            if not 8 <= value <= 32:
-                raise ValueError('Значение должно быть в диапазоне 8 - 32')
-            self._mask = value
+            if not value >= 0:
+                raise ValueError('Значение должно быть положительным')
+            self._price = float(value)
 
-        # создаем пустую property
-        mask = property()
+        total = property()
+        total = total.getter(_get_total)
 
-        # указываем getter
-        mask = mask.getter(get_mask)
-        # указываем setter
-        mask = mask.setter(set_mask)
+        price = property()
+        price = price.getter(_get_price)
+        price = price.setter(_set_price)
 
