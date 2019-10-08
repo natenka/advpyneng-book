@@ -7,5 +7,5 @@ VI. Дополнительная информация
 .. toctree::
    :maxdepth: 1
 
-   memory_test
-   oop_extra/index
+   additional_info/memory_test
+   additional_info/oop_extra/index
