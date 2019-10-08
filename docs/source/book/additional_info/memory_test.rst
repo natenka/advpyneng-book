@@ -1,14 +1,18 @@
-import resource
+Использование памяти
+--------------------
 
-from base_ssh import BaseSSH
+.. code:: python
 
-memory_start = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+    import resource
+    from base_ssh import BaseSSH
 
-ip_list = ['192.168.100.1', '192.168.100.2', '192.168.100.3']*5
-sessions = [BaseSSH(ip, 'cisco', 'cisco') for ip in ip_list]
+    memory_start = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
 
-memory_end = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+    ip_list = ['192.168.100.1', '192.168.100.2', '192.168.100.3']*5
+    sessions = [BaseSSH(ip, 'cisco', 'cisco') for ip in ip_list]
 
-print('Start ', memory_start)
-print('End   ', memory_end)
-print(sessions)
+    memory_end = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+
+    print('Start ', memory_start)
+    print('End   ', memory_end)
+    print(sessions)
