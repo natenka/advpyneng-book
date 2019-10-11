@@ -217,7 +217,7 @@ Data classes во многом похожи на именованные корт
 Функция field также поможет исправить ситуацию с сортировкой в классе IPAddress.
 Указав ``compare=False`` при создании переменной, можно исключить ее из сравнения
 и сортировки. Также в классе добавлена дополнительная переменная _ip,
-которая содержит IP-адрес в виде числа. Для этой переменной ``init=False``, так как 
+которая содержит IP-адрес в виде числа. Для этой переменной ``init=False``, так как
 это значение не надо передавать при создании экземпляра, и ``repr=False``, так
 как переменная не должна отображаться в строковом представлении:
 
@@ -275,4 +275,46 @@ Data classes во многом похожи на именованные корт
 
     In [10]: ip3
     Out[10]: IPAddress(ip='10.1.1.1', mask=24)
+
+Работа с property
+~~~~~~~~~~~~~~~~~
+
+.. code:: python
+
+    @dataclass
+    class Book:
+        title: str
+        price: float
+        _price: float = field(init=False, repr=False)
+        quantity: int = 0 # TypeError: non-default argument 'quantity' follows default argument
+
+        @property
+        def total(self):
+            return round(self.price * self.quantity, 2)
+
+        @property
+        def price(self):
+            return self._price
+
+        @price.setter
+        def price(self, value):
+            if not isinstance(value, (int, float)):
+                raise TypeError('Значение должно быть числом')
+            if not value >= 0:
+                raise ValueError('Значение должно быть положительным')
+            self._price = float(value)
+
+
+    In [79]: b1 = Book('Good Omens', 35, 5)
+
+    In [80]: b1.price
+    Out[80]: 35.0
+
+    In [81]: b1.total
+    Out[81]: 175.0
+
+    In [82]: b1.price = 30
+
+    In [83]: b1.total
+    Out[83]: 150.0
 
