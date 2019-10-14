@@ -11,3 +11,4 @@ V. Полезные модули
    17_click/index.rst
    18_pdb/index.rst
    19_code_formatters/index.rst
+   20_collections/index.rst
