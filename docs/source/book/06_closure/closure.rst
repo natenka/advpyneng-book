@@ -247,10 +247,6 @@
             ssh = ConnectHandler(**params_dict)
             ssh.enable()
             def send_show_command(command):
-                if command == 'close':
-                    ssh.disconnect()
-                    print('Session closed')
-                    return
                 return ssh.send_command(command)
             netmiko_ssh.send_show_command = send_show_command
             return send_show_command
@@ -260,8 +256,5 @@
 
     In [26]: r1('sh clock')
     Out[26]: '*15:14:13.240 UTC Wed Oct 2 2019'
-
-    In [27]: r1('close')
-    Session closed
 
 
