@@ -22,6 +22,8 @@
     Вызываю функцию func с args (1, 'a') и kwargs {'verbose': False}
     Out[3]: (1, 'a', False)
 
+Декоратор проверяет что все аргументы функции - строки:
+
 .. code:: python
 
     def all_args_str(func):
