@@ -166,20 +166,20 @@ islice
 
 .. code:: python
 
-In [59]: list(islice(range(100), 5))
-Out[59]: [0, 1, 2, 3, 4]
+    In [59]: list(islice(range(100), 5))
+    Out[59]: [0, 1, 2, 3, 4]
 
-In [60]: list(islice(range(100), 5, 10))
-Out[60]: [5, 6, 7, 8, 9]
+    In [60]: list(islice(range(100), 5, 10))
+    Out[60]: [5, 6, 7, 8, 9]
 
-In [61]: list(islice(range(100), 5, 10, 2))
-Out[61]: [5, 7, 9]
+    In [61]: list(islice(range(100), 5, 10, 2))
+    Out[61]: [5, 7, 9]
 
-In [62]: list(islice(range(100), 5, 20, 2))
-Out[62]: [5, 7, 9, 11, 13, 15, 17, 19]
+    In [62]: list(islice(range(100), 5, 20, 2))
+    Out[62]: [5, 7, 9, 11, 13, 15, 17, 19]
 
-In [63]: list(islice(range(100), 5, 20, 3))
-Out[63]: [5, 8, 11, 14, 17]
+    In [63]: list(islice(range(100), 5, 20, 3))
+    Out[63]: [5, 8, 11, 14, 17]
 
 
 groupby
@@ -203,19 +203,18 @@ groupby
     class Book:
         title: str
         author: str
-        year: int
 
 
     In [75]: books
     Out[75]:
-    [Book(title='1984', author='George Orwell', year=1949),
-     Book(title='The Martian Chronicles', author='Ray Bradbury', year=1950),
-     Book(title='The Hobbit', author='J.R.R. Tolkien', year=1937),
-     Book(title='Animal Farm', author='George Orwell', year=1945),
-     Book(title='Fahrenheit 451', author='Ray Bradbury', year=1953),
-     Book(title='The Lord of the Rings (1-3)', author='J.R.R. Tolkien', year=1954),
-     Book(title='Harry Potter and the Sorcerer’s Stone', author='J.K. Rowling', year=1997),
-     Book(title='To Kill a Mockingbird', author='Harper Lee', year=1988)]
+    [Book(title='1984', author='George Orwell'),
+     Book(title='The Martian Chronicles', author='Ray Bradbury'),
+     Book(title='The Hobbit', author='J.R.R. Tolkien'),
+     Book(title='Animal Farm', author='George Orwell'),
+     Book(title='Fahrenheit 451', author='Ray Bradbury'),
+     Book(title='The Lord of the Rings (1-3)', author='J.R.R. Tolkien'),
+     Book(title='Harry Potter and the Sorcerer’s Stone', author='J.K. Rowling'),
+     Book(title='To Kill a Mockingbird', author='Harper Lee')]
 
 
     In [76]: list(groupby(books, operator.attrgetter('author')))
@@ -233,37 +232,37 @@ groupby
     In [81]: for key, item in groupby(books, operator.attrgetter('author')):
         ...:     print(key.ljust(20), list(item))
         ...:
-    George Orwell        [Book(title='1984', author='George Orwell', year=1949)]
-    Ray Bradbury         [Book(title='The Martian Chronicles', author='Ray Bradbury', year=1950)]
-    J.R.R. Tolkien       [Book(title='The Hobbit', author='J.R.R. Tolkien', year=1937)]
-    George Orwell        [Book(title='Animal Farm', author='George Orwell', year=1945)]
-    Ray Bradbury         [Book(title='Fahrenheit 451', author='Ray Bradbury', year=1953)]
-    J.R.R. Tolkien       [Book(title='The Lord of the Rings (1-3)', author='J.R.R. Tolkien', year=1954)]
-    J.K. Rowling         [Book(title='Harry Potter and the Sorcerer’s Stone', author='J.K. Rowling', year=1997)]
-    Harper Lee           [Book(title='To Kill a Mockingbird', author='Harper Lee', year=1988)]
+    George Orwell        [Book(title='1984', author='George Orwell')]
+    Ray Bradbury         [Book(title='The Martian Chronicles', author='Ray Bradbury')]
+    J.R.R. Tolkien       [Book(title='The Hobbit', author='J.R.R. Tolkien')]
+    George Orwell        [Book(title='Animal Farm', author='George Orwell')]
+    Ray Bradbury         [Book(title='Fahrenheit 451', author='Ray Bradbury')]
+    J.R.R. Tolkien       [Book(title='The Lord of the Rings (1-3)', author='J.R.R. Tolkien')]
+    J.K. Rowling         [Book(title='Harry Potter and the Sorcerer’s Stone', author='J.K. Rowling')]
+    Harper Lee           [Book(title='To Kill a Mockingbird', author='Harper Lee')]
 
 
     In [83]: sorted_books = sorted(books, key=operator.attrgetter('author'))
 
     In [84]: sorted_books
     Out[84]:
-    [Book(title='1984', author='George Orwell', year=1949),
-     Book(title='Animal Farm', author='George Orwell', year=1945),
-     Book(title='To Kill a Mockingbird', author='Harper Lee', year=1988),
-     Book(title='Harry Potter and the Sorcerer’s Stone', author='J.K. Rowling', year=1997),
-     Book(title='The Hobbit', author='J.R.R. Tolkien', year=1937),
-     Book(title='The Lord of the Rings (1-3)', author='J.R.R. Tolkien', year=1954),
-     Book(title='The Martian Chronicles', author='Ray Bradbury', year=1950),
-     Book(title='Fahrenheit 451', author='Ray Bradbury', year=1953)]
+    [Book(title='1984', author='George Orwell'),
+     Book(title='Animal Farm', author='George Orwell'),
+     Book(title='To Kill a Mockingbird', author='Harper Lee'),
+     Book(title='Harry Potter and the Sorcerer’s Stone', author='J.K. Rowling'),
+     Book(title='The Hobbit', author='J.R.R. Tolkien'),
+     Book(title='The Lord of the Rings (1-3)', author='J.R.R. Tolkien'),
+     Book(title='The Martian Chronicles', author='Ray Bradbury'),
+     Book(title='Fahrenheit 451', author='Ray Bradbury')]
 
     In [85]: for key, item in groupby(sorted_books, operator.attrgetter('author')):
         ...:     print(key.ljust(20), list(item))
         ...:
-    George Orwell        [Book(title='1984', author='George Orwell', year=1949), Book(title='Animal Farm', author='George Orwell', year=1945)]
-    Harper Lee           [Book(title='To Kill a Mockingbird', author='Harper Lee', year=1988)]
-    J.K. Rowling         [Book(title='Harry Potter and the Sorcerer’s Stone', author='J.K. Rowling', year=1997)]
-    J.R.R. Tolkien       [Book(title='The Hobbit', author='J.R.R. Tolkien', year=1937), Book(title='The Lord of the Rings (1-3)', author='J.R.R. Tolkien', year=1954)]
-    Ray Bradbury         [Book(title='The Martian Chronicles', author='Ray Bradbury', year=1950), Book(title='Fahrenheit 451', author='Ray Bradbury', year=1953)]
+    George Orwell        [Book(title='1984', author='George Orwell'), Book(title='Animal Farm', author='George Orwell')]
+    Harper Lee           [Book(title='To Kill a Mockingbird', author='Harper Lee')]
+    J.K. Rowling         [Book(title='Harry Potter and the Sorcerer’s Stone', author='J.K. Rowling')]
+    J.R.R. Tolkien       [Book(title='The Hobbit', author='J.R.R. Tolkien'), Book(title='The Lord of the Rings (1-3)', author='J.R.R. Tolkien')]
+    Ray Bradbury         [Book(title='The Martian Chronicles', author='Ray Bradbury'), Book(title='Fahrenheit 451', author='Ray Bradbury')]
 
     In [86]: books_by_author = {}
 
@@ -272,14 +271,14 @@ groupby
         ...:
 
     In [90]: pprint(books_by_author)
-    {'George Orwell': [Book(title='1984', author='George Orwell', year=1949),
-                       Book(title='Animal Farm', author='George Orwell', year=1945)],
-     'Harper Lee': [Book(title='To Kill a Mockingbird', author='Harper Lee', year=1988)],
-     'J.K. Rowling': [Book(title='Harry Potter and the Sorcerer’s Stone', author='J.K. Rowling', year=1997)],
-     'J.R.R. Tolkien': [Book(title='The Hobbit', author='J.R.R. Tolkien', year=1937),
-                        Book(title='The Lord of the Rings (1-3)', author='J.R.R. Tolkien', year=1954)],
-     'Ray Bradbury': [Book(title='The Martian Chronicles', author='Ray Bradbury', year=1950),
-                      Book(title='Fahrenheit 451', author='Ray Bradbury', year=1953)]}
+    {'George Orwell': [Book(title='1984', author='George Orwell'),
+                       Book(title='Animal Farm', author='George Orwell')],
+     'Harper Lee': [Book(title='To Kill a Mockingbird', author='Harper Lee')],
+     'J.K. Rowling': [Book(title='Harry Potter and the Sorcerer’s Stone', author='J.K. Rowling')],
+     'J.R.R. Tolkien': [Book(title='The Hobbit', author='J.R.R. Tolkien'),
+                        Book(title='The Lord of the Rings (1-3)', author='J.R.R. Tolkien')],
+     'Ray Bradbury': [Book(title='The Martian Chronicles', author='Ray Bradbury'),
+                      Book(title='Fahrenheit 451', author='Ray Bradbury')]}
 
 
 
