@@ -5,7 +5,7 @@ itertools
 ---------------------
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
    repeat
    cycle
@@ -15,7 +15,7 @@ itertools
 ------------------
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
    zip_longest
    chain
