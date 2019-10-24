@@ -1,19 +1,19 @@
-Функции модуля itertools
-------------------------
+itertools
+---------
 
 Бесконечные итераторы
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    repeat
-   cicle
+   cycle
    count
 
 Конечные итераторы
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    zip_longest
    chain
@@ -21,4 +21,4 @@
    tee
    islice
    groupby
-   dropwhile и takewhile
+   dropwhile_takewhile

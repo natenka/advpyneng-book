@@ -13,7 +13,7 @@
 только некоторые из них.
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
 
    itertools
    ../../exercises/09_exercises.rst
