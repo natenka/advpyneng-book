@@ -5,5 +5,14 @@ itertools
 .. toctree::
    :maxdepth: 2
 
-   itertools_infinite
-   itertools_finite
+   repeat
+   cycle
+   count
+   zip_longest
+   chain
+   compress
+   tee
+   islice
+   groupby
+   dropwhile_takewhile
+
