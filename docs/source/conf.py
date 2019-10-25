@@ -17,7 +17,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'Python для сетевых инженеров. Том 2'
+project = 'Python для сетевых инженеров. Том 2: Продвинутые возможности Python с примерами на сетевой тематике'
 copyright = '2019, Natasha Samoylenko'
 author = 'Natasha Samoylenko'
 
