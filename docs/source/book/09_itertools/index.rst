@@ -16,4 +16,4 @@
    :maxdepth: 5
 
    itertools
-   ../../exercises/09_exercises.rst
+   more_itertools
