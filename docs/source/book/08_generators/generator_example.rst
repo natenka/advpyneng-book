@@ -7,16 +7,15 @@
 
 .. code:: python
 
-    def get_cdp_neighbor(sh_cdp_neighbor_detail):
-        with open(sh_cdp_neighbor_detail) as f:
+    def get_one_neighbor(filename):
+        with open(filename) as f:
             line = ''
             while True:
                 while not 'Device ID' in line:
                     line = f.readline()
-                neighbor = ''
-                neighbor += line
+                neighbor = line
                 for line in f:
-                    if line.startswith('-----'):
+                    if '----------' in line:
                         break
                     neighbor += line
                 yield neighbor
@@ -25,23 +24,23 @@
                     return
 
 
-Полный скрипт выглядит таким образом (файл parse_cdp_file.py):
+Полный скрипт выглядит таким образом (файл parse_cdp_neighbors.py):
 
 .. code:: python
 
     import re
     from pprint import pprint
 
-    def get_cdp_neighbor(sh_cdp_neighbor_detail):
-        with open(sh_cdp_neighbor_detail) as f:
+
+    def get_one_neighbor(filename):
+        with open(filename) as f:
             line = ''
             while True:
                 while not 'Device ID' in line:
                     line = f.readline()
-                neighbor = ''
-                neighbor += line
+                neighbor = line
                 for line in f:
-                    if line.startswith('-----'):
+                    if '----------' in line:
                         break
                     neighbor += line
                 yield neighbor
@@ -50,33 +49,24 @@
                     return
 
 
-    def parse_cdp(output):
-        regex = ('Device ID: (?P<device>\S+)'
-                 '|IP address: (?P<ip>\S+)'
-                 '|Platform: (?P<platform>\S+ \S+),'
-                 '|Cisco IOS Software, (?P<ios>.+), RELEASE')
+    def parse_neighbor(output):
+        regex = (
+            r'Device ID: (\S+).+?'
+            r' IP address: (?P<ip>\S+).+?'
+            r'Platform: (?P<platform>\S+ \S+), .+?'
+            r', Version (?P<ios>\S+),')
 
         result = {}
-
-        match_iter = re.finditer(regex, output)
-        for match in match_iter:
-            if match.lastgroup == 'device':
-                device = match.group(match.lastgroup)
-                result[device] = {}
-            elif device:
-                result[device][match.lastgroup] = match.group(match.lastgroup)
-
+        match = re.search(regex, output, re.DOTALL)
+        if match:
+            device = match.group(1)
+            result[device] = match.groupdict()
         return result
 
-
-    filename = 'sh_cdp_neighbors_detail.txt'
-    result = get_cdp_neighbor(filename)
-
-    all_cdp = {}
-    for cdp in result:
-        all_cdp.update(parse_cdp(cdp))
-
-    pprint(all_cdp)
+    if __name__ == "__main__":
+        data = get_one_neighbor('sh_cdp_neighbors_detail.txt')
+        for n in data:
+            pprint(parse_neighbor(n), width=120)
 
 
 Так как генератор get_cdp_neighbor выдает каждый раз вывод про одного соседа, можно проходиться по результату в цикле и передавать каждый вывод функции parse_cdp.
@@ -86,17 +76,9 @@
 
 .. code:: python
 
-    $ python parse_cdp_file.py
-    {'R1': {'ios': '3800 Software (C3825-ADVENTERPRISEK9-M), Version 12.4(24)T1',
-            'ip': '10.1.1.1',
-            'platform': 'Cisco 3825'},
-     'R2': {'ios': '2900 Software (C3825-ADVENTERPRISEK9-M), Version 15.2(2)T1',
-            'ip': '10.2.2.2',
-            'platform': 'Cisco 2911'},
-     'R3': {'ios': '2900 Software (C3825-ADVENTERPRISEK9-M), Version 15.2(2)T1',
-            'ip': '10.3.3.3',
-            'platform': 'Cisco 2911'},
-     'SW2': {'ios': 'C2960 Software (C2960-LANBASEK9-M), Version 12.2(55)SE9',
-             'ip': '10.1.1.2',
-             'platform': 'cisco WS-C2960-8TC-L'}}
+    $ python parse_cdp_neighbors.py
+    {'SW2': {'ios': '12.2(55)SE9', 'ip': '10.1.1.2', 'platform': 'cisco WS-C2960-8TC-L'}}
+    {'R1': {'ios': '12.4(24)T1', 'ip': '10.1.1.1', 'platform': 'Cisco 3825'}}
+    {'R2': {'ios': '15.2(2)T1', 'ip': '10.2.2.2', 'platform': 'Cisco 2911'}}
+    {'R3': {'ios': '15.2(2)T1', 'ip': '10.3.3.3', 'platform': 'Cisco 2911'}}
 
