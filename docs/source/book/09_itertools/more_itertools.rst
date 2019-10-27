@@ -6,4 +6,6 @@ more-itertools
 
    mit_grouping
    mit_look
-
+   mit_windowed
+   mit_collapse
+   mit_summarizing
