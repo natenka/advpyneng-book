@@ -5,13 +5,13 @@
 
 .. code:: python
 
-    In [1]: import asyncio
+    import asyncio
 
-    In [2]: async def main():
-       ...:     print(f'Start {datetime.now()}')
-       ...:     await asyncio.sleep(3)
-       ...:     print(f'End   {datetime.now()}')
-       ...:
+    async def main():
+        print(f'Start {datetime.now()}')
+        await asyncio.sleep(3)
+        print(f'End   {datetime.now()}')
+
 
     In [6]: coro = main()
 
@@ -35,7 +35,6 @@
 * asyncio.run
 * await
 * asyncio.create_task
-* asyncio.gather
 
 
 asyncio.run
@@ -108,14 +107,14 @@ asyncio.create_task
 Еще один вариант запуска сопрограммы - это создание задачи (task).
 Обернуть сопрограмму в задачу и запланировать ее выполнение можно с помощью функции
 asyncio.create_task. Она возвращает объект Task, который можно ожидать с await, как
-и сопрограммы. 
+и сопрограммы.
 
 .. code:: python
 
     asyncio.create_task(coro)
 
 Функция asyncio.create_task позволяет запускать сопрограммы одновременно, так как
-создание задачи означает для цикла, что надо запустить эту сопрограмму при первой 
+создание задачи означает для цикла, что надо запустить эту сопрограмму при первой
 возможности.
 
 Пример создания задач:
@@ -153,13 +152,4 @@ asyncio.create_task. Она возвращает объект Task, которы
 
     task1 = asyncio.create_task(delay_message(4, 'Hello'))
     task2 = asyncio.create_task(delay_message(2, 'world'))
-
-
-
-.. code:: python
-.. code:: python
-.. code:: python
-.. code:: python
-.. code:: python
-.. code:: python
 

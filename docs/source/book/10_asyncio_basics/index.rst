@@ -32,5 +32,6 @@
 
    terms
    basics
+   run_awaitables
    further_reading
    ../../exercises/10_exercises.rst
