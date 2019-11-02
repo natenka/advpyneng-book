@@ -5,6 +5,9 @@
 13. Модули async
 ================
 
+* aiofiles
+* aiohttp
+* async-timeout
 
 .. toctree::
    :maxdepth: 1
