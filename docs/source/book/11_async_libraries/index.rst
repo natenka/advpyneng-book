@@ -2,7 +2,7 @@
 
    \newpage
 
-13. Модули async
+11. Модули async
 ================
 
 * aiofiles
@@ -12,4 +12,4 @@
 .. toctree::
    :maxdepth: 1
 
-   ../../exercises/13_exercises.rst
+   ../../exercises/11_exercises.rst
