@@ -6,5 +6,5 @@ IV. Основы asyncio
 
    10_asyncio_basics/index.rst
    11_async_libraries/index.rst
-   12_asyncio/index.rst
+   12_using_asyncio/index.rst
 

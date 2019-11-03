@@ -5,6 +5,8 @@
 11. Модули async
 ================
 
+* asyncssh
+* netdev
 * aiofiles
 * aiohttp
 * async-timeout
