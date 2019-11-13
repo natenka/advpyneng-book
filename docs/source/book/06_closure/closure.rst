@@ -210,22 +210,63 @@
             return a-b
         def mul():
             return a*b
+        def replace():
+            pass
+        replace.add = add
+        replace.sub = sub
+        replace.mul = mul
+        return replace
+
+
+    In [13]: obj1 = func_as_object(5,2)
+
+    In [14]: obj1.add()
+    Out[14]: 7
+
+    In [15]: obj2 = func_as_object(15,2)
+
+    In [16]: obj2.add()
+    Out[16]: 17
+
+    In [17]: obj1.add()
+    Out[17]: 7
+
+В таких случая обязательно надо делать внутреннюю функцию которой
+присваиваются атрибуты и возвращать ее вместо исходной. Если сделать
+как в примере ниже, все будет работать корректно только с одним объектом:
+
+.. code:: python
+
+    def func_as_object(a,b):
+        def add():
+            return a+b
+        def sub():
+            return a-b
+        def mul():
+            return a*b
         func_as_object.add = add
         func_as_object.sub = sub
         func_as_object.mul = mul
         return func_as_object
 
+    In [18]: obj1 = func_as_object(5, 2)
 
-    In [15]: r = func_as_object(5,2)
+    In [19]: obj1.add()
+    Out[19]: 7
 
-    In [16]: r
-    Out[16]: <function __main__.func_as_object>
+Как только добавляется второй объект, атрибуты функции подменяются
+на другие вложенные функции, которые помнят значения переменных для последнего
+объекта и первый объект теперь возвращает неправильные значения:
 
-    In [17]: r.add()
-    Out[17]: 7
+.. code:: python
 
-    In [18]: r.mul()
-    Out[18]: 10
+    In [9]: obj2 = func_as_object(15,2)
+
+    In [10]: obj2.add()
+    Out[10]: 17
+
+    In [11]: obj1.add()
+    Out[11]: 17
 
 
 
