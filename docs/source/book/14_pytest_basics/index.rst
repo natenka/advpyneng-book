@@ -15,4 +15,7 @@
    parametrized_tests
    fixture
    mocking
+   conftest
+   extra
+   test_network
    ../../exercises/14_exercises.rst

@@ -1,32 +1,52 @@
 Fixture
 -------
 
-capsys
-~~~~~~
+Fixtures - это функции, которые pytest вызывает.
 
-tempfile
-~~~~~~~~
+scope:
 
+* function (default)
+* module
+* session
+
+
+Источник pyneng-online-may-aug-2019/exercises/19_ssh_telnet/conftest.py
 
 .. code:: python
 
-    def check_passwd(username, password, min_length=8, check_username=True):
-        if len(password) < min_length:
-            print('Пароль слишком короткий')
-            return False
-        elif check_username and username in password:
-            print('Пароль содержит имя пользователя')
-            return False
-        else:
-            print(f'Пароль для пользователя {username} прошел все проверки')
-            return True
+    import yaml
+    import pytest
+    from netmiko import ConnectHandler
 
 
-    def add_user_to_users_file(user, users_filename='users.txt'):
-        while True:
-            passwd = input(f'Введите пароль для пользователя {user}: ')
-            if check_passwd(user, passwd):
-                break
-        with open(users_filename, 'a') as f:
-            f.write(f'{user},{passwd}\n')
+    @pytest.fixture(scope='module')
+    def first_router_from_devices_yaml():
+        with open('devices.yaml') as f:
+            devices = yaml.safe_load(f)
+            r1 = devices[0]
+            #options = {'timeout': 5, 'fast_cli': True}
+            r1.update(options)
+        return r1
+
+
+    @pytest.fixture(scope='module')
+    def r1_test_connection(first_router_from_devices_yaml):
+        r1 = ConnectHandler(**first_router_from_devices_yaml)
+        r1.enable()
+        yield r1
+        r1.disconnect()
+
+
+    @pytest.fixture(scope='module')
+    def first_router_wrong_pass(first_router_from_devices_yaml):
+        r1 = first_router_from_devices_yaml.copy()
+        r1['password'] = 'wrong'
+        return r1
+
+
+    @pytest.fixture(scope='module')
+    def first_router_wrong_ip(first_router_from_devices_yaml):
+        r1 = first_router_from_devices_yaml.copy()
+        r1['ip'] = 'unreachable'
+        return r1
 

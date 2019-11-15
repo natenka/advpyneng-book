@@ -70,6 +70,52 @@
 
     =========================== 1 passed in 0.01s ===========================
 
+Отображение вывода на stdout:
+
+::
+
+    $ pytest test_check_password.py -s
+    =========================== test session starts ============================
+    platform linux -- Python 3.7.3, pytest-5.2.0, py-1.8.0, pluggy-0.12.0
+    rootdir: /home/vagrant/repos/advanced-pyneng-1/advpyneng-online-oct-nov-2019/examples/14_pytest_basics
+    collected 3 items
+
+    test_check_password.py Проверяем пароль
+    Пароль для пользователя nata прошел все проверки
+    Пароль содержит имя пользователя
+    .Пароль для пользователя nata прошел все проверки
+    Пароль содержит имя пользователя
+    .Пароль слишком короткий
+    Пароль содержит имя пользователя
+    Пароль для пользователя nata прошел все проверки
+    .
+
+    ============================ 3 passed in 0.02s =============================
+
+Аналогично с verbose:
+
+::
+
+    $ pytest test_check_password.py -v -s
+    =========================== test session starts ============================
+    platform linux -- Python 3.7.3, pytest-5.2.0, py-1.8.0, pluggy-0.12.0 -- /home/vagrant/venv/pyneng-py3-7/bin/python3.7
+    cachedir: .pytest_cache
+    rootdir: /home/vagrant/repos/advanced-pyneng-1/advpyneng-online-oct-nov-2019/examples/14_pytest_basics
+    collected 3 items
+
+    test_check_password.py::test_password_min_length Проверяем пароль
+    Пароль для пользователя nata прошел все проверки
+    Пароль содержит имя пользователя
+    PASSED
+    test_check_password.py::test_password_contains_username Пароль для пользователя nata прошел все проверки
+    Пароль содержит имя пользователя
+    PASSED
+    test_check_password.py::test_password_default_values Пароль слишком короткий
+    Пароль содержит имя пользователя
+    Пароль для пользователя nata прошел все проверки
+    PASSED
+
+    ============================ 3 passed in 0.02s =============================
 
 Когда тесты не проходят
 ~~~~~~~~~~~~~~~~~~~~~~~
