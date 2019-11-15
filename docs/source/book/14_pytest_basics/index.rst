@@ -14,6 +14,7 @@
    running_tests
    parametrized_tests
    fixture
+   fixture_builtin
    mocking
    conftest
    extra
