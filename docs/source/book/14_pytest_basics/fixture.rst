@@ -1,9 +1,11 @@
 Fixture
-=======
+-------
 
+capsys
+~~~~~~
 
 tempfile
---------
+~~~~~~~~
 
 
 .. code:: python
