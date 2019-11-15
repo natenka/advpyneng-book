@@ -27,3 +27,9 @@ pytest.raises
         with pytest.raises(task_27_2a.ErrorInCommand) as excinfo:
             return_value = r1.send_command('sh ip br')
         r1.disconnect()
+
+
+pytest-html
+~~~~~~~~~~~
+
+https://github.com/pytest-dev/pytest-html
