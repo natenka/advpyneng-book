@@ -21,7 +21,7 @@
     logger.warning('Сообщение уровня warning')
 
 
-    Результат выполнения
+Результат выполнения
 
 ::
 
@@ -191,9 +191,6 @@ logging_api_example_4.py
     logger.debug('Сообщение уровня debug')
     logger.info('Сообщение уровня info')
     logger.warning('Сообщение уровня warning')
-
-
-
 
 
 Handlers

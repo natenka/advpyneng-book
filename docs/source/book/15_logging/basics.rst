@@ -44,14 +44,48 @@ Log-файл
     WARNING:root:Сообщение уровня warning
 
 
+Пример вывода информации о потоках:
 
-Рекомендации
-------------
+.. code:: python
 
-https://gitpitch.com/pitchme/cdn/github/natenka/pyneng-slides/bonus-logging/6B32347FFCECBC648621A3C3974C7E85EFC4AFEFC87CD001646A84FD62209FC093F8F7EC317FE1ABD3A2DD0CBC40EAC15F7E66DE705A685554EC65C15A0FC410764746F2CF5250C0204669103B3CA395B60FFC52D19258D66546CDA4128FCC0F342D66D186B12616/assets/when_to_use_logging.png
+    from concurrent.futures import ThreadPoolExecutor
+    from pprint import pprint
+    from datetime import datetime
+    import time
+    from itertools import repeat
+    import logging
+    import yaml
+    from netmiko import ConnectHandler, NetMikoAuthenticationException
 
-Уровни
 
-https://gitpitch.com/pitchme/cdn/github/natenka/pyneng-slides/bonus-logging/6B32347FFCECBC648621A3C3974C7E85EFC4AFEFC87CD001646A84FD62209FC093F8F7EC317FE1ABD3A2DD0CBC40EAC15F7E66DE705A685554EC65C15A0FC410764746F2CF5250C0204669103B3CA395B60FFC52D19258D66546CDA4128FCC0F342D66D186B12616/assets/log_levels.png
+    logging.getLogger('paramiko').setLevel(logging.WARNING)
 
+    logging.basicConfig(
+        format='%(threadName)s %(name)s %(levelname)s: %(message)s',
+        level=logging.INFO)
+
+
+    def send_show(device_dict, command):
+        ip = device_dict['host']
+        logging.info(f'===> {datetime.now().time()} Connection: {ip}')
+        with ConnectHandler(**device_dict) as ssh:
+            ssh.enable()
+            result = ssh.send_command(command)
+            logging.info(f'<=== {datetime.now().time()} Received:   {ip}')
+        return result
+
+
+    def send_command_to_devices(devices, command):
+        data = {}
+        with ThreadPoolExecutor(max_workers=2) as executor:
+            result = executor.map(send_show, devices, repeat(command))
+            for device, output in zip(devices, result):
+                data[device['host']] = output
+        return data
+
+
+    if __name__ == '__main__':
+        with open('devices.yaml') as f:
+            devices = yaml.safe_load(f)
+        pprint(send_command_to_devices(devices, 'sh ip int br'), width=120)
 
