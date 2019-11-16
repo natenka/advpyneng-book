@@ -9,4 +9,6 @@
 .. toctree::
    :maxdepth: 1
 
+   basics
+   components
    ../../exercises/16_exercises.rst
