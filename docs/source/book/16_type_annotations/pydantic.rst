@@ -62,3 +62,4 @@ pydantic использует аннотацию типов для провер�
     Out[20]: 35
 
 
+`Примеры использования pydantic <https://github.com/samuelcolvin/pydantic/tree/master/docs/examples>`__
