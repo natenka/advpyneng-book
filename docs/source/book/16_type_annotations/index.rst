@@ -24,4 +24,5 @@
    mypy
    examples
    pydantic
+   further_reading
    ../../exercises/15_exercises.rst
