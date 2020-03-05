@@ -13,7 +13,7 @@
 
     import logging
 
-    logger = logging.getLogger('My Script')
+    logger = logging.getLogger(__name__)
 
     ## messages
     logger.debug('Сообщение уровня debug')
@@ -27,7 +27,6 @@
 
     $ python logging_api_example_1.py
     Сообщение уровня warning
-    По умолчанию вывод идет в stderr и уровень warning.
 
 
 logging_api_example_2.py
