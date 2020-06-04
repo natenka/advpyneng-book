@@ -2,7 +2,7 @@
 
    \newpage
 
-20. Collections
+Collections
 ===============
 
 

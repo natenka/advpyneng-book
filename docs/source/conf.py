@@ -17,12 +17,12 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'Python для сетевых инженеров. Том 2: Продвинутые возможности Python с примерами на сетевой тематике'
-copyright = '2019, Natasha Samoylenko'
+project = 'Продвинутые возможности Python с примерами на сетевой тематике'
+copyright = '2019-2020, Natasha Samoylenko'
 author = 'Natasha Samoylenko'
 
 # The full version, including alpha/beta/rc tags
-release = '0.0.1'
+release = '1.0.0'
 
 
 # -- General configuration ---------------------------------------------------
