@@ -2,7 +2,7 @@
 
    \newpage
 
-12. Использование модуля asyncio
+18. Использование модуля asyncio
 ================================
 
 * loop
@@ -18,4 +18,4 @@
 .. toctree::
    :maxdepth: 1
 
-   ../../exercises/12_exercises.rst
+   ../../exercises/18_exercises.rst

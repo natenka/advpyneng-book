@@ -2,7 +2,7 @@
 
    \newpage
 
-6. Closure
+7. Closure
 ==========
 
 
@@ -11,4 +11,4 @@
 
    first_class_functions
    closure
-   ../../exercises/06_exercises.rst
+   ../../exercises/07_exercises.rst

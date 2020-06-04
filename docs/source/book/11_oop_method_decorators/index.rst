@@ -2,7 +2,7 @@
 
    \newpage
 
-3. Classmethod, staticmethod, property
+11. Classmethod, staticmethod, property
 ======================================
 
 В Python есть ряд полезных встроенных декораторов, которые позволяют менять поведение
@@ -22,4 +22,4 @@
    property
    classmethod
    staticmethod
-   ../../exercises/03_exercises.rst
+   ../../exercises/11_exercises.rst

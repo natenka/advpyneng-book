@@ -2,7 +2,7 @@
 
    \newpage
 
-7. Декораторы
+8. Декораторы
 =============
 
 
@@ -14,4 +14,4 @@
    with_args
    with_args_examples
    class_decorator
-   ../../exercises/07_exercises.rst
+   ../../exercises/08_exercises.rst

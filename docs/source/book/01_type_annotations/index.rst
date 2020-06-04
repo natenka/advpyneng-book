@@ -2,7 +2,7 @@
 
    \newpage
 
-15. Основы аннотации типов
+1. Основы аннотации типов
 ==========================
 
 Преимущества:
@@ -25,4 +25,4 @@
    examples
    pydantic
    further_reading
-   ../../exercises/15_exercises.rst
+   ../../exercises/01_exercises.rst

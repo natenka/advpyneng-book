@@ -2,7 +2,7 @@
 
    \newpage
 
-8. Генераторы
+14. Генераторы
 =============
 
 Генератор - функция, которая позволяет легко создавать свои итераторы.
@@ -17,4 +17,4 @@
    generator_example
    genexpr
    further_reading
-   ../../exercises/08_exercises.rst
+   ../../exercises/14_exercises.rst

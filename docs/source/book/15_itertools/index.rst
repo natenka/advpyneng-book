@@ -2,7 +2,7 @@
 
    \newpage
 
-9. Модули itertools, more-itertools
+15. Модули itertools, more-itertools
 ===================================
 
 В этом разделе рассматриваются два модуля: модуль из стандартной библиотеки itertools

@@ -2,7 +2,7 @@
 
    \newpage
 
-5. Data classes
+13. Data classes
 ===============
 
 
@@ -12,4 +12,4 @@
    namedtuple
    dataclasses
    further_reading
-   ../../exercises/05_exercises.rst
+   ../../exercises/13_exercises.rst

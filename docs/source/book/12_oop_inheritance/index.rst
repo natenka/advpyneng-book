@@ -2,7 +2,7 @@
 
    \newpage
 
-4. Наследование
+12. Наследование
 ============================
 
 
@@ -15,4 +15,4 @@
    multiple_inheritance
    abc
    mixin
-   ../../exercises/04_exercises.rst
+   ../../exercises/12_exercises.rst

@@ -2,7 +2,7 @@
 
    \newpage
 
-11. Модули async
+17. Модули async
 ================
 
 * asyncssh
@@ -14,4 +14,4 @@
 .. toctree::
    :maxdepth: 1
 
-   ../../exercises/11_exercises.rst
+   ../../exercises/17_exercises.rst

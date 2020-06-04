@@ -2,7 +2,7 @@
 
    \newpage
 
-10. Основы модуля asyncio
+16. Основы модуля asyncio
 =========================
 
 Модуль asyncio можно разделить на две части: высокоуровневый интерфейс для пользователей,
@@ -34,4 +34,4 @@
    basics
    run_awaitables
    further_reading
-   ../../exercises/10_exercises.rst
+   ../../exercises/16_exercises.rst

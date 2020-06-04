@@ -2,7 +2,7 @@
 
    \newpage
 
-1. Основы ООП
+9. Основы ООП
 ============================
 
 .. toctree::
@@ -15,4 +15,4 @@
    init_method
    class_namespace
    class_variables
-   ../../exercises/01_exercises.rst
+   ../../exercises/09_exercises.rst

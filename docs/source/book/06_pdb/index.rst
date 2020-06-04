@@ -2,11 +2,11 @@
 
    \newpage
 
-18. Модуль pdb
+6. Модуль pdb
 ==============
 
 
 .. toctree::
    :maxdepth: 1
 
-   ../../exercises/18_exercises.rst
+   ../../exercises/06_exercises.rst

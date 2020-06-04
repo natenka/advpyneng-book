@@ -2,11 +2,11 @@
 
    \newpage
 
-19. Code formatters
+2. Code formatters
 ===================
 
 
 .. toctree::
    :maxdepth: 1
 
-   ../../exercises/19_exercises.rst
+   ../../exercises/02_exercises.rst
