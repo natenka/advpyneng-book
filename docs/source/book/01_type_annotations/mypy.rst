@@ -111,3 +111,43 @@ reveal_locals:
     example_02_function_check_passwd.py:4: note:     password: builtins.str
     example_02_function_check_passwd.py:4: note:     username: builtins.str
 
+
+Аннотация типов и наследование
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Дочерний класс должен поддерживать те же типы данных, что и родительский:
+
+.. code:: python
+
+    import time
+    from typing import Union, List
+
+
+    class BaseSSH:
+        def __init__(self, ip: str, username: str, password: str) -> None:
+            self.ip = ip
+            self.username = username
+            self.password = password
+
+        def send_config_commands(self, commands: Union[str, List[str]]) -> str:
+            if isinstance(commands, str):
+                commands = [commands]
+            for command in commands:
+                time.sleep(0.5)
+            return 'result'
+
+
+    class CiscoSSH(BaseSSH):
+        def __init__(self, ip: str, username: str, password: str,
+                     enable_password: str = None, disable_paging: bool = True) -> None:
+            super().__init__(ip, username, password)
+
+        def send_config_commands(self, commands: List[str]) -> str:
+            return 'result'
+
+В этом случае будет ошибка:
+
+::
+    $ mypy example_07_class_inheritance.py
+    example_07_class_inheritance.py:25: error: Argument 1 of "send_config_commands" is incompatible with supertype "BaseSSH"; supertype defines the argument type as "Union[str, List[str]]"
+    Found 1 error in 1 file (checked 1 source file)

@@ -32,7 +32,7 @@
     book_price_map: Dict[str, float] = {'Good Omens': 22.0}
 
 .. note::
-    
+
     Начиная с Python 3.9 вместо List, Set, Dict, Tuple из модуля typing, можно будет
     использовать встроенные объекты list, set, dict, tuple.
 
@@ -69,8 +69,6 @@
 
     NameError: name 'username' is not defined
 
-    In [3]: __annotations__
-    Out[3]: {'username': str}
 
 Например, этот функционал используется в `Data classes <r2d2_add_link>`__ чтобы указать какие атрибуты
 будут у экземпляров:
@@ -91,7 +89,8 @@
 Аннотация функции
 ~~~~~~~~~~~~~~~~~
 
-Пример аннотации функции:
+Для параметров функции, аннотация пишется так же как для переменных, плюс добавляется
+возвращаемое значение:
 
 .. code:: python
 
@@ -121,23 +120,12 @@
             print(f'Пароль для пользователя {username} прошел все проверки')
             return True
 
-Атрибут __annotations__:
-
-.. code:: python
-
-    In [2]: check_passwd.__annotations__
-    Out[2]:
-    {'username': str,
-     'password': str,
-     'min_length': int,
-     'check_username': bool,
-     'return': bool}
-
 
 Аннотация классов
 ~~~~~~~~~~~~~~~~~
 
-* не пишем аннотацию для self
+Аннотация методов пишется так же как аннотация функций.
+Единственный нюанс методов - self пишется без аннотации.
 
 
 .. code:: python
@@ -151,44 +139,60 @@
             return f"IPAddress({self.ip}/{self.mask})"
 
 
-Аннотация типов и наследование
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Дочерний класс должен поддерживать те же типы данных, что и родительский:
+Атрибут __annotations__
+~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code:: python
 
-    import time
-    from typing import Union, List
+    In [1]: username: str
+
+    In [2]: username
+    ---------------------------------------------------------------------------
+    NameError                                 Traceback (most recent call last)
+    <ipython-input-2-407fefd38331> in <module>
+    ----> 1 username
+
+    NameError: name 'username' is not defined
+
+    In [3]: __annotations__
+    Out[3]: {'username': str}
+
+Атрибут __annotations__ в функции:
+
+.. code:: python
+
+    def check_passwd(username: str, password: str,
+                     min_length: int = 8, check_username: bool = True) -> bool:
+        pass
+
+    In [2]: check_passwd.__annotations__
+    Out[2]:
+    {'username': str,
+     'password': str,
+     'min_length': int,
+     'check_username': bool,
+     'return': bool}
+
+В классе атрибут __annotations__ появляется в методах и в самом классе, если были созданы переменные класса:
+
+.. code:: python
+
+    class IPAddress:
+            address_type: int = 4
+
+            def __init__(self, ip: str, mask: int) -> None:
+                self.ip = ip
+                self.mask = mask
+
+            def __repr__(self) -> str:
+                return f"IPAddress({self.ip}/{self.mask})"
 
 
-    class BaseSSH:
-        def __init__(self, ip: str, username: str, password: str) -> None:
-            self.ip = ip
-            self.username = username
-            self.password = password
 
-        def send_config_commands(self, commands: Union[str, List[str]]) -> str:
-            if isinstance(commands, str):
-                commands = [commands]
-            for command in commands:
-                time.sleep(0.5)
-            return 'result'
+    In [9]: IPAddress.__annotations__
+    Out[9]: {'address_type': int}
 
-
-    class CiscoSSH(BaseSSH):
-        def __init__(self, ip: str, username: str, password: str,
-                     enable_password: str = None, disable_paging: bool = True) -> None:
-            super().__init__(ip, username, password)
-
-        def send_config_commands(self, commands: List[str]) -> str:
-            return 'result'
-
-В этом случае будет ошибка:
-
-::
-    $ mypy example_07_class_inheritance.py
-    example_07_class_inheritance.py:25: error: Argument 1 of "send_config_commands" is incompatible with supertype "BaseSSH"; supertype defines the argument type as "Union[str, List[str]]"
-    Found 1 error in 1 file (checked 1 source file)
+    In [10]: IPAddress.__repr__.__annotations__
+    Out[10]: {'return': str}
 
 
