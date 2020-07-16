@@ -1,12 +1,92 @@
-Основы
-------
+Синтаксис
+---------
 
-Аннотация типов - это дополнительное описание в классах, функциях, переменных,
-которое указывает какой тип данных должен быть в этом месте.
-Это новый функционал, который был добавлен в последних версиях Python (Python 3.6+).
+Аннотация переменных
+~~~~~~~~~~~~~~~~~~~~
 
-При этом указанные типы не проверяются и не форсируются самим Python. Для проверки
-типов данных надо использовать отдельные модули, например, mypy.
+Пример переменной:
+
+.. code:: python
+
+    username: str = 'user1'
+
+
+Пример аннотации для разных встроенных типов данных:
+
+.. code:: python
+
+    length: int = 5
+    summ: float = 5.5
+    skip_line: bool = True
+    line: str = "switchport mode access"
+
+Списки, множества, словари:
+
+.. code:: python
+
+    from typing import List, Set, Dict, Tuple, Union
+
+    vlans: List[int] = [10, 20, 100]
+    unique_vlans: Set[int] = {1, 6, 10}
+
+    book_price_map: Dict[str, float] = {'Good Omens': 22.0}
+
+.. note::
+    
+    Начиная с Python 3.9 вместо List, Set, Dict, Tuple из модуля typing, можно будет
+    использовать встроенные объекты list, set, dict, tuple.
+
+Кортеж с фиксированным количеством элементов:
+
+.. code:: python
+
+    sw_info: Tuple[str, str, int] = ("sw1", "15.1(3)", 24)
+
+Кортеж с произвольным количеством элементов:
+
+.. code:: python
+
+    vlans: Tuple[int, ...] = (1, 2, 3)
+
+Список с элементами разного типа:
+
+.. code:: python
+
+    sw_info: List[Union[str, int]] = ("sw1", "15.1(3)", 24)
+
+
+Также можно создавать аннотацию переменной без значения:
+
+.. code:: python
+
+    In [1]: username: str
+
+    In [2]: username
+    ---------------------------------------------------------------------------
+    NameError                                 Traceback (most recent call last)
+    <ipython-input-2-407fefd38331> in <module>
+    ----> 1 username
+
+    NameError: name 'username' is not defined
+
+    In [3]: __annotations__
+    Out[3]: {'username': str}
+
+Например, этот функционал используется в `Data classes <r2d2_add_link>`__ чтобы указать какие атрибуты
+будут у экземпляров:
+
+.. code:: python
+
+    In [11]: @dataclass
+        ...: class IPAddress:
+        ...:     ip: str
+        ...:     mask: int
+        ...:
+
+    In [12]: ip1 = IPAddress('10.1.1.1', 28)
+
+    In [13]: ip1
+    Out[13]: IPAddress(ip='10.1.1.1', mask=28)
 
 Аннотация функции
 ~~~~~~~~~~~~~~~~~
@@ -52,86 +132,6 @@
      'min_length': int,
      'check_username': bool,
      'return': bool}
-
-Аннотация переменных
-~~~~~~~~~~~~~~~~~~~~
-
-Пример переменной:
-
-.. code:: python
-
-    username: str = 'user1'
-
-Также можно создавать аннотацию переменной без значения:
-
-.. code:: python
-
-    In [1]: username: str
-
-    In [2]: username
-    ---------------------------------------------------------------------------
-    NameError                                 Traceback (most recent call last)
-    <ipython-input-2-407fefd38331> in <module>
-    ----> 1 username
-
-    NameError: name 'username' is not defined
-
-    In [3]: __annotations__
-    Out[3]: {'username': str}
-
-Например, этот функционал используется в Data classes:
-
-.. code:: python
-
-    In [11]: @dataclass
-        ...: class IPAddress:
-        ...:     ip: str
-        ...:     mask: int
-        ...:
-
-    In [12]: ip1 = IPAddress('10.1.1.1', 28)
-
-    In [13]: ip1
-    Out[13]: IPAddress(ip='10.1.1.1', mask=28)
-
-
-Писать аннотацию для переменных нужно далеко не всегда. Как правило, того типа который
-"угадал" mypy достаточно. Например, в этом случае mypy понимает, что ip это строка:
-
-.. code:: python
-
-    ip = '10.1.1.1'
-
-И не будет выводить никаких ошибок:
-
-::
-
-    $ mypy example_03_variable.py
-
-    Success: no issues found in 1 source file
-
-Однако, если переменная может быть и строкой и числом:
-
-.. code:: python
-
-    ip = '10.1.1.1'
-    ip = 3
-
-mypy посчитает это ошибкой:
-
-::
-
-    example_03_variable.py:2: error: Incompatible types in assignment (expression has type "int", variable has type "str")
-    Found 1 error in 1 file (checked 1 source file)
-
-В таком случае надо явно указать, что переменная может быть числом или строкой:
-
-.. code:: python
-
-    from typing import Union
-
-    ip: Union[int, str] = '10.1.1.1'
-    ip = 3
 
 
 Аннотация классов

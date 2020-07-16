@@ -1,6 +1,46 @@
 Основы mypy
 -----------
 
+Писать аннотацию для переменных нужно далеко не всегда. Как правило, того типа который
+"угадал" mypy достаточно. Например, в этом случае mypy понимает, что ip это строка:
+
+.. code:: python
+
+    ip = '10.1.1.1'
+
+И не будет выводить никаких ошибок:
+
+::
+
+    $ mypy example_03_variable.py
+
+    Success: no issues found in 1 source file
+
+Однако, если переменная может быть и строкой и числом:
+
+.. code:: python
+
+    ip = '10.1.1.1'
+    ip = 3
+
+mypy посчитает это ошибкой:
+
+::
+
+    example_03_variable.py:2: error: Incompatible types in assignment (expression has type "int", variable has type "str")
+    Found 1 error in 1 file (checked 1 source file)
+
+В таком случае надо явно указать, что переменная может быть числом или строкой:
+
+.. code:: python
+
+    from typing import Union
+
+    ip: Union[int, str] = '10.1.1.1'
+    ip = 3
+
+
+
 Пример запуска скрипта с помощью mypy:
 
 ::
