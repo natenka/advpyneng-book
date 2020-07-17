@@ -30,7 +30,7 @@ Mypy выполняет статический анализ кода - пров�
 .. toctree::
    :maxdepth: 1
 
-   basics
+   syntax
    mypy
    examples
    pydantic
