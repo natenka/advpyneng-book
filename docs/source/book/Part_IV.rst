@@ -1,10 +1,9 @@
-IV. Основы asyncio
-##################
+IV. Генераторы
+###############
+
 
 .. toctree::
    :maxdepth: 1
 
-   10_asyncio_basics/index.rst
-   11_async_libraries/index.rst
-   12_using_asyncio/index.rst
-
+   14_generators/index.rst
+   15_itertools/index.rst

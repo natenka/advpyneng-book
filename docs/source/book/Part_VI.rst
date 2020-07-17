@@ -9,3 +9,4 @@ VI. Дополнительная информация
 
    additional_info/memory_test
    additional_info/oop_extra/index
+   additional_info/collections/index.rst

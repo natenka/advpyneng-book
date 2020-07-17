@@ -1,11 +1,13 @@
-I. Объектно-ориентированное программирование
-############################################
+I. Полезные модули
+##################
+
 
 .. toctree::
    :maxdepth: 1
 
-   01_oop_basics/index.rst
-   02_oop_special_methods/index.rst
-   03_oop_method_decorators/index.rst
-   04_oop_inheritance/index.rst
-   05_data_classes/index.rst
+   01_type_annotations/index.rst
+   02_code_formatters/index.rst
+   03_pytest_basics/index.rst
+   04_logging/index.rst
+   05_click/index.rst
+   06_pdb/index.rst
