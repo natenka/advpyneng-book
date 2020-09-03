@@ -1,6 +1,25 @@
 Основы mypy
 -----------
 
+Так как сам Python никак не проверяет указанные типы данных, надо использовать какой-то дополнительный
+модуль для проверки. Один из таких модулей - mypy.
+
+Mypy выполняет статический анализ кода - проверяет соответствие типов данных без выполнения кода.
+
+.. note::
+
+    Mypy не единственный проект такого типа. Другие модули: pyre, pytype.
+
+
+Пример запуска скрипта с помощью mypy:
+
+::
+
+    $ mypy example_01_function_check_ip.py
+    example_01_function_check_ip.py:13: error: Argument 1 to "check_ip" has incompatible type "int"; expected "str"
+    Found 1 error in 1 file (checked 1 source file)
+
+
 Писать аннотацию для переменных нужно далеко не всегда. Как правило, того типа который
 "угадал" mypy достаточно. Например, в этом случае mypy понимает, что ip это строка:
 
@@ -41,13 +60,6 @@ mypy посчитает это ошибкой:
 
 
 
-Пример запуска скрипта с помощью mypy:
-
-::
-
-    $ mypy example_01_function_check_ip.py
-    example_01_function_check_ip.py:13: error: Argument 1 to "check_ip" has incompatible type "int"; expected "str"
-    Found 1 error in 1 file (checked 1 source file)
 
 strict
 ~~~~~~
@@ -111,43 +123,3 @@ reveal_locals:
     example_02_function_check_passwd.py:4: note:     password: builtins.str
     example_02_function_check_passwd.py:4: note:     username: builtins.str
 
-
-Аннотация типов и наследование
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Дочерний класс должен поддерживать те же типы данных, что и родительский:
-
-.. code:: python
-
-    import time
-    from typing import Union, List
-
-
-    class BaseSSH:
-        def __init__(self, ip: str, username: str, password: str) -> None:
-            self.ip = ip
-            self.username = username
-            self.password = password
-
-        def send_config_commands(self, commands: Union[str, List[str]]) -> str:
-            if isinstance(commands, str):
-                commands = [commands]
-            for command in commands:
-                time.sleep(0.5)
-            return 'result'
-
-
-    class CiscoSSH(BaseSSH):
-        def __init__(self, ip: str, username: str, password: str,
-                     enable_password: str = None, disable_paging: bool = True) -> None:
-            super().__init__(ip, username, password)
-
-        def send_config_commands(self, commands: List[str]) -> str:
-            return 'result'
-
-В этом случае будет ошибка:
-
-::
-    $ mypy example_07_class_inheritance.py
-    example_07_class_inheritance.py:25: error: Argument 1 of "send_config_commands" is incompatible with supertype "BaseSSH"; supertype defines the argument type as "Union[str, List[str]]"
-    Found 1 error in 1 file (checked 1 source file)

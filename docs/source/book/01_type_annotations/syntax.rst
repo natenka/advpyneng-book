@@ -143,6 +143,70 @@
         def __repr__(self) -> str:
             return f"IPAddress({self.ip}/{self.mask})"
 
+Аннотация типов и наследование
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Дочерний класс должен поддерживать те же типы данных, что и родительский:
+
+.. code:: python
+
+    import time
+    from typing import Union, List
+
+
+    class BaseSSH:
+        def __init__(self, ip: str, username: str, password: str) -> None:
+            self.ip = ip
+            self.username = username
+            self.password = password
+
+        def send_config_commands(self, commands: Union[str, List[str]]) -> str:
+            if isinstance(commands, str):
+                commands = [commands]
+            for command in commands:
+                time.sleep(0.5)
+            return 'result'
+
+
+    class CiscoSSH(BaseSSH):
+        def __init__(self, ip: str, username: str, password: str,
+                     enable_password: str = None, disable_paging: bool = True) -> None:
+            super().__init__(ip, username, password)
+
+        def send_config_commands(self, commands: List[str]) -> str:
+            return 'result'
+
+В этом случае будет ошибка:
+
+::
+    $ mypy example_07_class_inheritance.py
+    example_07_class_inheritance.py:25: error: Argument 1 of "send_config_commands" is incompatible with supertype "BaseSSH"; supertype defines the argument type as "Union[str, List[str]]"
+    Found 1 error in 1 file (checked 1 source file)
+
+Протоколы
+~~~~~~~~~
+
+Так как в Python достаточно часто будут встречаться функции с аргументами не конкретного типа,
+а поддерживающие протокол, в typing есть объекты типа Iterable, Iterator и другие:
+
+.. code:: python
+
+    import ipaddress
+    from typing import Iterable, Iterator, List
+
+    def convert_int_to_str(integers: Iterable[int]) -> List[str]:
+        return [str(x) for x in integers]
+
+    class Network:
+        def __init__(self, network: str) -> None:
+            self.network = network
+            subnet = ipaddress.ip_network(self.network)
+            self.addresses = [str(ip) for ip in subnet.hosts()]
+
+        def __iter__(self) -> Iterator:
+            return iter(self.addresses)
+
+
 
 Атрибут __annotations__
 ~~~~~~~~~~~~~~~~~~~~~~~
