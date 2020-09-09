@@ -2,7 +2,7 @@
 
    \newpage
 
-4. Модуль logging
+5. Модуль logging
 ==================
 
 
@@ -11,4 +11,4 @@
 
    basics
    components
-   ../../exercises/04_exercises.rst
+   ../../exercises/05_exercises.rst
