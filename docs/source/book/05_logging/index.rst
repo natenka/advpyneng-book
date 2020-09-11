@@ -11,4 +11,5 @@
 
    basics
    components
+   further_reading
    ../../exercises/05_exercises.rst
