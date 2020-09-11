@@ -179,6 +179,7 @@
 В этом случае будет ошибка:
 
 ::
+
     $ mypy example_07_class_inheritance.py
     example_07_class_inheritance.py:25: error: Argument 1 of "send_config_commands" is incompatible with supertype "BaseSSH"; supertype defines the argument type as "Union[str, List[str]]"
     Found 1 error in 1 file (checked 1 source file)
