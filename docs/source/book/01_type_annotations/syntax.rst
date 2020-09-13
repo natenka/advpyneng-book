@@ -204,7 +204,7 @@
             subnet = ipaddress.ip_network(self.network)
             self.addresses = [str(ip) for ip in subnet.hosts()]
 
-        def __iter__(self) -> Iterator:
+        def __iter__(self) -> Iterator[str]:
             return iter(self.addresses)
 
 
