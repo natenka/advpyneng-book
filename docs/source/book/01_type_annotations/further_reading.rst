@@ -4,6 +4,7 @@
 * `Шпаргалка по аннотации типов <https://mypy.readthedocs.io/en/latest/cheat_sheet_py3.html>`__
 * `Модуль typing <https://docs.python.org/3.7/library/typing.html>`__
 * `Type hinting in PyCharm <https://www.jetbrains.com/help/pycharm/type-hinting-in-product.html>`__
+* `PEP 563 -- Postponed Evaluation of Annotations <https://www.python.org/dev/peps/pep-0563/>`__
 
 Статьи:
 
