@@ -57,7 +57,7 @@
 
 .. code:: python
 
-    sw_info: List[Union[str, int]] = ("sw1", "15.1(3)", 24)
+    sw_info: List[Union[str, int]] = ["sw1", "15.1(3)", 24]
 
 
 Также можно создавать аннотацию переменной без значения:
