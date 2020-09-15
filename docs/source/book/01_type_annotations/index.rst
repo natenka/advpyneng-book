@@ -38,6 +38,7 @@ Mypy выполняет статический анализ кода - пров�
    syntax
    mypy
    examples
+   errors_and_solutions
    pydantic
    further_reading
    ../../exercises/01_exercises.rst

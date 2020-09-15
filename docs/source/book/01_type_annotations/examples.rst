@@ -53,4 +53,3 @@ ignore-missing-imports
         else:
             print(f'Пароль для пользователя {username} прошел все проверки')
             return True
-
