@@ -125,6 +125,24 @@
             print(f'Пароль для пользователя {username} прошел все проверки')
             return True
 
+Аннотация функции с исключениями
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Если функция может возвращать какой-то результат или исключения, аннотация пишется только для результата:
+
+.. code:: python
+
+    from typing import Dict, Union, List, Any
+
+
+    def summ(x: int, y: int) -> int:
+        if isinstance(x, int) and isinstance(y, int):
+            return x + y
+        else:
+            raise ValueError('Аргументы должны быть числами')
+
+
+
 
 Аннотация классов
 ~~~~~~~~~~~~~~~~~
