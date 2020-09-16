@@ -105,3 +105,45 @@ None или объект Match. Без проверки что возвраща�
             connect_list.append(neighbor)
         return connect_list
 
+Особенности работы с Union
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Пример кода, в котором в значении словаря типы указаны как Union[str, int, bool] (полный пример в файле example_14_dict_multiple_types_wrong.py):
+
+.. code:: python
+
+    def send_show_command_to_devices(
+        devices: List[Dict[str, Union[str, int, bool]]], command: str
+    ) -> Dict[str, str]:
+        data = {}
+        for device in devices:
+            output = send_show_command(device, command)
+            data[device["host"]] = output
+        return data
+
+В этом случае возникнет такая ошибка:
+
+::
+
+    $ mypy example_14_dict_multiple_types.py
+    example_14_dict_multiple_types_wrong.py:24: error: Incompatible return value type (got "Dict[Union[str, int, bool], str]", expected "Dict[str, str]")
+    Found 1 error in 1 file (checked 1 source file)
+
+Проблема связана с тем, что если в значении словаря указан Union[str, int, bool], то mypy это воспринимает как то, что любое
+значение может быть любым из этих типов. Указав что результатом будет словарь Dict[str, str]. Мы как бы уточняем, что device["host"]
+соответствует именно строка, но при работе с Union это будет ошибкой.
+Исправить ошибку можно либо указав, что возвращаемый словарь будет содержать в ключе Union[str, int, bool], или указав в словаре
+в devices тип значения Any (полный пример в example_14_dict_multiple_types.py):
+
+.. code:: python
+
+    def send_show_command_to_devices(
+        devices: List[Dict[str, Any]], command: str
+    ) -> Dict[str, str]:
+        data = {}
+        for device in devices:
+            output = send_show_command(device, command)
+            data[device["host"]] = output
+        return data
+
+
