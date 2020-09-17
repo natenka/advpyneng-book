@@ -231,7 +231,9 @@ logging_api_example_5_file_rotation.py
     logfile_with_rotation.log.1
     logfile_with_rotation.log.2
     logfile_with_rotation.log.3
-    logfile_with_rotation.log - это самый свежий файл, затем идет logfile_with_rotation.log.1, logfile_with_rotation.log.2 и тд.
+    logfile_with_rotation.log
+
+logfile_with_rotation.log - это самый свежий файл, затем идет logfile_with_rotation.log.1, logfile_with_rotation.log.2 и тд.
 
 
 Logging tree

@@ -16,6 +16,7 @@ logging_basic_1.py
 Log-файл
 
 ::
+
     DEBUG:root:Сообщение уровня debug
     INFO:root:Сообщение уровня info
     WARNING:root:Сообщение уровня warning
