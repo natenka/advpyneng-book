@@ -81,8 +81,53 @@ click.File
 
     @click.command()
     @click.argument("connection_params", type=click.File("r"))
-    def cli(command, connection_params):
+    def cli(connection_params):
         devices = yaml.safe_load(connection_params)
 
 
 Так как click открывает файл, внутри функции cli connection_params это уже открытый файл.
+
+
+click.Choice
+^^^^^^^^^^^^
+
+Тип click.Choice позволяет указать допустимые варианты значений для параметра:
+
+.. code:: python
+
+    @click.command()
+    @click.option("--key", "-k", type=click.Choice(["mac", "ip", "vlan"]))
+    def cli(key):
+        pass
+
+Если при вызове скрипта передать другое значение, возникнет ошибка:
+
+::
+
+    $ python example_choice.py --key test
+    ...
+    Error: Invalid value for '--key' / '-k': invalid choice: test. (choose from mac, ip, vlan)
+
+
+click.IntRange
+^^^^^^^^^^^^^^
+
+Тип click.IntRange:
+
+.. code:: python
+
+    class click.IntRange(min=None, max=None, clamp=False)
+
+Пример использования:
+
+.. code:: python
+
+    @click.command()
+    @click.option("--threads", "-t", type=click.IntRange(1, 10))
+    def cli(threads):
+        pass
+
+Если указанное значение не попадает в диапазон, по умолчанию возникнет ошибка.
+Если установить ``clamp=True``, вместо ошибки, значение будет подгоняться под ближайшую границу.
+Например, если в примере выше передать 20, то threads будет равен 10.
+
