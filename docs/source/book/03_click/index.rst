@@ -22,7 +22,6 @@ Click не единственный модуль для обработки ар�
    parameters
    arguments
    options
-   decorators
    utilities
    further_reading
    ../../exercises/03_exercises.rst
