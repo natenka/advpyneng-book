@@ -36,6 +36,7 @@
 * ``@click.option("--f", "--foo-bar")``, имя ``"f"``
 * ``@click.option("---f")``, имя ``"_f"``
 
+
 Запрос значения у пользователя
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -83,4 +84,24 @@
 
     @click.option("--show-all", "-a", is_flag=True, help="show db content")
 
+
+Подтверждение ввода
+~~~~~~~~~~~~~~~~~~~
+
+confirmation_prompt может пригодится при запросе пароля или других критичных данных. 
+В этом случае пароль запрашивается повторно автоматически и два введенных значения сравниваются:
+
+.. code:: python
+
+    @click.command()
+    @click.option("--username", "-u", prompt=True)
+    @click.option("--password", "-p", prompt=True, hide_input=True, confirmation_prompt=True)
+    def cli(username, password):
+        print(username, password)
+
+
+.. note::
+
+    Так как это распространенная задача, ввод пароля таким образом можно заменить
+    декоратором click.password_option.
 
