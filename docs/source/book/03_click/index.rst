@@ -18,5 +18,10 @@ Click не единственный модуль для обработки ар�
    :maxdepth: 1
 
    basics
+   setuptools
+   parameters
+   arguments
+   options
+   utilities
    further_reading
    ../../exercises/03_exercises.rst
