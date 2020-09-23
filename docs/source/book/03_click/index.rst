@@ -23,5 +23,6 @@ Click не единственный модуль для обработки ар�
    arguments
    options
    utilities
+   complex
    further_reading
    ../../exercises/03_exercises.rst
