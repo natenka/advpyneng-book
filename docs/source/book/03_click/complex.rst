@@ -122,8 +122,8 @@ click.group это декоратор, который работает так ж
 
 ::
 
-    $ python example_11_click_group_basics.py --help
-    Usage: example_11_click_group_basics.py [OPTIONS] COMMAND [ARGS]...
+    $ python example_10_click_group_basics.py --help
+    Usage: example_10_click_group_basics.py [OPTIONS] COMMAND [ARGS]...
 
     Options:
       --help  Show this message and exit.
@@ -136,8 +136,8 @@ click.group это декоратор, который работает так ж
 
 ::
 
-    $ python example_11_click_group_basics.py stats --help
-    Usage: example_11_click_group_basics.py stats [OPTIONS]
+    $ python example_10_click_group_basics.py stats --help
+    Usage: example_10_click_group_basics.py stats [OPTIONS]
 
     Options:
       -d, --day
@@ -146,8 +146,8 @@ click.group это декоратор, который работает так ж
       --help       Show this message and exit.
 
 
-    $ python example_11_click_group_basics.py work --help
-    Usage: example_11_click_group_basics.py work [OPTIONS]
+    $ python example_10_click_group_basics.py work --help
+    Usage: example_10_click_group_basics.py work [OPTIONS]
 
     Options:
       -r, --pomodoros_to_run INTEGER  [default: 5]
@@ -158,12 +158,60 @@ click.group это декоратор, который работает так ж
       --help                          Show this message and exit.
 
 В этом случае у каждой команды свои параметры, плюс команд мало.
-Часто бывают случаи, когда часть параметров команд пересекаются и, особенно
-если команд много, их становится неудобно описывать, так как параметры приходится повторять.
-
-Тут на помощь приходит контекст.
 
 click.pass_context
 ~~~~~~~~~~~~~~~~~~
 
+Часто бывают случаи, когда часть параметров команд пересекаются и, особенно
+если команд много, их становится неудобно описывать, так как параметры приходится повторять.
+В этом случае общие параметры можно перенести в функцию-группу, но появляется новая проблема - как
+теперь передать значение этих параметров в подкоманды? Тут на помощь приходит контекст.
+
+
+Пример скрипта (example_11_click_context.py):
+
+.. code:: python
+
+    import click
+
+
+    @click.group()
+    @click.option("--db-filename", "-n", help="db filename")
+    @click.pass_context
+    def dhcp_db(context, db_filename):
+        context.obj = {"db_filename": db_filename}
+
+
+    @dhcp_db.command()
+    @click.option("--db-schema", "-s", help="db schema filename")
+    @click.pass_context
+    def create(context, db_schema):
+        """
+        create DB
+        """
+
+
+    @dhcp_db.command()
+    @click.argument("filename", nargs=-1, required=True)
+    @click.option("--switch-data", "-s", default=False, is_flag=True)
+    @click.pass_context
+    def add(context, filename, switch_data):
+        """
+        add data to db from FILENAME
+        """
+
+
+    @dhcp_db.command()
+    @click.option("--key", "-k", type=click.Choice(["mac", "ip", "vlan"]))
+    @click.option("--value", "-v", help="value of key")
+    @click.option("--show-all", "-a", is_flag=True, help="show db content")
+    @click.pass_context
+    def get(context, key, value, show_all):
+        """
+        get data from db
+        """
+
+
+    if __name__ == "__dhcp_db__":
+        dhcp_db()
 
