@@ -9,6 +9,7 @@
 .. toctree::
    :maxdepth: 1
     
+   useful_builtin_functions
    descriptor
    metaclass
    slots
