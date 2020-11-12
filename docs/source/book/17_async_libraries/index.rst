@@ -7,7 +7,6 @@
 
 * asyncssh
 * netdev
-* scrapli
 * aiofiles
 * aiohttp
 * async-timeout
