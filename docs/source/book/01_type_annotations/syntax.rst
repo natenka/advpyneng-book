@@ -292,4 +292,62 @@
     In [10]: IPAddress.__repr__.__annotations__
     Out[10]: {'return': str}
 
+Справка при работе в консоли
+~~~~~~~~~~~~~~~~~~~~
+
+Болшая часть объектов модуля typing имеет встроенную справку, например:
+
+.. code:: python
+    
+    In [21]: ?Iterable
+    Signature:   Iterable(*args, **kwargs)
+    Type:        _GenericAlias
+    String form: typing.Iterable
+    File:        /usr/lib/python3.8/typing.py
+    Docstring:
+    The central part of internal API.
+
+    This represents a generic version of type 'origin' with type arguments 'params'.
+    There are two kind of these aliases: user defined and special. The special ones
+    are wrappers around builtin collections and ABCs in collections.abc. These must
+    have 'name' always set. If 'inst' is False, then the alias can't be instantiated,
+    this is used by e.g. typing.List and typing.Dict.
+
+    In [22]: help(Union)
+
+Но некоторые объекты дополнительно описаны методом _doc, например:
+
+.. code:: python
+
+    In [32]: print(Optional._doc)
+    Optional type.
+
+        Optional[X] is equivalent to Union[X, None].
+
+
+    In [33]: print(Union._doc)
+    Union type; Union[X, Y] means either X or Y.
+
+        To define a union, use e.g. Union[int, str].  Details:
+        - The arguments must be types and there must be at least one.
+        - None as an argument is a special case and is replaced by
+          type(None).
+        - Unions of unions are flattened, e.g.::
+
+            Union[Union[int, str], float] == Union[int, str, float]
+
+        - Unions of a single argument vanish, e.g.::
+
+            Union[int] == int  # The constructor actually returns int
+
+        - Redundant arguments are skipped, e.g.::
+
+            Union[int, str, int] == Union[int, str]
+
+        - When comparing unions, the argument order is ignored, e.g.::
+
+            Union[int, str] == Union[str, int]
+
+        - You cannot subclass or instantiate a union.
+        - You can use Optional[X] as a shorthand for Union[X, None].
 
