@@ -34,7 +34,7 @@
 
 .. code:: python
 
-    class Interger:
+    class Integer:
         def __init__(self, name):
             self.name = name
 
@@ -63,7 +63,7 @@
 .. code:: python
 
     class IPAddress:
-        mask = Interger('mask')
+        mask = Integer('mask')
         ip = String('ip')
 
         def __init__(self, ip, mask):
@@ -120,7 +120,7 @@
                 raise TypeError(f'Wrong data type, expected {self.attr_type}')
             instance.__dict__[self.name] = value
 
-    class Interger(Typed):
+    class Integer(Typed):
         attr_type = int
 
     class String(Typed):
