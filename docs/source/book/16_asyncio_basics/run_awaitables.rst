@@ -6,9 +6,12 @@
 
 * asyncio.gather
 * asyncio.as_completed
-* asyncio.wait
-* asyncio.wait_for
 
+.. note::
+
+    Кроме функций gather и as_completed, несколько awaitables может запускать и
+    функция wait, но она рассматривается позже, в 18 разделе.
+    
 
 asyncio.gather
 --------------
