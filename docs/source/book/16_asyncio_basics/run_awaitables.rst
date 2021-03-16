@@ -5,9 +5,9 @@
 или задач:
 
 * asyncio.gather
+* asyncio.as_completed
 * asyncio.wait
 * asyncio.wait_for
-* asyncio.as_completed
 
 
 asyncio.gather
@@ -18,7 +18,7 @@ asyncio.gather
 
 .. code:: python
 
-    asyncio.gather(*aws, loop=None, return_exceptions=False)
+    asyncio.gather(*aws, return_exceptions=False)
 
 Если какие-то из объектов являются сопрограммами, они автоматически оборачиваются в задачи
 и планируются на выполнение уже как объекты Task.
@@ -146,3 +146,95 @@ asyncio.gather
     Out[17]: True
 
 
+asyncio.as_completed
+--------------------
+
+Функция as_completed запускает на выполнение awaitable объекты, которые перечислены
+в последовательности aws:
+
+.. code:: python
+
+    asyncio.as_completed(aws, *, timeout=None)
+
+Возвращает итератор с сопрограмами, в порядке получения результата от сопрограмм.
+Функция генерирует исключение asyncio.TimeoutError, если за timeout отработали не
+все сопрограмы.
+
+Пример использования as_completed:
+
+.. code:: python
+
+    async def delay_print(task_name):
+        delay = round(random.random() * 10, 2)
+        print(f'>>> start {task_name} sleep {delay}')
+        await asyncio.sleep(delay)
+        print(f'<<< end   {task_name}')
+        return task_name
+
+
+    async def main():
+        coroutines = [delay_print(f"task {i}") for i in range(1, 6)]
+        for cor in asyncio.as_completed(coroutines):
+            cor_result = await cor
+            print(f"DONE {cor_result}")
+
+Результаты возвращаются в порядке отрабатывания сопрограм, а не в порядке их запуска:
+
+.. code:: python
+
+    In [27]: asyncio.run(main())
+    >>> start task 2 sleep 8.93
+    >>> start task 1 sleep 0.03
+    >>> start task 4 sleep 8.33
+    >>> start task 5 sleep 3.43
+    >>> start task 3 sleep 5.09
+    <<< end   task 1
+    DONE task 1
+    <<< end   task 5
+    DONE task 5
+    <<< end   task 3
+    DONE task 3
+    <<< end   task 4
+    DONE task 4
+    <<< end   task 2
+    DONE task 2
+
+Это может быть полезно когда сразу после получения результата, надо запускать следующую
+операцию. Например, в примере ниже сразу после получения результата сопрограмы, идет запись
+результата в файл:
+
+.. code:: python
+
+    import asyncio
+    import time
+    from datetime import datetime
+    import random
+
+
+    async def connect_ssh(ip, command):
+        print(f"Подключаюсь к {ip}")
+        await asyncio.sleep(1)
+        print(f"Отправляю команду {command}")
+        await asyncio.sleep(random.random() * 10)
+        print(f"Получен результат от {ip}")
+        return ip, command
+
+
+    async def write_to_file(filename, data):
+        print(f">>> Записываю результат в файл {filename}")
+        await asyncio.sleep(1)
+        print(f"<<< Результат записан в файл {filename}")
+
+
+    async def main():
+        ip_list = ["10.1.1.1", "10.1.1.2", "10.1.1.3", "10.1.1.4"]
+        coroutines = [connect_ssh(ip, "sh clock") for ip in ip_list]
+        tasks = []
+        for coro in asyncio.as_completed(coroutines):
+            result = await coro
+            tasks.append(asyncio.create_task(write_to_file(f"{result[0]}.txt", result)))
+        await asyncio.gather(*tasks)
+
+
+    if __name__ == "__main__":
+        asyncio.run(main())

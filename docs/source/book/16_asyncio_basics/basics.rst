@@ -74,24 +74,24 @@ await
 
 .. code:: python
 
-    In [2]: from datetime import datetime
+    from datetime import datetime
 
-    In [3]: async def delay_print(delay, task_name):
-       ...:     print(f'>>> start {task_name}')
-       ...:     await asyncio.sleep(delay)
-       ...:     print(f'<<< end   {task_name}')
-       ...:
+    async def delay_print(delay, task_name):
+        print(f'>>> start {task_name}')
+        await asyncio.sleep(delay)
+        print(f'<<< end   {task_name}')
+
 
 Для запуска сопрограммы delay_print, ее результат ожидается в сопрограмме main:
 
 .. code:: python
 
-    In [4]: async def main():
-       ...:     print(f'Start {datetime.now()}')
-       ...:     await delay_print(4, 'task1')
-       ...:     await delay_print(2, 'task2')
-       ...:     print(f'End   {datetime.now()}')
-       ...:
+    async def main():
+        print(f'Start {datetime.now()}')
+        await delay_print(4, 'task1')
+        await delay_print(2, 'task2')
+        print(f'End   {datetime.now()}')
+
 
     In [5]: asyncio.run(main())
     Start 2021-03-16 09:54:42.163949
@@ -124,24 +124,24 @@ asyncio.create_task. Она возвращает объект Task, которы
 
 .. code:: python
 
-    In [6]: async def delay_print(delay, task_name):
-       ...:     print(f'>>> start {task_name}')
-       ...:     await asyncio.sleep(delay)
-       ...:     print(f'<<< end   {task_name}')
-       ...:
+    async def delay_print(delay, task_name):
+        print(f'>>> start {task_name}')
+        await asyncio.sleep(delay)
+        print(f'<<< end   {task_name}')
 
-    In [7]: async def main():
-       ...:     print(f'Start {datetime.now()}')
-       ...:     task1 = asyncio.create_task(delay_print(4, 'task1'))
-       ...:     task2 = asyncio.create_task(delay_print(2, 'task2'))
-       ...:
-       ...:     await asyncio.sleep(1)
-       ...:     print("Все задачи запущены")
-       ...:
-       ...:     await task1
-       ...:     await task2
-       ...:     print(f'End   {datetime.now()}')
-       ...:
+
+    async def main():
+        print(f'Start {datetime.now()}')
+        task1 = asyncio.create_task(delay_print(4, 'task1'))
+        task2 = asyncio.create_task(delay_print(2, 'task2'))
+
+        await asyncio.sleep(1)
+        print("Все задачи запущены")
+
+        await task1
+        await task2
+        print(f'End   {datetime.now()}')
+
 
     In [8]: asyncio.run(main())
     Start 2021-03-16 09:58:10.817222
