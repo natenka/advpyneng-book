@@ -221,3 +221,63 @@ asyncio.create_task. Она возвращает объект Task, которы
     ### End   get_and_parse_show_command 10.3.3.3
     End 2021-03-16 10:29:26.286659
 
+
+Еще один пример работы с await и create_task, но теперь функции выполняют много действий и
+после каждого выполняется asyncio.sleep:
+
+.. code:: python
+
+    async def print_number(task_name):
+        print(f">>> Start {task_name}")
+        for _ in range(10):
+            print(42)
+            await asyncio.sleep(0.5)
+        print(f"<<< End   {task_name}")
+
+
+    async def print_text(task_name):
+        print(f">>> Start {task_name}")
+        for _ in range(10):
+            print("hello")
+            await asyncio.sleep(0.9)
+        print(f"<<< End   {task_name}")
+
+
+    async def main():
+        print(f'Start {datetime.now()}')
+        task1 = asyncio.create_task(print_number('task1'))
+        task2 = asyncio.create_task(print_text('task2'))
+
+        await task1
+        await task2
+        print(f'End   {datetime.now()}')
+
+
+    In [11]: asyncio.run(main())
+    Start 2021-03-16 15:35:31.668084
+    >>> Start task1
+    42
+    >>> Start task2
+    hello
+    42
+    hello
+    42
+    42
+    hello
+    42
+    42
+    hello
+    42
+    42
+    hello
+    42
+    hello
+    42
+    <<< End   task1
+    hello
+    hello
+    hello
+    hello
+    <<< End   task2
+    End   2021-03-16 15:35:40.684632
+
