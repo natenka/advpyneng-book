@@ -20,6 +20,7 @@
 .. toctree::
    :maxdepth: 1
 
+   asyncio_vs_threads
    terms
    basics
    run_awaitables
