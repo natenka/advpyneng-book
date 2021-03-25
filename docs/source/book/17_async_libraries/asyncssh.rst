@@ -39,7 +39,9 @@ Linux, например, тут может указываться, наприм�
        ...:     term_type="Dumb", term_size=(200, 24)
        ...: )
 
-Дальше вся работа будет через объекты reader (класс SSHReader) и writer (класс SSHWriter)
+Дальше вся работа будет через объекты reader
+(`класс SSHReader <https://asyncssh.readthedocs.io/en/stable/api.html#sshreader>`__)
+и writer (`класс SSHWriter <https://asyncssh.readthedocs.io/en/stable/api.html#sshwriter>`__)
 и методы readuntil и write соответственно. При этом reader.readuntil это сопрограмма,
 поэтому надо писать await, а writer.write не сопрограмма, поэтому await использовать не нужно:
 
