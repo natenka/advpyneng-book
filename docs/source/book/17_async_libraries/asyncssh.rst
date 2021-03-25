@@ -98,13 +98,13 @@ Linux, например, тут может указываться, наприм�
         writer, reader, stderr = await ssh.open_session(
             term_type="Dumb", term_size=(200, 24)
         )
-        output = await reader.readuntil(">")
+        await reader.readuntil(">")
         writer.write("enable\n")
-        output = await reader.readuntil("Password")
+        await reader.readuntil("Password")
         writer.write(f"{enable_password}\n")
-        output = await reader.readuntil([">", "#"])
+        await reader.readuntil([">", "#"])
         writer.write("terminal length 0\n")
-        output = await reader.readuntil("#")
+        await reader.readuntil("#")
 
         writer.write(f"{command}\n")
         output = await reader.readuntil("#")
@@ -154,3 +154,18 @@ Linux, например, тут может указываться, наприм�
         pprint(result, width=120)
 
 Теперь подключение выполняется на три устройства параллельно, с помощью gather.
+
+asyncio.wait_for
+----------------
+
+У метода readuntil есть одна проблема - у него нет параметра timeout, в итоге,
+если указанная строка не найдена, метод зависает, пока соединение не прервется.
+Исправить это можно с помощью функции ``asyncio.wait_for``:
+
+.. code:: python
+
+    coroutine asyncio.wait_for(aw, timeout)
+
+Функция wait_for запускает awaitable и ждет его выполнение указанный timeout.
+Если задача не выполнилась за timeout, генерируется исключение asyncio.TimeoutError.
+
