@@ -1,12 +1,14 @@
 scrapli
 =======
 
-scrapli поддерживает разные варианты подключения: system, paramiko, ssh2, telnet, asyncssh, asynctelnet.
-Тут рассматривается только asyncssh.
+`scrapli <https://github.com/carlmontanari/scrapli>`__ поддерживает разные варианты
+подключения: system, paramiko, ssh2, telnet, asyncssh, asynctelnet.
+Тут рассматривается только asyncssh и asynctelnet.
 
 .. note::
 
-    `Основы scrapli с использованием сихронного варианта транспорта <https://pyneng.readthedocs.io/ru/latest/book/18_ssh_telnet/scrapli.html>`__.
+    Основы scrapli с использованием сихронного варианта транспорта рассматриваются
+    в книге `Python для сетевых инженеров <https://pyneng.readthedocs.io/ru/latest/book/18_ssh_telnet/scrapli.html>`__.
 
 
 Доступные async драйверы:
