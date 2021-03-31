@@ -11,6 +11,12 @@ scrapli
     в книге `Python для сетевых инженеров <https://pyneng.readthedocs.io/ru/latest/book/18_ssh_telnet/scrapli.html>`__.
 
 
+Доступные варианты асинхронного транспорта:
+
+* asyncssh
+* asynctelnet (реализация telnet на основе asyncio)
+
+
 Доступные async драйверы:
 
 +--------------+-------------------+-------------------+
