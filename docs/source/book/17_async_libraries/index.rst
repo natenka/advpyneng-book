@@ -12,6 +12,7 @@
 В этом разделе рассматриваются модули:
 
 * asyncssh
+* scrapli
 * netdev
 * aiofiles
 * aiohttp
