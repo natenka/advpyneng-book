@@ -22,5 +22,6 @@
    :maxdepth: 1
 
    asyncssh
+   scrapli
    further_reading
    ../../exercises/17_exercises.rst
