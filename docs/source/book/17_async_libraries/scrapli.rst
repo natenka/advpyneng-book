@@ -169,6 +169,7 @@ scrapli
 пустое значение) и обычный вывод команды, если нет:
 
 .. code:: python
+
     from pprint import pprint
     import asyncio
     from scrapli import AsyncScrapli
