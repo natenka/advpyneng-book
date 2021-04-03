@@ -201,6 +201,39 @@ scrapli
         result = asyncio.run(send_command_to_devices(devices, "sh ip int br"))
         pprint(result, width=120)
 
+Файл devices_async.yaml:
+
+.. code:: yaml
+
+    - host: 192.168.100.1
+      auth_username: cisco
+      auth_password: cisco
+      auth_secondary: cisco
+      auth_strict_key: false
+      timeout_socket: 5
+      timeout_transport: 10
+      platform: cisco_iosxe
+      transport: asyncssh
+    - host: 192.168.100.2
+      auth_username: cisco
+      auth_password: cisco
+      auth_secondary: cisco
+      auth_strict_key: false
+      timeout_socket: 5
+      timeout_transport: 10
+      platform: cisco_iosxe
+      transport: asyncssh
+    - host: 192.168.100.3
+      auth_username: cisco
+      auth_password: cisco
+      auth_secondary: cisco
+      auth_strict_key: false
+      timeout_socket: 5
+      timeout_transport: 10
+      platform: cisco_iosxe
+      transport: asyncssh
+
+
 Подключение с транспортом asynctelnet
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
