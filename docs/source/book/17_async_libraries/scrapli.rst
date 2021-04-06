@@ -37,7 +37,9 @@ scrapli
 * auth_username - имя пользователя
 * auth_password - пароль
 * auth_secondary - пароль на enable
-* auth_strict_key - включить/отключить аутентификацию по ключам (по умолчанию включена)
+* auth_strict_key - контролирует проверку SSH ключей сервера, а именно разрешать
+  ли подключаться к серверам ключ которых не сохранен в ssh/known_hosts.
+  False - разрешить подключение (по умолчанию значение True)
 * platform - нужно указывать при использовании AsyncScrapli
 * transport - для async варианта transport указывать обязательно: asyncssh или asynctelnet
 * transport_options - опции для конкретного транспорта
