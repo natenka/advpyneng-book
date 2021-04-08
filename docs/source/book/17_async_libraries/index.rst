@@ -14,9 +14,6 @@
 * asyncssh
 * scrapli
 * netdev
-* aiofiles
-* aiohttp
-* async-timeout
 
 .. toctree::
    :maxdepth: 1
