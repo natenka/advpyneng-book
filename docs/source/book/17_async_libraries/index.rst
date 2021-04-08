@@ -23,5 +23,6 @@
 
    asyncssh
    scrapli
+   netdev
    further_reading
    ../../exercises/17_exercises.rst
