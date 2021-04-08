@@ -18,11 +18,11 @@
 # -- Project information -----------------------------------------------------
 
 project = 'Advanced Python для сетевых инженеров'
-copyright = '2019-2020, Natasha Samoylenko'
+copyright = '2019-2021, Natasha Samoylenko'
 author = 'Natasha Samoylenko'
 
 # The full version, including alpha/beta/rc tags
-release = '1.0.0'
+release = '0.8.0'
 
 
 # -- General configuration ---------------------------------------------------
