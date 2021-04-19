@@ -4,6 +4,8 @@ Advanced Python для сетевых инженеров
 .. warning::
 
     Книга в процессе написания!
+    Написаны разделы 3, 7-10, 13-15. Также написаны разделы 16-17, но они перенесены
+    в `отдельную книгу <https://asyncpyneng.readthedocs.io/ru/latest/index.html>`__.
 
 .. toctree::
    :maxdepth: 2
