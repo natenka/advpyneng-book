@@ -2,7 +2,7 @@
 
    \newpage
 
-4. Основы pytest
+1. Основы pytest
 =================
 
 
@@ -19,4 +19,4 @@
    conftest
    extra
    test_network
-   ../../exercises/04_exercises.rst
+   ../../exercises/01_exercises.rst

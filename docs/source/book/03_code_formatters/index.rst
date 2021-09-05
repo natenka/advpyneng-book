@@ -2,7 +2,7 @@
 
    \newpage
 
-2. Code formatters
+3. Code formatters
 ===================
 
 
@@ -10,4 +10,4 @@
    :maxdepth: 1
 
    further_reading
-   ../../exercises/02_exercises.rst
+   ../../exercises/03_exercises.rst
