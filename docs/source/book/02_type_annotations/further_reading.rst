@@ -5,6 +5,7 @@
 * `Модуль typing <https://docs.python.org/3.7/library/typing.html>`__
 * `Type hinting in PyCharm <https://www.jetbrains.com/help/pycharm/type-hinting-in-product.html>`__
 * `PEP 563 -- Postponed Evaluation of Annotations <https://www.python.org/dev/peps/pep-0563/>`__
+* `Annotations Best Practices <https://docs.python.org/3.10/howto/annotations.html#annotations-howto>`__
 
 Статьи:
 
