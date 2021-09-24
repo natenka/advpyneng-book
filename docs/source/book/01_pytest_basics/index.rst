@@ -19,4 +19,5 @@
    conftest
    extra
    test_network
+   further_reading
    ../../exercises/01_exercises.rst
