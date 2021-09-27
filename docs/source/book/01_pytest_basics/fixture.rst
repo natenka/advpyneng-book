@@ -32,6 +32,6 @@ Fixture scope - контролирует как часто запускаетс�
 
    fixture_custom
    fixture_builtin
+   conftest
    fixture_features
    fixture_parametrization
-   conftest
