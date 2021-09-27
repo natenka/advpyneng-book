@@ -14,3 +14,15 @@
 -  `Effective Python Testing With Pytest <https://realpython.com/pytest-python-testing/>`__
 -  `tox <https://tox.readthedocs.io/en/latest/index.html>`__
 -  `pytest and tox <https://tox.readthedocs.io/en/latest/example/pytest.html>`__
+
+Альтернативы pytest
+~~~~~~~~~~~~~~~~~~~
+
+* `unittest <https://pymotw.com/3/unittest/index.html>`__
+* `doctest <https://pymotw.com/3/doctest/index.html>`__
+* `nose <https://nose.readthedocs.io/en/latest/>`__
+
+Полезные ссылки по сравнению фреймворков:
+
+* `Test & code podcast: 2: Pytest vs Unittest vs Nose <https://testandcode.com/2>`__
+* `The Cleaning Hand of Pytest <https://blog.daftcode.pl/the-cleaning-hand-of-pytest-28f434f4b684>`__

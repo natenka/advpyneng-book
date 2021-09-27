@@ -1,10 +1,15 @@
 Примеры тестов
 --------------
 
+Тут примеры тестов еще не используют fixture и параметризацию.
+
 Тест функции
 ~~~~~~~~~~~~
 
 .. code:: python
+
+    import pytest
+
 
     def check_passwd(username, password, min_length=8, check_username=True):
         if len(password) < min_length:
@@ -17,23 +22,17 @@
             print(f'Пароль для пользователя {username} прошел все проверки')
             return True
 
-.. code:: python
 
-    In [3]: check_passwd('nata', '12345', min_length=3)
-    Пароль для пользователя nata прошел все проверки
-    Out[3]: True
-
-    In [4]: check_passwd('nata', '12345nata', min_length=3)
-    Пароль содержит имя пользователя
-    Out[4]: False
-
-    In [5]: check_passwd('nata', '12345nata', min_length=3, check_username=False)
-    Пароль для пользователя nata прошел все проверки
-    Out[5]: True
-
-    In [6]: check_passwd('nata', '12345nata', min_length=3, check_username=True)
-    Пароль содержит имя пользователя
-    Out[6]: False
+    @pytest.mark.parametrize(
+        ("user", "passwd", "min_len", "result"),
+        [
+            ("user1", "123456", 4, True),
+            ("user1", "123456", 8, False),
+            ("user1", "123456", 6, True),
+        ],
+    )
+    def test_min_len_param(user, passwd, min_len, result):
+        assert check_passwd(user, passwd, min_length=min_len) == result
 
 Тест класса
 ~~~~~~~~~~~
@@ -45,71 +44,74 @@
 
     class IPv4Network:
         def __init__(self, network):
-            self._net = ipaddress.ip_network(network)
-            self.address = str(self._net.network_address)
-            self.mask = self._net.prefixlen
-            self.allocated = tuple()
+            self.network = network
+            self.mask = int(network.split("/")[-1])
+            self.bin_mask = "1" * self.mask + "0" * (32 - self.mask)
 
         def hosts(self):
-            return tuple([str(ip) for ip in self._net.hosts()])
+            net = ipaddress.ip_network(self.network)
+            return [str(ip) for ip in net.hosts()]
 
-        def allocate(self, ip):
-            self.allocated += (ip,)
+        def __repr__(self):
+            return f"Network('{self.network}')"
 
-        def unassigned(self):
-            return tuple([ip for ip in self.hosts() if ip not in self.allocated])
+        def __len__(self):
+            return len(self.hosts())
+
+        def __iter__(self):
+            return iter(self.hosts())
+
+Тесты:
 
 .. code:: python
 
+    from collections.abc import Iterable
     import pytest
-    import task_1_1
-    from common_functions import check_class_exists, check_attr_or_method
-
-
-    def test_class_created():
-        '''Проверяем, что класс создан'''
-        check_class_exists(task_1_1, 'IPv4Network')
+    from ex06_class_ipv4network import IPv4Network
 
 
     def test_attributes_created():
-        '''
+        """
         Проверяем, что у объекта есть атрибуты:
-            address, mask, broadcast, allocated
-        '''
-        net = task_1_1.IPv4Network('100.7.1.0/26')
-        check_attr_or_method(net, attr='address')
-        check_attr_or_method(net, attr='mask')
-        check_attr_or_method(net, attr='broadcast')
-        check_attr_or_method(net, attr='allocated')
-        assert net.allocated == tuple(), "По умолчанию allocated должен содержать пустой кортеж"
-
-    def test_methods_created():
-        '''
-        Проверяем, что у объекта есть методы:
-            allocate, unassigned
-        '''
-        net = task_1_1.IPv4Network('100.7.1.0/26')
-        check_attr_or_method(net, method='allocate')
-        check_attr_or_method(net, method='unassigned')
-
-    def test_return_types():
-        '''Проверяем работу объекта'''
-        net = task_1_1.IPv4Network('100.7.1.0/26')
-        assert type(net.hosts()) == tuple, "Метод hosts должен возвращать кортеж"
-        assert type(net.unassigned()) == tuple, "Метод unassigned должен возвращать кортеж"
+            network, mask, bin_mask
+        """
+        net = IPv4Network("100.7.1.0/26")
+        assert getattr(net, "network", None) != None, "Атрибут не найден"
+        assert getattr(net, "mask", None) != None, "Атрибут не найден"
+        assert getattr(net, "bin_mask", None) != None, "Атрибут не найден"
 
 
-    def test_address_allocation():
-        '''Проверяем работу объекта'''
-        net = task_1_1.IPv4Network('100.7.1.0/26')
+    def test_attributes():
+        """Проверяем значения атрибутов"""
+        net = IPv4Network("10.1.1.0/29")
+        assert net.network == "10.1.1.0/29"
+        assert net.mask == 29
+        assert net.bin_mask == "11111111111111111111111111111000"
+
+
+    def test_hosts():
+        """Проверяем работу метода hosts"""
+        net = IPv4Network("100.7.1.0/26")
+        assert type(net.hosts()) == list, "Метод hosts должен возвращать список"
         assert len(net.hosts()) == 62, "В данной сети должно быть 62 хоста"
-        assert net.broadcast == '100.7.1.63', "Broadcast адрес для этой сети 100.7.1.63"
 
-        net.allocate('100.7.1.45')
-        net.allocate('100.7.1.15')
-        net.allocate('100.7.1.60')
 
-        assert len(net.hosts()) == 62, "Метод hosts должен возвращать все хосты"
-        assert len(net.allocated) == 3, "Переменная allocated должна содержать 3 хоста"
-        assert len(net.unassigned()) == 59, "Метод unassigned должен возвращать на 3 хоста меньше"
+    def test_repr():
+        """Проверяем работу метода __repr__"""
+        net = IPv4Network("192.168.1.0/26")
+        assert repr(net) == "Network('192.168.1.0/26')"
+
+
+    def test_len():
+        """Проверяем работу метода __len__"""
+        net = IPv4Network("192.168.1.0/26")
+        assert len(net) == 62
+
+
+    def test_iter():
+        """Проверяем что IPv4Network итерируемый объект"""
+        net = IPv4Network("192.168.1.0/26")
+        net_iterator = iter(net)
+        assert next(net_iterator) == "192.168.1.1"
+        assert isinstance(net, Iterable)
 
