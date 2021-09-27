@@ -51,16 +51,16 @@
 
 .. code::
 
-    $ pytest tests/unit/test_03_check_password.py -v
-    ==================================== test session starts =====================================
+    $ pytest test_check_password.py -v
+    ============================ test session starts ==============================
     ...
     collected 3 items
 
-    tests/unit/test_03_check_password.py::test_min_len_param[user1-123456-4-True] PASSED   [ 33%]
-    tests/unit/test_03_check_password.py::test_min_len_param[user1-123456-8-False] PASSED  [ 66%]
-    tests/unit/test_03_check_password.py::test_min_len_param[user1-123456-6-True] PASSED   [100%]
+    test_check_password.py::test_min_len_param[user1-123456-4-True] PASSED   [ 33%]
+    test_check_password.py::test_min_len_param[user1-123456-8-False] PASSED  [ 66%]
+    test_check_password.py::test_min_len_param[user1-123456-6-True] PASSED   [100%]
 
-    ===================================== 3 passed in 0.03s ======================================
+    ============================= 3 passed in 0.03s ================================
 
 Пример использования параметризации теста для одного параметра:
 
@@ -87,4 +87,23 @@
     @pytest.mark.parametrize("ip", ["500.1.1.1", "50.1.1", "a", 100])
     def test_is_ip_address_wrong(ip):
         assert is_ip_address(ip) == False
+
+
+Запуск теста:
+
+.. code::
+    $ pytest test_check_ip.py
+    ========================= test session starts =======================
+    ...
+    collected 9 items
+
+    test_check_ip.py::test_check_ip PASSED                          [ 11%]
+    test_check_ip.py::test_check_ip_correct[10.1.1.1] PASSED        [ 22%]
+    test_check_ip.py::test_check_ip_correct[224.1.1.1] PASSED       [ 33%]
+    test_check_ip.py::test_check_ip_correct[0.0.0.0] PASSED         [ 44%]
+    test_check_ip.py::test_check_ip_wrong[500.1.1.1] PASSED         [ 55%]
+    test_check_ip.py::test_check_ip_wrong[50.1.1] PASSED            [ 66%]
+    test_check_ip.py::test_check_ip_wrong[a] PASSED                 [ 77%]
+    test_check_ip.py::test_check_ip_wrong[100] PASSED               [ 88%]
+    test_check_ip.py::test_check_ip_wrong[ip4] PASSED               [100%]
 

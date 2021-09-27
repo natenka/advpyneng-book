@@ -1,25 +1,38 @@
 Fixture
 -------
 
-Fixtures - это функции, которые pytest вызывает.
+Fixtures это функции, которые выполняют что-то до теста и, при необходимости, после.
 
-scope:
+Два самых распространенных применения fixture:
 
-* function (default)
-* module
-* session
+* для передачи каких-то данных для теста
+* setup and teardown
 
-Источник pyneng-online-may-aug-2019/exercises/26_oop_special_methods/conftest.py
+Fixture scope - контролирует как часто запускается fixture:
+
+* function (значение по умолчанию) - fixture запускается до и после каждого теста, который использует это fixture
+* class
+* module - fixture запускается один раз до и после тестов в модуле, который использует это fixture
+* package
+* session - fixture запускается один раз в начале сессии и в конце
+
+Запуск "после" актуален только для fixture c yield.
+
+
+Полезные команды для работы с fixture:
+
+* ``pytest --fixtures`` - показывает все доступные fixture (встроенные,
+  из плагинов и найденные в тестах и conftest.py). Добавление ``-v`` показывает
+  в каких файлах находятся fixture и на какой строке определена функция
+* ``pytest --setup-show`` - показывает какие fixture запускаются и когда
+
 
 .. code:: python
 
-    import re
-    import yaml
     import pytest
-    from netmiko import ConnectHandler
 
 
-    @pytest.fixture()
+    @pytest.fixture
     def topology_with_dupl_links():
         topology = {('R1', 'Eth0/0'): ('SW1', 'Eth0/1'),
                     ('R2', 'Eth0/0'): ('SW1', 'Eth0/2'),
@@ -33,7 +46,7 @@ scope:
         return topology
 
 
-    @pytest.fixture()
+    @pytest.fixture
     def normalized_topology_example():
         normalized_topology = {('R1', 'Eth0/0'): ('SW1', 'Eth0/1'),
                                ('R2', 'Eth0/0'): ('SW1', 'Eth0/2'),
@@ -44,10 +57,6 @@ scope:
         return normalized_topology
 
 
-
-
-
-Источник pyneng-online-may-aug-2019/exercises/19_ssh_telnet/conftest.py
 
 .. code:: python
 
@@ -61,17 +70,7 @@ scope:
         with open('devices.yaml') as f:
             devices = yaml.safe_load(f)
             r1 = devices[0]
-            #options = {'timeout': 5, 'fast_cli': True}
-            r1.update(options)
         return r1
-
-
-    @pytest.fixture(scope='module')
-    def r1_test_connection(first_router_from_devices_yaml):
-        r1 = ConnectHandler(**first_router_from_devices_yaml)
-        r1.enable()
-        yield r1
-        r1.disconnect()
 
 
     @pytest.fixture(scope='module')
@@ -86,4 +85,16 @@ scope:
         r1 = first_router_from_devices_yaml.copy()
         r1['ip'] = 'unreachable'
         return r1
+
+Fixture r1_test_connection создает подключение netmiko до тестов в одном файле
+и закрывает его после:
+
+.. code:: python
+
+    @pytest.fixture(scope='module')
+    def r1_test_connection(first_router_from_devices_yaml):
+        with ConnectHandler(**first_router_from_devices_yaml) as r1:
+            r1.enable()
+            yield r1
+
 
