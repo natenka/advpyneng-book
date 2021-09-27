@@ -1,28 +1,90 @@
 Параметризация теста
 --------------------
 
+
+Очень часто в тестах нужно проверять функцию/класс/метод на разных входящих данных.
+Один вариант, в этом случае, будет написать несколько assert в одном тесте.
+
 .. code:: python
 
-    from check_password_function import check_passwd
+    def check_passwd(username, password, min_length=8, check_username=True):
+        if len(password) < min_length:
+            print('Пароль слишком короткий')
+            return False
+        elif check_username and username in password:
+            print('Пароль содержит имя пользователя')
+            return False
+        else:
+            print(f'Пароль для пользователя {username} прошел все проверки')
+            return True
 
 
     def test_password_min_length():
-        assert check_passwd('nata', '12345', min_length=3)
-        assert not check_passwd('nata', '12345nata', min_length=3)
+        assert check_passwd('user', '12345', min_length=3) == True
+        assert check_passwd('user', '123456', min_length=5) == False
+        assert check_passwd('user', 'userpass', min_length=5) == False
 
+Этот вариант плох тем, что теперь все три проверки считаются одним тестом и
+если одна из проверок не проходит, следующие не проверяются.
 
-Параметризация:
+Параметризация тестов позволяет указать несколько наборов данных, на которых надо
+проверить тест:
 
 .. code:: python
 
     import pytest
-    from check_password_function import check_passwd
 
-    @pytest.mark.parametrize("username,password,min_length,result",[
-        ('nata', '12345', 3, True),
-        ('nata', '12345nata', 3, False)
-    ])
-    def test_password_min_length(username, password, min_length, result):
-        assert result == check_passwd(username, password, min_length=min_length)
 
-Пример из базового курса: https://github.com/pyneng/pyneng-online-may-aug-2019/blob/master/exercises/19_ssh_telnet/tests/test_task_19_2b.py
+    @pytest.mark.parametrize(
+        ("user", "passwd", "min_len", "result"),
+        [
+            ("user1", "123456", 4, True),
+            ("user1", "123456", 8, False),
+            ("user1", "123456", 6, True),
+        ],
+    )
+    def test_min_len_param(user, passwd, min_len, result):
+        assert check_passwd(user, passwd, min_length=min_len) == result
+
+и, что особенно удобно, каждый набор данных срабатывает как отдельный
+запуск теста:
+
+.. code::
+
+    $ pytest tests/unit/test_03_check_password.py -v
+    ==================================== test session starts =====================================
+    ...
+    collected 3 items
+
+    tests/unit/test_03_check_password.py::test_min_len_param[user1-123456-4-True] PASSED   [ 33%]
+    tests/unit/test_03_check_password.py::test_min_len_param[user1-123456-8-False] PASSED  [ 66%]
+    tests/unit/test_03_check_password.py::test_min_len_param[user1-123456-6-True] PASSED   [100%]
+
+    ===================================== 3 passed in 0.03s ======================================
+
+Пример использования параметризации теста для одного параметра:
+
+.. code:: python
+
+    import ipaddress
+
+
+    def is_ip_address(ip):
+        if not isinstance(ip, str):
+            return False
+        try:
+            ipaddress.ip_address(ip)
+            return True
+        except ValueError:
+            return False
+
+
+    @pytest.mark.parametrize("ip", ["10.1.1.1", "224.1.1.1", "0.0.0.0"])
+    def test_is_ip_address_correct(ip):
+        assert is_ip_address(ip) == True
+
+
+    @pytest.mark.parametrize("ip", ["500.1.1.1", "50.1.1", "a", 100])
+    def test_is_ip_address_wrong(ip):
+        assert is_ip_address(ip) == False
+
