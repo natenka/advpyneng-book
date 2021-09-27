@@ -1,8 +1,36 @@
 conftest
 --------
 
+conftest.py это файл в котором хранятся fixture для разных тестов.
+Этих файлов может быть много, например, может быть такая структура:
+
 ::
 
+    ├── conftest.py
+    ├── pytest.ini
+    └── tests
+        ├── conftest.py
+        ├── helper_test_functions.py
+        ├── network
+        │   ├── conftest.py
+        │   └── test_11_network_fixture_params.py
+        └── unit
+            ├── conftest.py
+            ├── test_01_check_ip.py
+            ├── test_02_send_command.py
+            ├── test_03_check_password.py
+            ├── test_04_get_interfaces.py
+            ├── test_05_class_topology.py
+            └── test_06_class_ipv4network.py
+
+
+Conftest.py также добавляет каталог в котором он находится в sys.path.
+Поэтому часто можно встретить пустые файлы conftest.py.
+Например в этом случае conftest.py в текущем каталоге может быть пустым,
+но он нужен чтобы тесты из каталога tests могли импортировать функции из файлов
+в текущем каталоге:
+
+::
     $ tree
     .
     ├── check_ip_functions.py
@@ -12,49 +40,10 @@ conftest
     ├── common_functions.py
     ├── conftest.py
     └── tests
+        ├── conftest.py
         ├── test_check_ip_function.py
         ├── test_check_password_input.py
         ├── test_check_password_parametrize.py
         ├── test_check_password.py
         └── test_ipv4_network.py
 
-Запуск тестов:
-
-::
-
-    $ pytest
-    ============================= test session starts =============================
-    platform linux -- Python 3.7.3, pytest-5.2.0, py-1.8.0, pluggy-0.12.0
-    rootdir: /home/vagrant/repos/advanced-pyneng-1/advpyneng-online-oct-nov-2019/examples/14_pytest_basics
-    collected 0 items / 5 errors
-
-    =================================== ERRORS ====================================
-    ______________ ERROR collecting tests/test_check_ip_function.py _______________
-    ImportError while importing test module '/home/vagrant/repos/advanced-pyneng-1/advpyneng-online-oct-nov-2019/examples/14_pytest_basics/tests/test_check_ip_function.py'.
-    Hint: make sure your test modules/packages have valid Python names.
-    Traceback:
-    tests/test_check_ip_function.py:1: in <module>
-        from check_ip_functions import check_ip
-    E   ModuleNotFoundError: No module named 'check_ip_functions'
-    !!!!!!!!!!!!!!!!!!! Interrupted: 5 errors during collection !!!!!!!!!!!!!!!!!!!
-    ============================== 5 error in 0.18s ===============================
-
-
-Достаточно создать пустой файл conftest.py и тесты заработают
-
-::
-
-    $ touch conftest.py
-    $ pytest
-    ============================= test session starts =============================
-    platform linux -- Python 3.7.3, pytest-5.2.0, py-1.8.0, pluggy-0.12.0
-    rootdir: /home/vagrant/repos/advanced-pyneng-1/advpyneng-online-oct-nov-2019/examples/14_pytest_basics
-    collected 13 items
-
-    tests/test_check_ip_function.py .                                       [  7%]
-    tests/test_check_password.py ...                                        [ 30%]
-    tests/test_check_password_input.py ..                                   [ 46%]
-    tests/test_check_password_parametrize.py ..                             [ 61%]
-    tests/test_ipv4_network.py .....                                        [100%]
-
-    ============================= 13 passed in 0.09s ==============================
