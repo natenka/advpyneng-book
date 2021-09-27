@@ -4,32 +4,29 @@
 pytest.raises
 ~~~~~~~~~~~~~
 
-
 .. code:: python
 
+    from netmiko import ConnectHandler
     import pytest
-    import task_27_2a
-    from netmiko.cisco.cisco_ios import CiscoIosBase
-    import sys
-    sys.path.append('..')
-
-    from common_functions import check_class_exists, check_attr_or_method
 
 
-    def test_class_created():
-        check_class_exists(task_27_2a, 'MyNetmiko')
+    def send_show_command(device, command):
+        with ConnectHandler(**device) as ssh:
+            ssh.enable()
+            result = ssh.send_command(command)
+        return result
 
 
-    def test_class_inheritance(first_router_from_devices_yaml):
-        r1 = task_27_2a.MyNetmiko(**first_router_from_devices_yaml)
-        assert isinstance(r1, CiscoIosBase), "Класс MyNetmiko должен наследовать CiscoIosBase"
-        check_attr_or_method(r1, method='send_command')
-        with pytest.raises(task_27_2a.ErrorInCommand) as excinfo:
-            return_value = r1.send_command('sh ip br')
-        r1.disconnect()
+    @pytest.mark.parametrize("host", ["192.168.100.5", "192.168.100.2", "192.168.100.3"])
+    def test_send_show_exceptions(cisco_ios_router_common_params, host):
+        device = cisco_ios_router_common_params.copy()
+        device["host"] = host
+        device["password"] = "sdkjfhshdkf"
+        with pytest.raises(
+            (
+                netmiko.ssh_exception.NetmikoTimeoutException,
+                netmiko.ssh_exception.NetmikoAuthenticationException,
+            )
+        ) as exc:
+            output = send_show_command(device, "sh ip int br")
 
-
-pytest-html
-~~~~~~~~~~~
-
-https://github.com/pytest-dev/pytest-html

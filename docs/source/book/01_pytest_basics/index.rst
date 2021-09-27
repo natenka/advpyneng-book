@@ -85,7 +85,6 @@ Pytest - фреймворк для тестирования кода
    running_tests
    parametrized_tests
    fixture
-   mocking
    extra
    test_network
    further_reading
