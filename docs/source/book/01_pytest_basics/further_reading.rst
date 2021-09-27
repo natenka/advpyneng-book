@@ -26,3 +26,8 @@
 
 * `Test & code podcast: 2: Pytest vs Unittest vs Nose <https://testandcode.com/2>`__
 * `The Cleaning Hand of Pytest <https://blog.daftcode.pl/the-cleaning-hand-of-pytest-28f434f4b684>`__
+
+Тестирование сети
+~~~~~~~~~~~~~~~~~
+
+* `Automating "Network Ready for Use" Testing <https://www.youtube.com/watch?v=2_tZVWMVEUQ>`__ - полезное выступление об использовании pytest для тестирования сети
