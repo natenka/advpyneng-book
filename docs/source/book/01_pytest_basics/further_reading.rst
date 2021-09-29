@@ -31,3 +31,12 @@
 ~~~~~~~~~~~~~~~~~
 
 * `Automating "Network Ready for Use" Testing <https://www.youtube.com/watch?v=2_tZVWMVEUQ>`__ - полезное выступление об использовании pytest для тестирования сети
+
+Примеры тестов в модулях
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+* `Тесты scrapli <https://github.com/carlmontanari/scrapli/tree/master/tests>`__.
+  Пример `относительно простых тестов scrapli <https://github.com/carlmontanari/scrapli/blob/master/tests/unit/test_factory.py>`__
+* `Тесты netmiko <https://github.com/ktbyers/netmiko/tree/develop/tests>`__.
+  Пример `относительно простых тестов netmiko <https://github.com/ktbyers/netmiko/blob/develop/tests/unit/test_base_connection.py>`__
+

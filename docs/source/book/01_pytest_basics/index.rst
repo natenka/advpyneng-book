@@ -87,5 +87,6 @@ Pytest - фреймворк для тестирования кода
    fixture
    extra
    test_network
+   test_hints
    further_reading
    ../../exercises/01_exercises.rst
