@@ -16,3 +16,9 @@
 * `Building Command Line Applications with Click <https://youtu.be/kNke39OZ2k0>`__
 * `Sebastian Vetter - Click: A Pleasure To Write, A Pleasure To Use - PyCon 2016 <https://youtu.be/SDyHLG2ltSY>`__
 
+Другие модули для создания cli:
+
+* `argparse <https://docs.python.org/3/library/argparse.html>`__, `Argparse Tutorial <https://docs.python.org/3/howto/argparse.html>`__
+* `typer <https://github.com/tiangolo/typer>`__
+* `docopt <https://github.com/docopt/docopt>`__
+
