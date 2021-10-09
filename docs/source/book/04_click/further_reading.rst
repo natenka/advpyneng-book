@@ -3,7 +3,7 @@
 
 Документация:
 
-* `Click <https://click.palletsprojects.com/en/7.x/#documentation>`__
+* `Click <https://click.palletsprojects.com/>`__
 * `Примеры click <https://github.com/pallets/click/tree/7.x/examples>`__
 
 
@@ -22,3 +22,8 @@
 * `typer <https://github.com/tiangolo/typer>`__
 * `docopt <https://github.com/docopt/docopt>`__
 
+
+setuptools:
+
+* `Click Setuptools Integration <https://click.palletsprojects.com/en/8.0.x/setuptools/>`__
+* `How to package and deploy CLI applications with Python PyPA setuptools build <https://pybit.es/articles/how-to-package-and-deploy-cli-apps/>`__
