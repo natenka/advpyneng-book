@@ -88,6 +88,35 @@ click.File
 Так как click открывает файл, внутри функции cli connection_params это уже открытый файл.
 
 
+click.Path
+^^^^^^^^^^
+
+Тип click.Path
+
+.. code:: python
+
+    class click.Path(exists=False, file_okay=True, dir_okay=True, writable=False, readable=True, resolve_path=False, allow_dash=False, path_type=None)
+
+
+Пример аргумента с типом click.Path:
+
+.. code:: python
+
+    @click.command()
+    @click.argument("source", type=click.Path(exists=True))
+    def cli(source):
+        pass
+
+::
+
+    $ python script.py sh_cdp_n_r22.txt
+    Usage: script.py SOURCE DESTINATION
+    Try 'script.py --help' for help.
+
+    Error: Invalid value for 'SOURCE': Path 'sh_cdp_n_r22.txt' does not exist.
+
+
+
 click.Choice
 ^^^^^^^^^^^^
 
