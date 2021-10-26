@@ -5,6 +5,19 @@
 функции, метода или класса.
 Декораторы используются для добавления какого-то функционала к функциям/классам.
 
+Синтаксис декоратора - это синтаксический сахар,
+эти два определения функций эквивалентны:
+
+.. code:: python
+
+    def f(...):
+        ...
+    f = verbose(f)
+
+    @verbose
+    def f(...):
+        ...
+
 Например, допустим, есть ряд функций к которым надо добавить print с информацией о том какая
 функция вызывается:
 
@@ -133,27 +146,27 @@
 
 .. code:: python
 
-    In [5]: from functools import wraps
+    from functools import wraps
 
-    In [6]: def verbose(func):
-       ...:     @wraps(func)
-       ...:     def wrapper(*args, **kwargs):
-       ...:         print(f'Вызываю функцию {func.__name__}')
-       ...:         return func(*args, **kwargs)
-       ...:     return wrapper
-       ...:
-       ...: @verbose
-       ...: def upper(string):
-       ...:     return string.upper()
-       ...:
-       ...: @verbose
-       ...: def lower(string):
-       ...:     return string.lower()
-       ...:
-       ...: @verbose
-       ...: def capitalize(string):
-       ...:     return string.capitalize()
-       ...:
+    def verbose(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            print(f'Вызываю функцию {func.__name__}')
+            return func(*args, **kwargs)
+        return wrapper
+    
+    @verbose
+    def upper(string):
+        return string.upper()
+    
+    @verbose
+    def lower(string):
+        return string.lower()
+    
+    @verbose
+    def capitalize(string):
+        return string.capitalize()
+    
 
     In [7]: lower
     Out[7]: <function __main__.lower(string)>
@@ -166,107 +179,4 @@
 
 Декоратор wraps переносит информацию исходной функции на внутреннюю
 и хотя это можно сделать и вручную, лучше пользоваться wraps.
-
-К функции может применяться несколько декораторов. Порядок применения
-декораторов будет зависеть от того в каком порядке они записаны:
-
-.. code:: python
-
-    def stars(func):
-        @wraps(func)
-        def wrapper(*args, **kwargs):
-            print('*'*30)
-            return func(*args, **kwargs)
-        return wrapper
-
-
-    def lines(func):
-        @wraps(func)
-        def wrapper(*args, **kwargs):
-            print('-'*30)
-            return func(*args, **kwargs)
-        return wrapper
-
-
-    def equals(func):
-        @wraps(func)
-        def wrapper(*args, **kwargs):
-            print('='*30)
-            return func(*args, **kwargs)
-        return wrapper
-
-
-    @stars
-    @lines
-    @equals
-    def func(a, b):
-        return a + b
-
-
-    In [23]: func(4,5)
-    ******************************
-    ------------------------------
-    ==============================
-    Out[23]: 9
-
-    In [24]: def func(a, b):
-        ...:     return a + b
-        ...: func = stars(lines(equals(func)))
-
-    In [30]: func(4,5)
-    ******************************
-    ------------------------------
-    ==============================
-    Out[30]: 9
-
-    In [31]: @equals
-        ...: @lines
-        ...: @stars
-        ...: def func(a, b):
-        ...:     return a + b
-        ...:
-
-    In [32]: func(4,5)
-    ==============================
-    ------------------------------
-    ******************************
-    Out[32]: 9
-
-    In [33]: def func(a, b):
-        ...:     return a + b
-        ...: func = equals(lines(stars(func)))
-
-    In [34]: func(4,5)
-    ==============================
-    ------------------------------
-    ******************************
-    Out[34]: 9
-
-Для некоторых декораторов порядок важен и тогда он будет
-указан в документации. Например, декоратор abstractmethod 
-должен `стоять первым над методом (быть самым внутренним) <https://docs.python.org/3/library/abc.html#abc.abstractmethod>`__:
-
-.. code:: python
-
-    class C(ABC):
-        @abstractmethod
-        def my_abstract_method(self, ...):
-            ...
-        @classmethod
-        @abstractmethod
-        def my_abstract_classmethod(cls, ...):
-            ...
-        @staticmethod
-        @abstractmethod
-        def my_abstract_staticmethod(...):
-            ...
-
-        @property
-        @abstractmethod
-        def my_abstract_property(self):
-            ...
-        @my_abstract_property.setter
-        @abstractmethod
-        def my_abstract_property(self, val):
-            ...
 
