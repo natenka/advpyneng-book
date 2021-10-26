@@ -9,5 +9,5 @@
 .. toctree::
    :maxdepth: 1
 
+   black
    further_reading
-   ../../exercises/03_exercises.rst
