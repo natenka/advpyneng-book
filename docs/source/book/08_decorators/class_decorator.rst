@@ -1,6 +1,9 @@
 Декоратор класса
 ----------------
 
+Регистрация классов
+~~~~~~~~~~~~~~~~~~~
+
 .. code:: python
 
 
@@ -76,4 +79,30 @@
     {
         'as_int': <function IPv4Address.as_int at 0xb4235df0>,
         'pprint': <function add_pprint.<locals>.pprint at 0xb4235388>
-}
+    }
+
+
+Применение декоратора ко всем методам класса
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code:: python
+
+    def verbose(func):
+        @wraps(func)
+        def inner(*args, **kwargs):
+            print(f"Вызываю {func.__name__}")
+            print("Аргументы", args[1:], kwargs)
+            return func(*args, **kwargs)
+        return inner
+
+
+    def verbose_methods(cls):
+        methods = {
+            name: method
+            for name, method in vars(cls).items()
+            if not name.startswith("__") and callable(method)
+        }
+        for name, method in methods.items():
+            setattr(cls, name, verbose(method))
+        return cls
+
