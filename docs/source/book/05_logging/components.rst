@@ -6,6 +6,7 @@
 * Filter - позволяет фильтровать сообщения
 * Formatter - указывает формат сообщения
 
+Log события передаются между logger, handlers, filters и  formatter в виде экземпляра LogRecord.
 
 Вывод на стандартный поток ошибок logging_api_example_1.py
 

@@ -7,6 +7,12 @@
 -  `Logging tutorial <https://docs.python.org/3.6/howto/logging.html>`__
 -  `Logging
    Cookbook <https://docs.python.org/3/howto/logging-cookbook.html>`__
+-  Модуль `python-json-logger <https://github.com/madzak/python-json-logger>`__
+
+Альтернативы модулю logging
+
+* `loguru <https://github.com/Delgan/loguru>`__
+
 
 Статьи:
 ~~~~~~~

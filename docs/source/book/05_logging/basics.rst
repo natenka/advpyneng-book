@@ -1,6 +1,12 @@
 Базовый пример
 --------------
 
+Вызов basicConfig должен происходить перед любыми вызовами logging.debug, logging.info и т.д.
+
+basicConfig задуман как одноразовое простое средство настройки, только первый вызов 
+что-то сделает: последующие вызовы фактически не выполняются.
+
+
 logging_basic_1.py
 
 .. code:: python
@@ -43,6 +49,21 @@ Log-файл
     {'__name__': '__main__', '__doc__': None, '__package__': None, '__loader__': <_frozen_importlib_external.SourceFileLoader object at 0xb72a57ac>, '__spec__': None, '__annotations__': {}, '__builtins__': <module 'builtins' (built-in)>, '__file__': 'logging_basic_2.py', '__cached__': None, 'logging': <module 'logging' from '/usr/local/lib/python3.6/logging/__init__.py'>}
     INFO:root:Сообщение уровня info
     WARNING:root:Сообщение уровня warning
+
+
+
+`Параметры logging.basicConfig <https://docs.python.org/3.9/library/logging.html#logging.basicConfig>`__
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* filename  Specifies that a FileHandler be created, using the specified filename, rather than a StreamHandler.
+* filemode  Specifies the mode to open the file, if filename is specified (if filemode is unspecified, it defaults to 'a').
+* format
+* datefmt - date/time format
+* style - ``%``, ``{``, ``$``
+* level
+* stream - stream to initialize the StreamHandler. Incompatible with filename - if both are present, a ValueError is raised.
+* handlers - Incompatible with filename or stream
+
 
 
 Пример вывода информации о потоках:
