@@ -121,7 +121,7 @@ logging_api_example_2_new_format.py
 
 
 Запись логов в файл
--------------------
+~~~~~~~~~~~~~~~~~~~~
 
 logging_api_example_3.py
 
@@ -158,7 +158,7 @@ logging_api_example_3.py
 
 
 Запись в файл и вывод на stderr
--------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 logging_api_example_4.py
 
@@ -194,7 +194,7 @@ logging_api_example_4.py
 
 
 Handlers
---------
+~~~~~~~~~
 
 RotatingFileHandler
 ~~~~~~~~~~~~~~~~~~~
@@ -238,7 +238,7 @@ logfile_with_rotation.log - это самый свежий файл, затем 
 
 
 Logging tree
-------------
+~~~~~~~~~~~
 
 
 netmiko_func.py
@@ -317,7 +317,7 @@ logging_api_example_6_mult_files.py
 
 
 logger.exception
-----------------
+~~~~~~~~~~~~~~~~
 
 logging_api_example_7_exception.py
 
@@ -358,7 +358,7 @@ logging_api_example_7_exception.py
     19:23:24 - superscript - DEBUG - After exception
 
 Конфигурация logging из словаря
--------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 logging_api_example_8.py
