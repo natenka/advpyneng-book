@@ -92,6 +92,7 @@
 Запуск теста:
 
 .. code::
+
     $ pytest test_check_ip.py
     ========================= test session starts =======================
     ...

@@ -238,7 +238,7 @@ logfile_with_rotation.log - это самый свежий файл, затем 
 
 
 Logging tree
-~~~~~~~~~~~
+~~~~~~~~~~~~~
 
 
 netmiko_func.py
