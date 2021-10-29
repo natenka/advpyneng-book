@@ -1,78 +1,89 @@
 Переменные класса
 ~~~~~~~~~~~~~~~~~
 
+
 Помимо переменных экземпляра, существуют также переменные класса. Они
 создаются, при указании переменных внутри самого класса, не метода:
 
 .. code:: python
 
-    In [1]: class CiscoSSH:
-       ...:     device_type = 'cisco_ios'
-       ...:
-       ...:     def send_command(self, command):
-       ...:         pass
-       ...:
+    class Network:
+        all_allocated_ip = []
 
-Теперь не только у класса, но и у каждого экземпляра класса будет
-переменная ``device_type``:
+        def __init__(self, network):
+            self.network = network
+            self.hosts = tuple(
+                str(ip) for ip in ipaddress.ip_network(network).hosts()
+            )
+            self.allocated = []
 
-.. code:: python
+        def allocate(self, ip):
+            if ip in self.hosts:
+                if ip not in self.allocated:
+                    self.allocated.append(ip)
+                    type(self).all_allocated_ip.append(ip)
+                else:
+                    raise ValueError(f"IP-адрес {ip} уже находится в allocated")
+            else:
+                raise ValueError(f"IP-адрес {ip} не входит в сеть {self.network}")
 
-    In [2]: CiscoSSH.device_type
-    Out[2]: 'cisco_ios'
+К переменным класса можно обращаться по-разному:
 
-    In [3]: r1 = CiscoSSH()
+* ``self.all_allocated_ip``
+* ``Network.all_allocated_ip``
+* ``type(self).all_allocated_ip``
 
-    In [4]: r1.device_type
-    Out[4]: 'cisco_ios'
+Вариант ``self.all_allocated_ip`` позволяет обратиться к значению переменной
+класса или добавить элемент, если переменная класса изменяемый тип данных.
+Минус этого варианта в том, что если в методе написать
+``self.all_allocated_ip = ...``, вместо изменения переменной класса,
+будет создана переменная экземпляра.
 
-    In [5]: r2 = CiscoSSH()
+Вариант ``Network.all_allocated_ip`` будет работать корректно, но небольшой минус
+этого варианта в том, что имя класса прописано вручную.
+Вместо него можно использовать третий вариант ``type(self).all_allocated_ip``,
+так как ``type(self)`` возвращает класс.
 
-    In [6]: r2.device_type
-    Out[6]: 'cisco_ios'
 
-Важный момент при использовании переменных класса, то что внутри метода
-к ним все равно надо обращаться через имя класса. Для
-начала, вариант обращения без имени класса:
 
-.. code:: python
-
-    In [7]: class CiscoSSH:
-       ...:     device_type = 'cisco_ios'
-       ...:
-       ...:     def send_command(self, command):
-       ...:         print(device_type)
-       ...:
-
-    In [8]: r1 = CiscoSSH()
-
-    In [9]: r1.send_command()
-    ---------------------------------------------------------------------------
-    NameError                                 Traceback (most recent call last)
-    <ipython-input-9-921b8733dbee> in <module>()
-    ----> 1 r1.send_command()
-
-    <ipython-input-7-ef923c4e39d3> in send_command(self, command)
-          3
-          4     def send_command(self, command):
-    ----> 5         print(device_type)
-          6
-
-    NameError: name 'device_type' is not defined
-
-И правильный вариант:
+Теперь у класса есть переменная all_allocated_ip в которую записываются
+все IP-адреса, которые выделены в сетях:
 
 .. code:: python
 
-    In [10]: class CiscoSSH:
-        ...:     device_type = 'cisco_ios'
-        ...:
-        ...:     def send_command(self, command):
-        ...:         print(CiscoSSH.device_type)
-        ...:
+    In [3]: net1 = Network("10.1.1.0/29")
 
-    In [11]: r1 = CiscoSSH()
+    In [4]: net1.allocate("10.1.1.1")
+       ...: net1.allocate("10.1.1.2")
+       ...: net1.allocate("10.1.1.3")
+       ...:
 
-    In [12]: r1.send_command()
-    'cisco_ios'
+    In [5]: net1.allocated
+    Out[5]: ['10.1.1.1', '10.1.1.2', '10.1.1.3']
+
+    In [6]: net2 = Network("10.2.2.0/29")
+
+    In [7]: net2.allocate("10.2.2.1")
+       ...: net2.allocate("10.2.2.2")
+       ...:
+
+    In [9]: net2.allocated
+    Out[9]: ['10.2.2.1', '10.2.2.2']
+
+    In [10]: Network.all_allocated_ip
+    Out[10]: ['10.1.1.1', '10.1.1.2', '10.1.1.3', '10.2.2.1', '10.2.2.2']
+
+Переменная доступна не только через класс, но и через экземпляры:
+
+.. code:: python
+
+    In [40]: Network.all_allocated_ip
+    Out[40]: ['10.1.1.1', '10.1.1.2', '10.1.1.3', '10.2.2.1', '10.2.2.2']
+
+    In [41]: net1.all_allocated_ip
+    Out[41]: ['10.1.1.1', '10.1.1.2', '10.1.1.3', '10.2.2.1', '10.2.2.2']
+
+    In [42]: net2.all_allocated_ip
+    Out[42]: ['10.1.1.1', '10.1.1.2', '10.1.1.3', '10.2.2.1', '10.2.2.2']
+
 

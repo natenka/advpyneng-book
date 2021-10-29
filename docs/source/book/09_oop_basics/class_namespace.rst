@@ -6,7 +6,7 @@
 того чтобы переменные были доступны, надо присваивать их экземпляру
 через ``self.name``.
 По сути метод - это функция привязанная к объекту. Поэтому все
-нюансы, которые касаются функция, относятся и к методам.
+нюансы, которые касаются функций, относятся и к методам.
 
 Переменные экземпляра доступны в другом методе, потому что каждому
 методу первым аргументом передается сам экзепляр. В примере ниже, в
@@ -16,12 +16,12 @@
 
 .. code:: python
 
-    In [32]: class Switch:
-        ...:     def __init__(self, hostname, model):
-        ...:         self.hostname = hostname
-        ...:         self.model = model
-        ...:
-        ...:     def info(self):
-        ...:         print('Hostname: {}\nModel: {}'.format(self.hostname, self.model))
-        ...:
+    class Switch:
+        def __init__(self, hostname, model):
+            self.hostname = hostname
+            self.model = model
+
+        def info(self):
+            print('Hostname: {}\nModel: {}'.format(self.hostname, self.model))
+
 

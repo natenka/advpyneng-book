@@ -2,17 +2,20 @@
 
    \newpage
 
-9. Основы ООП
+.. _oop_basics_index:
+
+22. Основы ООП
 ============================
 
 .. toctree::
    :maxdepth: 1
 
-   README
+   terminology
    create_class
    create_methods
    parameter_self
    init_method
+   class_example
    class_namespace
    class_variables
-   ../../exercises/09_exercises.rst
+   ../../exercises/22_exercises.rst
