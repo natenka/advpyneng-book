@@ -2,9 +2,7 @@
 
    \newpage
 
-.. _oop_basics_index:
-
-22. Основы ООП
+9. Основы ООП
 ============================
 
 .. toctree::
@@ -18,4 +16,3 @@
    class_example
    class_namespace
    class_variables
-   ../../exercises/22_exercises.rst
