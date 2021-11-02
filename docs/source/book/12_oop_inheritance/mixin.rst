@@ -11,7 +11,6 @@ Mixin используются для добавления одних и тех 
 .. note::
 
     `What is a mixin, and why are they useful? <https://stackoverflow.com/questions/533631/what-is-a-mixin-and-why-are-they-useful>`__
-    `Перевод "Что такое mixin и почему они полезны?" <http://qaru.site/questions/12628/what-is-a-mixin-and-why-are-they-useful>`__
 
 С одной стороны, то же самое можно сделать с помощью наследования обычных классов,
 но не всегда те методы, которые нужны в разных дочерних классах,
