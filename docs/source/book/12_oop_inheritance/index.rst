@@ -15,4 +15,5 @@
    multiple_inheritance
    abc
    mixin
+   further_reading
    ../../exercises/12_exercises.rst

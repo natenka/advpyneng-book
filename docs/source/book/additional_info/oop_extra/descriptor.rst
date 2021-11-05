@@ -179,3 +179,9 @@
     String form: <property object at 0xb4203aa4>
     Docstring:   <no docstring>
 
+
+Дополнительные материалы
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+* `Invoking Descriptors <https://docs.python.org/3/reference/datamodel.html#invoking-descriptors>`__
+* `Descriptor HowTo Guide <https://docs.python.org/3/howto/descriptor.html>`__
