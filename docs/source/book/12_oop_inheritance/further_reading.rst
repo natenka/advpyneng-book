@@ -8,7 +8,7 @@
 * `python-course.eu Inheritance <https://python-course.eu/python3_inheritance.php>`__
 * `python-course.eu Multiple Inheritance <https://python-course.eu/python3_multiple_inheritance.php>`__
 * `mro <https://www.python.org/download/releases/2.3/mro/>`__
-* `Guido van Rossum Method Resolution Order <http://python-history.blogspot.com/2010/06/method-resolution-order.html>`
+* `Guido van Rossum Method Resolution Order <http://python-history.blogspot.com/2010/06/method-resolution-order.html>`__
 * `The wonders of cooperative inheritance, or using super in Python 3 <https://www.artima.com/weblogs/viewpost.jsp?thread=281127>`__
 
 super
