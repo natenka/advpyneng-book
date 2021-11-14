@@ -5,8 +5,6 @@ VI. Дополнительная информация
 но которая, тем не менее, может быть полезна.
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
-   additional_info/memory_test
-   additional_info/oop_extra/index
-   additional_info/collections/index.rst
+   additional_info/index
