@@ -16,3 +16,12 @@ Collections
 .. toctree::
    :maxdepth: 1
 
+   index
+   time_complexity
+   deque
+   chainmap
+   counter
+   ordereddict
+   defaultdict
+   userlist_userdict_userstr
+
