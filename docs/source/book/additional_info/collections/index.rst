@@ -17,6 +17,7 @@ Collections
    :maxdepth: 1
 
    time_complexity
+   namedtuple
    deque
    chainmap
    counter
