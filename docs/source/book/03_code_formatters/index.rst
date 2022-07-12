@@ -8,6 +8,7 @@
 
 .. toctree::
    :maxdepth: 1
+   :hidden:
 
    black
    further_reading

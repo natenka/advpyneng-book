@@ -14,6 +14,7 @@
 
 .. toctree::
    :maxdepth: 5
+   :hidden:
 
    itertools
    more_itertools

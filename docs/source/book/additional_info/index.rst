@@ -5,6 +5,7 @@
 
 .. toctree::
    :maxdepth: 1
+   :hidden:
 
    memory_test
    oop_extra/index

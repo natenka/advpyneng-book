@@ -8,5 +8,6 @@
 
 .. toctree::
    :maxdepth: 1
+   :hidden:
 
    ../../exercises/06_exercises.rst

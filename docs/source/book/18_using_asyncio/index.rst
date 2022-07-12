@@ -18,6 +18,7 @@
 
 .. toctree::
    :maxdepth: 1
+   :hidden:
 
    async_class
    to_thread

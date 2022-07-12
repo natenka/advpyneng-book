@@ -16,6 +16,7 @@ Click не единственный модуль для обработки ар�
 
 .. toctree::
    :maxdepth: 1
+   :hidden:
 
    basics
    setuptools

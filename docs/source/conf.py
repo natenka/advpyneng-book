@@ -18,11 +18,8 @@
 # -- Project information -----------------------------------------------------
 
 project = 'Advanced Python для сетевых инженеров'
-copyright = '2019-2021, Natasha Samoylenko'
+copyright = '2019-2022, Natasha Samoylenko'
 author = 'Natasha Samoylenko'
-
-# The full version, including alpha/beta/rc tags
-release = '0.8.0'
 
 
 # -- General configuration ---------------------------------------------------
@@ -31,6 +28,9 @@ release = '0.8.0'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
+    "sphinx.ext.imgconverter",
+    "sphinx_inline_tabs",
+    "sphinx_copybutton",
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -54,45 +54,34 @@ exclude_patterns = []
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'sphinx_rtd_theme'
+html_theme = 'furo'
 #html_sidebars = {
 #    "**": ["about.html", "searchbox.html", "localtoc.html", "navigation.html"]
 #}
+html_title = "Advanced Python для сетевых инженеров"
+html_theme_options = {
+    "prev_next_buttons_location": "both",
+    "navigation_with_keys": True,
+    "top_of_page_button": None,
+    # "announcement": "",
+    "light_css_variables": {
+        "color-brand-primary": "#336790",  # "blue"
+        "color-brand-content": "#336790",
+    },
+    "dark_css_variables": {
+        "color-brand-primary": "#E5B62F",  # "yellow"
+        "color-brand-content": "#E5B62F",
+    },
+    "announcement": (
+        "Книга в процессе написания!"
+        "Написаны разделы 3, 7-10, 13-15. Также написаны разделы 16-17, но они перенесены"
+        "в `отдельную книгу <https://asyncpyneng.readthedocs.io/ru/latest/index.html>`__."
+    )
+}
+
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 html_last_updated_fmt = ''
-
-# -- Options for LaTeX output ---------------------------------------------
-
-
-latex_engine = 'xelatex'
-latex_elements = {
-    'fontpkg': r'''
-\documentclass[a4paper]{article}
-\usepackage[12pt]{extsizes}
-\usepackage[margin=1.0in]{geometry}
-\usepackage{polyglossia}
-\setcounter{secnumdepth}{0}
-\setdefaultlanguage{russian}
-\setotherlanguage{english}
-\usepackage{fontspec}
-\defaultfontfeatures{Scale=MatchLowercase}
-\setmainfont{DejaVu Sans}
-\setsansfont{DejaVu Serif}
-\setmonofont{DejaVu Sans Mono}
-''',
-    'preamble': r'''
-\setcounter{tocdepth}{2}
-\usepackage[titles]{tocloft}
-\cftsetpnumwidth {1.25cm}\cftsetrmarg{1.5cm}
-\setlength{\cftchapnumwidth}{0.75cm}
-\setlength{\cftsecindent}{\cftchapnumwidth}
-\setlength{\cftsecnumwidth}{1.25cm}
-''',
-    'fncychap': r'\usepackage[Bjornstrup]{fncychap}',
-    'printindex': r'\footnotesize\raggedright\printindex',
-    'figure_align': 'H',
-}

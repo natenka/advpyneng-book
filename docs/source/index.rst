@@ -1,14 +1,13 @@
 Advanced Python для сетевых инженеров
 =====================================
 
-.. warning::
+В книге рассматриваются продвинутые возможности Python на примерах
+для сетевых инженеров.
 
-    Книга в процессе написания!
-    Написаны разделы 3, 7-10, 13-15. Также написаны разделы 16-17, но они перенесены
-    в `отдельную книгу <https://asyncpyneng.readthedocs.io/ru/latest/index.html>`__.
 
 .. toctree::
    :maxdepth: 2
+   :hidden:
 
    book/Part_I
    book/Part_II
@@ -18,3 +17,11 @@ Advanced Python для сетевых инженеров
    book/Part_VI
    resources
    download
+
+
+.. toctree::
+   :caption: Ресурсы
+   :maxdepth: 1
+   :hidden:
+
+   Задания, примеры кода <https://github.com/natenka/advpyneng-examples-exercises>

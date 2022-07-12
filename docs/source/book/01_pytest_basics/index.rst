@@ -79,6 +79,7 @@ Pytest - фреймворк для тестирования кода
 
 .. toctree::
    :maxdepth: 1
+   :hidden:
 
    basics
    basic_examples
