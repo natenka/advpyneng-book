@@ -15,6 +15,7 @@ Collections
 
 .. toctree::
    :maxdepth: 1
+   :hidden:
 
    time_complexity
    namedtuple

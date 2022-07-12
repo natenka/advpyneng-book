@@ -8,6 +8,7 @@
 
 .. toctree::
    :maxdepth: 1
+   :hidden:
     
    useful_builtin_functions
    descriptor

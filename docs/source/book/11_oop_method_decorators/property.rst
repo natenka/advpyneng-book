@@ -265,5 +265,6 @@ Property как правило, используется как декорато
 
 .. toctree::
    :maxdepth: 1
+   :hidden:
 
    property_variations

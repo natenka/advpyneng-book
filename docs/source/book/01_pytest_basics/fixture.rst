@@ -29,6 +29,7 @@ Fixture scope - контролирует как часто запускаетс�
 
 .. toctree::
    :maxdepth: 1
+   :hidden:
 
    fixture_custom
    fixture_builtin

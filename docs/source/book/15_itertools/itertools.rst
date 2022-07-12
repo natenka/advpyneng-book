@@ -4,6 +4,7 @@ itertools
 
 .. toctree::
    :maxdepth: 2
+   :hidden:
 
    repeat
    cycle

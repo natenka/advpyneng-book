@@ -171,5 +171,6 @@ send_command и send_config_commands:
 
 .. toctree::
    :maxdepth: 1
+   :hidden:
 
    abc_standard_library
