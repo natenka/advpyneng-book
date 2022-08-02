@@ -6,6 +6,8 @@ Advanced Python для сетевых инженеров
 
 
 .. toctree::
+   :maxdepth: 2
+   :hidden:
 
    book/Part_I
    book/Part_II
