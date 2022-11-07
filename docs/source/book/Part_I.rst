@@ -4,7 +4,6 @@ I. Полезные модули
 
 .. toctree::
    :maxdepth: 1
-   :hidden:
 
    01_pytest_basics/index.rst
    02_type_annotations/index.rst

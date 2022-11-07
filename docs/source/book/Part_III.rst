@@ -3,7 +3,6 @@ III. Объектно-ориентированное программирова�
 
 .. toctree::
    :maxdepth: 1
-   :hidden:
 
    09_oop_basics/index.rst
    10_oop_special_methods/index.rst

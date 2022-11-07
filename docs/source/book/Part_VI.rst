@@ -6,6 +6,5 @@ VI. Дополнительная информация
 
 .. toctree::
    :maxdepth: 2
-   :hidden:
 
    additional_info/index
