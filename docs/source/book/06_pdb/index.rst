@@ -2,7 +2,7 @@
 
    \newpage
 
-6. Модуль pdb
+6. Отладчик pdb
 ==============
 
 
@@ -10,4 +10,5 @@
    :maxdepth: 1
    :hidden:
 
-   ../../exercises/06_exercises.rst
+   basics
+   further_reading
