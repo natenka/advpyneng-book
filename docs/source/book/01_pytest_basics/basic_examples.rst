@@ -8,25 +8,45 @@
 
 .. code:: python
 
-    import pytest
+    import ipaddress
 
 
-    def check_passwd(username, password, min_length=8, check_username=True):
-        if len(password) < min_length:
-            print('Пароль слишком короткий')
-            return False
-        elif check_username and username in password:
-            print('Пароль содержит имя пользователя')
-            return False
-        else:
-            print(f'Пароль для пользователя {username} прошел все проверки')
+    def check_ip(ip):
+        try:
+            ipaddress.ip_address(ip)
             return True
+        except ValueError:
+            return False
+
+Тесты
+
+.. code:: python
+
+    from basics_01_check_ip import check_ip
 
 
-    def test_password_min_length():
-        assert check_passwd('user', '12345', min_length=3) == True
-        assert check_passwd('user', '123456', min_length=5) == False
-        assert check_passwd('user', 'userpass', min_length=5) == False
+    def test_check_ip_correct_10_1_1_1():
+        assert (
+            check_ip("10.1.1.1") == True
+        ), "При правильном IP, функция должна возвращать True"
+
+
+    def test_check_ip_correct_180_10_1_1():
+        assert (
+            check_ip("180.10.1.1") == True
+        ), "При правильном IP, функция должна возвращать True"
+
+
+    def test_check_ip_wrong_octet():
+        assert (
+            check_ip("10.400.1.1") == False
+        ), "При неправильном IP, функция должна возвращать False"
+
+
+    def test_check_ip_wrong_number_of_octets():
+        assert (
+            check_ip("10.1.1") == False
+        ), "При неправильном IP, функция должна возвращать False"
 
 
 Тест класса
@@ -37,76 +57,98 @@
     import ipaddress
 
 
-    class IPv4Network:
-        def __init__(self, network):
-            self.network = network
-            self.mask = int(network.split("/")[-1])
-            self.bin_mask = "1" * self.mask + "0" * (32 - self.mask)
+    class IPAddress:
+        def __init__(self, ip, mask):
+            self.ip = ip
+            self.mask = mask
 
-        def hosts(self):
-            net = ipaddress.ip_network(self.network)
-            return [str(ip) for ip in net.hosts()]
+        def __int__(self):
+            int_ip = int(ipaddress.ip_address(self.ip))
+            return int_ip
+
+        def __str__(self):
+            return f"{self.ip}/{self.mask}"
 
         def __repr__(self):
-            return f"Network('{self.network}')"
+            return f"IPAddress('{self.ip}', {self.mask})"
 
-        def __len__(self):
-            return len(self.hosts())
+        def __lt__(self, second_ip):
+            if type(second_ip) != IPAddress:
+                raise TypeError(f"'<' not supported between instances of 'IPAddress'"
+                                f" and '{type(second_ip).__name__}'")
+            return (int(self), self.mask) < (int(second_ip), second_ip.mask)
 
-        def __iter__(self):
-            return iter(self.hosts())
+        def __le__(self, second_ip):
+            if type(second_ip) != IPAddress:
+                raise TypeError(f"'<=' not supported between instances of 'IPAddress'"
+                                f" and '{type(second_ip).__name__}'")
+            return (int(self), self.mask) <= (int(second_ip), second_ip.mask)
+
+        def __eq__(self, second_ip):
+            # print("eq", self, second_ip)
+            if type(second_ip) != IPAddress:
+                raise TypeError(f"'==' not supported between instances of 'IPAddress'"
+                                f" and '{type(second_ip).__name__}'")
+            return (int(self), self.mask) == (int(second_ip), second_ip.mask)
+
+
 
 Тесты:
 
 .. code:: python
 
-    from collections.abc import Iterable
+    from class_ipaddress import IPAddress
     import pytest
-    from ex06_class_ipv4network import IPv4Network
 
 
-    def test_attributes_created():
-        """
-        Проверяем, что у объекта есть атрибуты:
-            network, mask, bin_mask
-        """
-        net = IPv4Network("100.7.1.0/26")
-        assert getattr(net, "network", None) != None, "Атрибут не найден"
-        assert getattr(net, "mask", None) != None, "Атрибут не найден"
-        assert getattr(net, "bin_mask", None) != None, "Атрибут не найден"
+    def test_ipaddress_attrs():
+        ip1 = IPAddress("10.1.1.1", 25)
+        assert ip1.ip == "10.1.1.1"
+        assert ip1.mask == 25
 
 
-    def test_attributes():
-        """Проверяем значения атрибутов"""
-        net = IPv4Network("10.1.1.0/29")
-        assert net.network == "10.1.1.0/29"
-        assert net.mask == 29
-        assert net.bin_mask == "11111111111111111111111111111000"
+    def test_ipaddress_str_repr():
+        ip1 = IPAddress("10.1.1.1", 25)
+        assert str(ip1) == "10.1.1.1/25"
+        assert repr(ip1) == "IPAddress('10.1.1.1', 25)"
 
 
-    def test_hosts():
-        """Проверяем работу метода hosts"""
-        net = IPv4Network("100.7.1.0/26")
-        assert type(net.hosts()) == list, "Метод hosts должен возвращать список"
-        assert len(net.hosts()) == 62, "В данной сети должно быть 62 хоста"
+    def test_ipaddress_int():
+        ip1 = IPAddress("10.1.1.1", 25)
+        assert int(ip1) == 167837953
 
 
-    def test_repr():
-        """Проверяем работу метода __repr__"""
-        net = IPv4Network("192.168.1.0/26")
-        assert repr(net) == "Network('192.168.1.0/26')"
+    def test_ipaddress_cmp_basic():
+        ip1 = IPAddress("10.2.1.1", 25)
+        ip2 = IPAddress("10.10.1.1", 25)
+        assert ip1 < ip2
+        assert ip2 > ip1
+        assert ip1 != ip2
+        assert not ip1 == ip2
+        assert ip1 <= ip2
+        assert ip2 >= ip1
 
 
-    def test_len():
-        """Проверяем работу метода __len__"""
-        net = IPv4Network("192.168.1.0/26")
-        assert len(net) == 62
+    def test_ipaddress_cmp_mask():
+        ip1 = IPAddress("10.2.1.1", 24)
+        ip2 = IPAddress("10.2.1.1", 25)
+        assert ip1 < ip2
+        assert ip2 > ip1
+        assert ip1 != ip2
+        assert not ip1 == ip2
+        assert ip1 <= ip2
+        assert ip2 >= ip1
 
 
-    def test_iter():
-        """Проверяем что IPv4Network итерируемый объект"""
-        net = IPv4Network("192.168.1.0/26")
-        net_iterator = iter(net)
-        assert next(net_iterator) == "192.168.1.1"
-        assert isinstance(net, Iterable)
+    def test_ipaddress_cmp_equal():
+        ip1 = IPAddress("10.2.1.1", 24)
+        ip2 = IPAddress("10.2.1.1", 24)
+        assert ip1 == ip2
+
+
+    def test_ipaddress_cmp_raise():
+        ip1 = IPAddress("10.2.1.1", 24)
+        ip2 = 100
+        with pytest.raises(TypeError):
+            ip1 == ip2
 

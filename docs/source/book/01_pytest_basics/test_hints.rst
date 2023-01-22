@@ -238,7 +238,7 @@ Fixture, как правило, используются только для п�
 Структура теста
 ~~~~~~~~~~~~~~~
 
-`AAA (Arrange, Act, Assert) <https://docs.pytest.org/en/6.2.x/fixture.html?highlight=arrange#what-fixtures-are>`__.
+`AAA (Arrange, Act, Assert) <https://docs.pytest.org/en/latest/explanation/anatomy.html#test-anatomy>`__.
 
 Тесты, как правило, можно разбить на несколько этапов:
 

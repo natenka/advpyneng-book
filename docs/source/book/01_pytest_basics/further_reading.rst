@@ -5,7 +5,7 @@
 ~~~~~~~~~~~~~
 
 -  `pytest <https://docs.pytest.org/>`__
--  `Good Integration Practices <https://docs.pytest.org/en/6.2.x/goodpractices.html>`__
+-  `Good Integration Practices <https://docs.pytest.org/en/latest/explanation/goodpractices.html>`__
 
 Статьи:
 ~~~~~~~

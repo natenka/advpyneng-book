@@ -6,27 +6,31 @@ pytest.raises
 
 .. code:: python
 
-    from netmiko import ConnectHandler
+    import ipaddress
     import pytest
 
 
-    def send_show_command(device, command):
-        with ConnectHandler(**device) as ssh:
-            ssh.enable()
-            result = ssh.send_command(command)
-        return result
+    def check_ip(ip):
+        if type(ip) != str:
+            raise TypeError("Function only works with strings")
+        try:
+            ipaddress.ip_address(ip)
+            return True
+        except ValueError:
+            return False
 
 
-    @pytest.mark.parametrize("host", ["192.168.100.5", "192.168.100.2", "192.168.100.3"])
-    def test_send_show_exceptions(cisco_ios_router_common_params, host):
-        device = cisco_ios_router_common_params.copy()
-        device["host"] = host
-        device["password"] = "sdkjfhshdkf"
-        with pytest.raises(
-            (
-                netmiko.ssh_exception.NetmikoTimeoutException,
-                netmiko.ssh_exception.NetmikoAuthenticationException,
-            )
-        ) as exc:
-            output = send_show_command(device, "sh ip int br")
+    def test_check_ip_raises_1():
+        with pytest.raises(TypeError):
+            check_ip(100)
 
+
+    def test_check_ip_raises_3():
+        with pytest.raises(TypeError) as error:
+            check_ip(100)
+        assert "strings" in str(error.value)
+
+
+    def test_check_ip_raises_4():
+        with pytest.raises(TypeError, match="st.+ngs"):
+            check_ip(100)
