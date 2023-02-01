@@ -21,6 +21,7 @@
 * `argparse <https://docs.python.org/3/library/argparse.html>`__, `Argparse Tutorial <https://docs.python.org/3/howto/argparse.html>`__
 * `typer <https://github.com/tiangolo/typer>`__
 * `docopt <https://github.com/docopt/docopt>`__
+* `Python Fire <https://github.com/google/python-fire>`__
 
 
 setuptools:
