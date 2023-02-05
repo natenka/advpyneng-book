@@ -40,6 +40,7 @@ Scrapli:
 * `Тесты scrapli <https://github.com/carlmontanari/scrapli/tree/master/tests>`__.
 * Пример `относительно простых тестов scrapli <https://github.com/carlmontanari/scrapli/blob/master/tests/unit/test_factory.py>`__
 * `Тесты Response <https://github.com/carlmontanari/scrapli/blob/main/tests/unit/test_response.py>`__
+* `Тесты со skipif <https://github.com/carlmontanari/scrapli/blob/main/tests/unit/test_helper.py>`_
 
 Netmiko:
 
