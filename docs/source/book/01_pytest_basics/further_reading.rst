@@ -35,8 +35,14 @@
 Примеры тестов в модулях
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
+Scrapli:
+
 * `Тесты scrapli <https://github.com/carlmontanari/scrapli/tree/master/tests>`__.
-  Пример `относительно простых тестов scrapli <https://github.com/carlmontanari/scrapli/blob/master/tests/unit/test_factory.py>`__
+* Пример `относительно простых тестов scrapli <https://github.com/carlmontanari/scrapli/blob/master/tests/unit/test_factory.py>`__
+* `Тесты Response <https://github.com/carlmontanari/scrapli/blob/main/tests/unit/test_response.py>`__
+
+Netmiko:
+
 * `Тесты netmiko <https://github.com/ktbyers/netmiko/tree/develop/tests>`__.
-  Пример `относительно простых тестов netmiko <https://github.com/ktbyers/netmiko/blob/develop/tests/unit/test_base_connection.py>`__
+* Пример `относительно простых тестов netmiko <https://github.com/ktbyers/netmiko/blob/develop/tests/unit/test_base_connection.py>`__
 
