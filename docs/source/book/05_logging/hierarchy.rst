@@ -1,6 +1,9 @@
 Иерархия логеров
 ----------------
 
+.. image:: https://raw.githubusercontent.com/natenka/advpyneng-book/master/docs/source/_static/loggers.png
+   :align: center
+
 В модуле logging есть иерархия логеров. Самый главный в иерархии root. 
 Остальные под ним, часто, на одном уровне. В одном модуле может быть много логеров с разной иерархией,
 например, в paramiko есть логер paramiko.transport, он по иерархии ниже paramiko.

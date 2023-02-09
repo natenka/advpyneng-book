@@ -1,6 +1,19 @@
 Базовый пример
 --------------
 
+
+.. image:: https://raw.githubusercontent.com/natenka/advpyneng-book/master/docs/source/_static/basicconfig.png
+   :align: center
+   :class: only-light
+
+.. only:: html
+
+    .. image:: https://raw.githubusercontent.com/natenka/advpyneng-book/master/docs/source/_static/basicconfig.png
+       :align: center
+       :class: only-dark
+
+
+
 Вызов basicConfig должен происходить перед любыми вызовами logging.debug, logging.info и т.д.
 
 basicConfig задуман как одноразовое простое средство настройки, только первый вызов 

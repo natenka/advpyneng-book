@@ -1,6 +1,9 @@
 Компоненты модуля logging
 -------------------------
 
+.. image:: https://raw.githubusercontent.com/natenka/advpyneng-book/master/docs/source/_static/logger.png
+   :align: center
+
 * Logger - это основной интерфейс для работы с модулем
 * Handler - отправляет log-сообщения конкретному получателю
 * Filter - позволяет фильтровать сообщения
