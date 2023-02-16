@@ -10,7 +10,6 @@
    :maxdepth: 1
    :hidden:
     
-   useful_builtin_functions
    descriptor
    metaclass
    slots
