@@ -10,3 +10,4 @@
    memory_test
    oop_extra/index
    collections/index
+   pdb/index

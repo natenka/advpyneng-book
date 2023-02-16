@@ -2,7 +2,7 @@
 
    \newpage
 
-7. Closure
+6. Функции
 ==========
 
 
@@ -10,5 +10,6 @@
    :maxdepth: 1
    :hidden:
 
-   closure
-   ../../exercises/07_exercises.rst
+   terms
+   namespace
+   first_class_functions
