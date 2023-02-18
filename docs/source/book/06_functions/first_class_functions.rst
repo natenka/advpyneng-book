@@ -1,5 +1,5 @@
-Функции первого класса
-----------------------
+Функции - объекты первого класса
+---------------------------------
 
 В Python все функции являются объектами первого класса. Это означает, что Python поддерживает:
 
@@ -21,13 +21,13 @@
 
 .. code:: python
 
-    In [2]: import time
+    import time
 
-    In [3]: def delay(seconds, func, *args, **kwargs):
-       ...:     print(f'Delay {seconds} seconds...')
-       ...:     time.sleep(seconds)
-       ...:     return func(*args, **kwargs)
-       ...:
+    def delay(seconds, func, *args, **kwargs):
+        print(f'Delay {seconds} seconds...')
+        time.sleep(seconds)
+        return func(*args, **kwargs)
+
 
 
 Теперь функции delay можно передавать любую другую функцию как аргумент и
@@ -35,9 +35,9 @@
 
 .. code:: python
 
-    In [4]: def summ(a, b):
-       ...:     return a + b
-       ...:
+    def summ(a, b):
+        return a + b
+
 
     In [5]: delay(5, summ, 1, 4)
     Delay 5 seconds...

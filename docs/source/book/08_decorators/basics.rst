@@ -154,19 +154,18 @@
             print(f'Вызываю функцию {func.__name__}')
             return func(*args, **kwargs)
         return wrapper
-    
+
     @verbose
     def upper(string):
         return string.upper()
-    
+
     @verbose
     def lower(string):
         return string.lower()
-    
+
     @verbose
     def capitalize(string):
         return string.capitalize()
-    
 
     In [7]: lower
     Out[7]: <function __main__.lower(string)>

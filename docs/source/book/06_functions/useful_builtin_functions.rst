@@ -10,13 +10,13 @@ hasattr:
 
 .. code:: python
 
-    In [6]: class Test:
-       ...:     def __init__(self, name):
-       ...:         self.name = name
-       ...:
-       ...:     def method1(self):
-       ...:         print("method1")
-       ...:
+    class Test:
+        def __init__(self, name):
+            self.name = name
+
+        def method1(self):
+            print("method1")
+
 
     In [7]: t1 = Test("object1")
 
@@ -85,13 +85,13 @@ vars
 
 .. code:: python
 
-    In [21]: class Test:
-        ...:     def __init__(self, name):
-        ...:         self.name = name
-        ...:
-        ...:     def method1(self):
-        ...:         print("method1")
-        ...:
+    class Test:
+        def __init__(self, name):
+            self.name = name
+
+        def method1(self):
+            print("method1")
+
 
 .. code:: python
 
@@ -136,10 +136,10 @@ callable
 
 .. code:: python
 
-    In [35]: def summ(a, b):
-        ...:     print(locals())
-        ...:     return a + b
-        ...:
+    def summ(a, b):
+        print(locals())
+        return a + b
+
 
     In [36]: callable(summ)
     Out[36]: True
@@ -156,13 +156,13 @@ dir
 
 .. code:: python
 
-    In [33]: class Test:
-        ...:     def __init__(self, name):
-        ...:         self.name = name
-        ...:
-        ...:     def method1(self):
-        ...:         print("method1")
-        ...:
+    class Test:
+        def __init__(self, name):
+            self.name = name
+
+        def method1(self):
+            print("method1")
+
 
     In [34]: dir(Test)
     Out[34]:
@@ -209,10 +209,10 @@ exec
 
 .. code:: python
 
-    In [30]: upper_func = """
-        ...: def upper(string):
-        ...:     return string.upper()
-        ...: """
+    upper_func = """
+    def upper(string):
+        return string.upper()
+    """
 
     In [31]: exec(upper_func)
 
@@ -243,10 +243,10 @@ locals
 
 .. code:: python
 
-    In [27]: def summ(a, b):
-        ...:     print(locals())
-        ...:     return a + b
-        ...:
+    def summ(a, b):
+        print(locals())
+        return a + b
+
 
     In [28]: summ(3, 4)
     {'a': 3, 'b': 4}
