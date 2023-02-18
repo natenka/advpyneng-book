@@ -14,3 +14,4 @@
    namespace
    first_class_functions
    useful_builtin_functions
+   further_reading

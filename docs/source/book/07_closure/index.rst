@@ -11,4 +11,5 @@
    :hidden:
 
    closure
+   further_reading
    ../../exercises/07_exercises.rst

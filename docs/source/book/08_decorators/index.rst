@@ -27,4 +27,5 @@
    builtin
    class_decorator
    class_as_decorator
+   further_reading
    ../../exercises/08_exercises.rst
